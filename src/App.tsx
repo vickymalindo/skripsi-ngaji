@@ -1,5 +1,7 @@
+import React from 'react';
 import Button from './views/atoms/Button';
 import { CardInfo, CardProfile } from './views/atoms/Cards';
+import { DropdownSidebar } from './views/atoms/Dropdowns';
 import {
   InputDefault,
   InputDropdown,
@@ -8,12 +10,25 @@ import {
 import TitlePage from './views/atoms/TitlePage';
 
 function App() {
+  const [value, setValue] = React.useState('');
+
+  const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setValue(e.target.value);
+  };
+
+  const handleClick = () => {
+    console.log('klik');
+  };
+  {
+    console.log(value);
+  }
+
   return (
     <div>
       <InputFloating type='text' label='Username' />
       <InputDropdown label='Kelas' />
-      <InputDefault label='Nama Pengguna' password={true} />
-      <InputDefault label='Nama Pengguna' />
+      <InputDefault label='Nama Pengguna' password={true} onChange={onChange} />
+      <InputDefault label='Nama Pengguna' onChange={onChange} />
       <div className='flex'>
         <CardProfile
           name='Vicky Malindo'
@@ -31,7 +46,7 @@ function App() {
       </div>
       <TitlePage page='Daftar Guru' />
       <TitlePage page='Daftar Kelas' />
-      <Button children='Buat' />
+      <Button children='Buat' onClick={handleClick} />
       <br />
       <br />
       <CardInfo
@@ -47,6 +62,8 @@ function App() {
         description='Guru maupun orangtua dapat memantau
                       progres murid. Sehingga guru maupun orangtua harus menandai murid, apabila sudah menyelesaikan hafalan.'
       />
+      <DropdownSidebar parent='Pengguna' />
+      <DropdownSidebar parent='Kelas' />
     </div>
   );
 }

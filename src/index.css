@@ -13,6 +13,22 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.gradient-green {
+  background: linear-gradient(151.91deg, #00aa13 26.89%, #07e420 82.6%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.rounded-tl-tr {
+  border-radius: 10px 10px 0 0;
+}
+
+.rounded-bl-br {
+  border-radius: 0 0 10px 10px;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
 }

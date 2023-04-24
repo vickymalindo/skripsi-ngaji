@@ -54,7 +54,7 @@ export const CardProfile = ({
   );
 };
 
-export const CardInfo = ({ icon, title, description }: Props) => {
+export const CardInfo = ({ title, description }: Props) => {
   return (
     <div className='relative w-[458px] h-[209px] pt-[27px] pl-[70px] pr-[34px] shadow-primary-shadow rounded-[47px] ml-3'>
       <div>
