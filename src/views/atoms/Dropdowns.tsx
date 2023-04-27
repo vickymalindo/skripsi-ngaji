@@ -1,5 +1,6 @@
 import React from 'react';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
+import { SidebarChild } from '../../utils/SidebarProps';
 
 interface Props<T> {
   parent?: string;
@@ -9,7 +10,10 @@ interface Props<T> {
   data?: T[];
 }
 
-export const DropdownSidebar = <T extends {}>({ parent }: Props<T>) => {
+export const DropdownSidebar = <T extends SidebarChild>({
+  parent,
+  data,
+}: Props<T>) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -19,7 +23,7 @@ export const DropdownSidebar = <T extends {}>({ parent }: Props<T>) => {
   return (
     <div
       className={
-        'bg-dropdwon-cream rounded-[27.34px] pt-[25.65px] px-7 cursor-pointer' +
+        'bg-dropdwon-cream mb-[29px] rounded-[27.34px] pt-[25.65px] px-7 cursor-pointer' +
         (open ? ' pb-[39.3px]' : ' pb-[25.65px]')
       }
       onClick={handleOpen}>
@@ -34,17 +38,19 @@ export const DropdownSidebar = <T extends {}>({ parent }: Props<T>) => {
         )}
       </div>
       {open && (
-        <div className='pl-[10px] mt-[11px]'>
-          <a href='/' className='block py-0.5 hover:text-dark-green'>
-            Guru
-          </a>
-          <a href='admin' className='block py-0.5 hover:text-dark-green'>
-            Admin
-          </a>
-          <a href='user' className='block py-0.5 hover:text-dark-green'>
-            User
-          </a>
-        </div>
+        <ul className='pl-[10px] mt-[11px] list-none'>
+          {data?.map((val, index) => {
+            return (
+              <li className='mb-3' key={index}>
+                <a
+                  className='inline-block w-full hover:text-dark-green'
+                  href={val.href}>
+                  {val.text}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
       )}
     </div>
   );
@@ -65,7 +71,7 @@ export const DropdownInput = <T extends string>({
         return (
           <button
             key={index}
-            className='block m-auto p-1 w-full'
+            className='block m-auto p-1 w-full hover:bg-green-300'
             onClick={() => passKelas?.(value)}>
             {value}
           </button>

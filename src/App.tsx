@@ -1,13 +1,5 @@
 import React from 'react';
-import Button from './views/atoms/Button';
-import { CardInfo, CardProfile } from './views/atoms/Cards';
-import { DropdownSidebar } from './views/atoms/Dropdowns';
-import {
-  InputDefault,
-  InputDropdown,
-  InputFloating,
-} from './views/atoms/Inputs';
-import TitlePage from './views/atoms/TitlePage';
+import { SidebarOrtu } from './views/molecules/Sidebars';
 
 function App() {
   const [value, setValue] = React.useState('');
@@ -25,7 +17,7 @@ function App() {
 
   return (
     <div>
-      <InputFloating type='text' label='Username' />
+      {/* <InputFloating type='text' label='Username' />
       <InputDropdown label='Kelas' />
       <InputDefault label='Nama Pengguna' password={true} onChange={onChange} />
       <InputDefault label='Nama Pengguna' onChange={onChange} />
@@ -63,7 +55,8 @@ function App() {
                       progres murid. Sehingga guru maupun orangtua harus menandai murid, apabila sudah menyelesaikan hafalan.'
       />
       <DropdownSidebar parent='Pengguna' />
-      <DropdownSidebar parent='Kelas' />
+      <DropdownSidebar parent='Kelas' /> */}
+      <SidebarOrtu />
     </div>
   );
 }

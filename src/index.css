@@ -29,6 +29,29 @@
   border-radius: 0 0 10px 10px;
 }
 
+.line-before-after::before,
+.line-before-after::after {
+  content: '';
+  width: 15%;
+  height: 2px;
+  background: #ffd217;
+  position: absolute;
+}
+
+.line-before-after::before {
+  top: 0;
+  right: 32px;
+}
+
+.line-before-after::after {
+  left: 32px;
+  bottom: 0;
+}
+
+.line-before-after.active::before {
+  width: 100%;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
 }
