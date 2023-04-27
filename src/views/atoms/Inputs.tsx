@@ -62,6 +62,7 @@ export const InputFloating = ({ label, ...props }: Props) => {
 
 export const InputDropdown = ({ label }: Props) => {
   const [open, setOpen] = React.useState(false);
+  const [kelas, setKelas] = React.useState<string | undefined>('');
 
   const handleOpen = () => {
     setOpen((prev) => !prev);
@@ -74,7 +75,9 @@ export const InputDropdown = ({ label }: Props) => {
           className={
             'px-4 py-3 h-[45px] border-dark-green border text-dark-green' +
             (open ? ' rounded-tl-tr' : ' rounded-[10px]')
-          }></div>
+          }>
+          {kelas}
+        </div>
         <span className='absolute -top-3 left-4 px-1 bg-white text-dark-green text-base flex justify-center items-center gap-1'>
           <span>{label}</span>
           <FaCaretDown />
@@ -84,6 +87,7 @@ export const InputDropdown = ({ label }: Props) => {
         <DropdownInput
           data={['4IA22', '4IA19', '4IA20', '4IA18']}
           isOpen={open}
+          passKelas={setKelas}
         />
       )}
     </div>

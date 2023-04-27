@@ -5,14 +5,11 @@ interface Props<T> {
   parent?: string;
   onClick?: React.MouseEventHandler;
   isOpen?: boolean;
+  passKelas?: (e: string) => void;
   data?: T[];
 }
 
-export const DropdownSidebar = <T extends {}>({
-  parent,
-  onClick,
-  isOpen,
-}: Props<T>) => {
+export const DropdownSidebar = <T extends {}>({ parent }: Props<T>) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -38,13 +35,13 @@ export const DropdownSidebar = <T extends {}>({
       </div>
       {open && (
         <div className='pl-[10px] mt-[11px]'>
-          <a href='/' className='block py-0.5'>
+          <a href='/' className='block py-0.5 hover:text-dark-green'>
             Guru
           </a>
-          <a href='admin' className='block py-0.5'>
+          <a href='admin' className='block py-0.5 hover:text-dark-green'>
             Admin
           </a>
-          <a href='user' className='block py-0.5'>
+          <a href='user' className='block py-0.5 hover:text-dark-green'>
             User
           </a>
         </div>
@@ -53,7 +50,11 @@ export const DropdownSidebar = <T extends {}>({
   );
 };
 
-export const DropdownInput = <T extends string>({ data, isOpen }: Props<T>) => {
+export const DropdownInput = <T extends string>({
+  data,
+  isOpen,
+  passKelas,
+}: Props<T>) => {
   return (
     <div
       className={
@@ -65,7 +66,7 @@ export const DropdownInput = <T extends string>({ data, isOpen }: Props<T>) => {
           <button
             key={index}
             className='block m-auto p-1 w-full'
-            onClick={() => console.log(value)}>
+            onClick={() => passKelas?.(value)}>
             {value}
           </button>
         );
