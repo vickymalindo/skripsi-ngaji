@@ -23,7 +23,7 @@ export const DropdownSidebar = <T extends SidebarChild>({
   return (
     <div
       className={
-        'bg-dropdwon-cream mb-[29px] rounded-[27.34px] pt-[25.65px] px-7 cursor-pointer' +
+        'bg-dropdwon-cream mb-[29px] rounded-[27.34px] pt-[25.65px] px-7 cursor-pointer last:mb-0' +
         (open ? ' pb-[39.3px]' : ' pb-[25.65px]')
       }
       onClick={handleOpen}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Content from './views/molecules/Content';
 import { SidebarAdmin } from './views/molecules/Sidebars';
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
       {/* <SidebarOrtu /> */}
       {/* <SidebarGuru /> */}
       <SidebarAdmin />
+      <Content />
     </div>
   );
 }
