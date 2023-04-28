@@ -1,5 +1,5 @@
 import React from 'react';
-import { SidebarOrtu } from './views/molecules/Sidebars';
+import { SidebarAdmin } from './views/molecules/Sidebars';
 
 function App() {
   const [value, setValue] = React.useState('');
@@ -56,7 +56,9 @@ function App() {
       />
       <DropdownSidebar parent='Pengguna' />
       <DropdownSidebar parent='Kelas' /> */}
-      <SidebarOrtu />
+      {/* <SidebarOrtu /> */}
+      {/* <SidebarGuru /> */}
+      <SidebarAdmin />
     </div>
   );
 }

@@ -40,12 +40,79 @@ export const sidebarOrtu: SidebarProps[] = [
   },
 ];
 
-interface Arr {
-  name: string;
-  class: string;
-}
+export const sidebarGuru: SidebarProps[] = [
+  {
+    text: 'Daftar Nama Siswa',
+    href: '/siswa',
+  },
+  {
+    text: 'Murojaah',
+    href: '/murojaah',
+  },
+  {
+    text: 'Penjadwalan',
+    href: '/penjadwalan',
+  },
+  {
+    text: 'Tilawah',
+    href: '/tilawah',
+  },
+  {
+    text: 'Profile',
+    href: '/profile',
+  },
+];
 
-const arr: Arr[] = [
-  { name: 'Vicky', class: 'a' },
-  { name: 'Vicky', class: 'a' },
+export const sidebarAdmin: SidebarProps[] = [
+  {
+    text: 'Pengguna',
+    children: [
+      {
+        text: 'Guru',
+        href: '/guru',
+      },
+      {
+        text: 'Murid/Anak',
+        href: '/muridanak',
+      },
+      {
+        text: 'Orangtua',
+        href: '/orangtua',
+      },
+    ],
+  },
+  {
+    text: 'Buat Akun',
+    children: [
+      {
+        text: 'Guru',
+        href: '/buat/guru',
+      },
+      {
+        text: 'Murid/Anak',
+        href: '/buat/muridanak',
+      },
+      {
+        text: 'Orangtua',
+        href: '/buat/orangtua',
+      },
+    ],
+  },
+  {
+    text: 'Buat Akun',
+    children: [
+      {
+        text: 'Guru',
+        href: '/buat/guru',
+      },
+      {
+        text: 'Murid/Anak',
+        href: '/buat/muridanak',
+      },
+      {
+        text: 'Orangtua',
+        href: '/buat/orangtua',
+      },
+    ],
+  },
 ];
