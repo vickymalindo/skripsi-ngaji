@@ -1,66 +1,10 @@
-import React from 'react';
-import Content from './views/molecules/Content';
-import { SidebarAdmin } from './views/molecules/Sidebars';
+import { RouterProvider } from 'react-router-dom';
+import Router from './routes/Router';
 
 function App() {
-  const [value, setValue] = React.useState('');
-
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setValue(e.target.value);
-  };
-
-  const handleClick = () => {
-    console.log('klik');
-  };
-  {
-    console.log(value);
-  }
-
   return (
     <div>
-      {/* <InputFloating type='text' label='Username' />
-      <InputDropdown label='Kelas' />
-      <InputDefault label='Nama Pengguna' password={true} onChange={onChange} />
-      <InputDefault label='Nama Pengguna' onChange={onChange} />
-      <div className='flex'>
-        <CardProfile
-          name='Vicky Malindo'
-          group='4IA22'
-          birthdate='17/02/01'
-          teacher='Tukimin'
-        />
-        <CardProfile
-          name='Azmi Yushar'
-          group='4IA22'
-          birthdate='02/03/01'
-          teacher='Tukimin'
-        />
-        <CardProfile username='Azmi Yushari' />
-      </div>
-      <TitlePage page='Daftar Guru' />
-      <TitlePage page='Daftar Kelas' />
-      <Button children='Buat' onClick={handleClick} />
-      <br />
-      <br />
-      <CardInfo
-        icon='calendar'
-        title='Metode Penjadwalan'
-        description='Guru dapat menjadwalkan hafalan kepada
-                      murid, mulai dari hari/tanggal, juz, surah,
-                      dan ayat.'
-      />
-      <CardInfo
-        icon='eye'
-        title='Dibawah Pemantauan'
-        description='Guru maupun orangtua dapat memantau
-                      progres murid. Sehingga guru maupun orangtua harus menandai murid, apabila sudah menyelesaikan hafalan.'
-      />
-      <DropdownSidebar parent='Pengguna' />
-      <DropdownSidebar parent='Kelas' /> */}
-      {/* <SidebarOrtu /> */}
-      {/* <SidebarGuru /> */}
-      <SidebarAdmin />
-      <Content />
+      <RouterProvider router={Router} />
     </div>
   );
 }

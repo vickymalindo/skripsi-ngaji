@@ -1,8 +1,6 @@
 // import React from 'react'
-import {
-  default as Website,
-  default as Whatsapp,
-} from './../../assets/images/website.png';
+import Website from './../../assets/images/website.png';
+import Whatsapp from './../../assets/images/whatsapp.png';
 
 interface Props {
   height: string;
