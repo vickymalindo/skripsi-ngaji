@@ -2,8 +2,8 @@
 
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../pages/teacher/Main';
+import Table from '../views/atoms/Table';
 import Content from '../views/molecules/Content';
-
 const Router = createBrowserRouter([
   {
     path: 'teacher',
@@ -14,6 +14,10 @@ const Router = createBrowserRouter([
         element: <Content />,
       },
     ],
+  },
+  {
+    path: 'table',
+    element: <Table />,
   },
 ]);
 

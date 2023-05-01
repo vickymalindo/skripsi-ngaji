@@ -9,7 +9,7 @@ import Links from '../atoms/Links';
 import Sosmed from '../atoms/Sosmed';
 import Logo from './../../assets/images/Logo.png';
 
-export const SidebarOrtu = () => {
+export const SidebarParent = () => {
   return (
     <aside className='w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll'>
       <div className='px-[9px] pt-[45px]'>
@@ -57,7 +57,7 @@ export const SidebarAdmin = () => {
   );
 };
 
-export const SidebarGuru = () => {
+export const SidebarTeacher = () => {
   return (
     <aside className='w-[274px] bg-dark-green fixed left-0 h-full'>
       <div className='px-[9px] pt-[45px]'>
