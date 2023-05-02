@@ -1,17 +1,25 @@
 // import React from 'react'
 
 import { createBrowserRouter } from 'react-router-dom';
-import Main from '../pages/teacher/Main';
+import Main from '../pages/Main';
+import * as ParentRote from '../pages/parent/Rote/All';
 import Table from '../views/atoms/Table';
-import Content from '../views/molecules/Content';
 const Router = createBrowserRouter([
   {
-    path: 'teacher',
+    path: 'parent',
     element: <Main />,
     children: [
       {
-        path: 'allStudents',
-        element: <Content />,
+        path: 'rote/school',
+        element: <ParentRote.School />,
+      },
+      {
+        path: 'rote/home',
+        element: <ParentRote.Home />,
+      },
+      {
+        path: 'rote/ndone',
+        element: <ParentRote.NotDone />,
       },
     ],
   },

@@ -2,11 +2,15 @@
 import { FaBars } from 'react-icons/fa';
 import { CardProfile } from '../atoms/Cards';
 
-const Appbar = () => {
+interface Props {
+  username: string;
+}
+
+const Appbar = ({ username }: Props) => {
   return (
     <div className='flex justify-between items-center'>
       <FaBars className='text-2xl ml-8 cursor-pointer' />
-      <CardProfile username='vickymalindo' />
+      <CardProfile username={username} />
     </div>
   );
 };

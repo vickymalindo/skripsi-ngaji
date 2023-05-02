@@ -1,9 +1,12 @@
+import { useLocation } from 'react-router-dom';
 import Pencil from './../../assets/images/pencil.png';
 import Trash from './../../assets/images/trash.png';
 
 const Table = () => {
+  const location = useLocation();
+
   return (
-    <div className='overflow-x-scroll lg:overflow-x-auto px-4'>
+    <div className='overflow-x-scroll lg:overflow-x-auto px-10'>
       <table className='m-auto'>
         <thead className='bg-gradient-green text-white'>
           <tr>
@@ -15,7 +18,9 @@ const Table = () => {
             <th className='p-2'>Surah</th>
             <th className='p-2'>Ayat</th>
             <th className='p-2'>Juz</th>
-            <th className='p-2'>Aksi</th>
+            {location.pathname.includes('ndone') && (
+              <th className='p-2'>Aksi</th>
+            )}
           </tr>
         </thead>
         <tbody>
@@ -28,16 +33,18 @@ const Table = () => {
             <td>Al-Baqarah</td>
             <td>20-23</td>
             <td>1</td>
-            <td>
-              <div className='flex items-center justify-center gap-6'>
-                <span className='cursor-pointer inline-block'>
-                  <img src={Pencil} alt='Pencil' />
-                </span>
-                <span className='cursor-pointer inline-block'>
-                  <img src={Trash} alt='Trash' />
-                </span>
-              </div>
-            </td>
+            {location.pathname.includes('ndone') && (
+              <td>
+                <div className='flex items-center justify-center gap-6'>
+                  <span className='cursor-pointer inline-block'>
+                    <img src={Pencil} alt='Pencil' />
+                  </span>
+                  <span className='cursor-pointer inline-block'>
+                    <img src={Trash} alt='Trash' />
+                  </span>
+                </div>
+              </td>
+            )}
           </tr>
           <tr>
             <td>1</td>
@@ -48,16 +55,18 @@ const Table = () => {
             <td>Al-Baqarah</td>
             <td>20-23</td>
             <td>1</td>
-            <td>
-              <div className='flex items-center justify-center gap-6'>
-                <span className='cursor-pointer inline-block'>
-                  <img src={Pencil} alt='Pencil' />
-                </span>
-                <span className='cursor-pointer inline-block'>
-                  <img src={Trash} alt='Trash' />
-                </span>
-              </div>
-            </td>
+            {location.pathname.includes('ndone') && (
+              <td>
+                <div className='flex items-center justify-center gap-6'>
+                  <span className='cursor-pointer inline-block'>
+                    <img src={Pencil} alt='Pencil' />
+                  </span>
+                  <span className='cursor-pointer inline-block'>
+                    <img src={Trash} alt='Trash' />
+                  </span>
+                </div>
+              </td>
+            )}
           </tr>
           <tr>
             <td>1</td>
@@ -68,16 +77,18 @@ const Table = () => {
             <td>Al-Baqarah</td>
             <td>20-23</td>
             <td>1</td>
-            <td>
-              <div className='flex items-center justify-center gap-6'>
-                <span className='cursor-pointer inline-block'>
-                  <img src={Pencil} alt='Pencil' />
-                </span>
-                <span className='cursor-pointer inline-block'>
-                  <img src={Trash} alt='Trash' />
-                </span>
-              </div>
-            </td>
+            {location.pathname.includes('ndone') && (
+              <td>
+                <div className='flex items-center justify-center gap-6'>
+                  <span className='cursor-pointer inline-block'>
+                    <img src={Pencil} alt='Pencil' />
+                  </span>
+                  <span className='cursor-pointer inline-block'>
+                    <img src={Trash} alt='Trash' />
+                  </span>
+                </div>
+              </td>
+            )}
           </tr>
         </tbody>
       </table>

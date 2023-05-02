@@ -1,9 +1,13 @@
 // import React from 'react'
 
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { SidebarTeacher } from '../../views/molecules/Sidebars';
 
 const Main = () => {
+  const location = useLocation();
+  {
+    console.log(location.pathname.includes('teacher'));
+  }
   return (
     <div>
       <SidebarTeacher />

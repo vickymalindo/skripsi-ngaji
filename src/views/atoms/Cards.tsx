@@ -22,10 +22,10 @@ export const CardProfile = ({
   return (
     <div
       className={
-        'pt-3 pb-5 pr-[35px] pl-[17px] card-shadow flex w-max h-max' +
+        'pt-3 pb-5 pr-[35px] pl-[17px] card-shadow flex w-max h-max mb-[26px]' +
         (username
           ? ' items-center rounded-bl-[30px]'
-          : 'items-start rounded-[30px]')
+          : ' items-start rounded-[30px]')
       }>
       <img src={Profile} alt='profile' className='h-[48px]' />
       {username ? (
