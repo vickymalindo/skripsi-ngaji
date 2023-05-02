@@ -6,10 +6,10 @@ import Appbar from './Appbar';
 interface Props {
   username: string;
   page: string;
-  name: string;
-  group: string;
-  birthdate: string;
-  teacher: string;
+  name?: string;
+  group?: string;
+  birthdate?: string;
+  teacher?: string;
 }
 
 const Content = ({
@@ -26,12 +26,15 @@ const Content = ({
       {/* <Loader /> */}
       <div className='w-full box-shadow px-7 py-7 rounded-[57px]'>
         <TitlePage page={page} />
-        <CardProfile
-          name={name}
-          group={group}
-          birthdate={birthdate}
-          teacher={teacher}
-        />
+        {name && (
+          <CardProfile
+            name={name}
+            group={group}
+            birthdate={birthdate}
+            teacher={teacher}
+          />
+        )}
+
         <Table />
       </div>
     </div>

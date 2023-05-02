@@ -14,29 +14,29 @@ export const sidebarOrtu: SidebarProps[] = [
     children: [
       {
         text: 'Sekolah',
-        href: '/sekolah',
+        href: '/parent/rote/school',
       },
       {
         text: 'Rumah',
-        href: '/rumah',
+        href: '/parent/rote/home',
       },
       {
         text: 'Belum Selesai',
-        href: '/belum',
+        href: '/parent/rote/ndone',
       },
     ],
   },
   {
     text: 'Murojaah',
-    href: '/murojaah',
+    href: '/parent/murojaah',
   },
   {
     text: 'Tilawah',
-    href: '/tilawah',
+    href: '/parent/ktilawah',
   },
   {
     text: 'Profile',
-    href: '/profile',
+    href: '/parent/profile',
   },
 ];
 

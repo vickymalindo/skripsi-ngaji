@@ -58,6 +58,9 @@ body {
 }
 
 .line-before-after.active::before {
+  width: 90%;
+}
+.line-before-after.active::after {
   width: 100%;
 }
 

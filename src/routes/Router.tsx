@@ -2,7 +2,9 @@
 
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../pages/Main';
+import Murojaah from '../pages/parent/Murojaah';
 import * as ParentRote from '../pages/parent/Rote/All';
+import Tilawah from '../pages/parent/Tilawah';
 import Table from '../views/atoms/Table';
 const Router = createBrowserRouter([
   {
@@ -10,16 +12,29 @@ const Router = createBrowserRouter([
     element: <Main />,
     children: [
       {
-        path: 'rote/school',
-        element: <ParentRote.School />,
+        path: 'rote',
+        children: [
+          {
+            path: 'school',
+            element: <ParentRote.School />,
+          },
+          {
+            path: 'home',
+            element: <ParentRote.Home />,
+          },
+          {
+            path: 'ndone',
+            element: <ParentRote.NotDone />,
+          },
+        ],
       },
       {
-        path: 'rote/home',
-        element: <ParentRote.Home />,
+        path: 'murojaah',
+        element: <Murojaah />,
       },
       {
-        path: 'rote/ndone',
-        element: <ParentRote.NotDone />,
+        path: 'tilawah',
+        element: <Tilawah />,
       },
     ],
   },
