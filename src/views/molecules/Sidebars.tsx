@@ -1,4 +1,5 @@
 // import React from 'react'
+import { useAppSelector } from '../../redux/store';
 import {
   sidebarAdmin,
   sidebarGuru,
@@ -10,6 +11,8 @@ import Sosmed from '../atoms/Sosmed';
 import Logo from './../../assets/images/Logo.png';
 
 export const SidebarParent = () => {
+  const isClick = useAppSelector((state) => state.toggle.clicked);
+  console.log(isClick);
   return (
     <aside className='w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll'>
       <div className='px-[9px] pt-[45px]'>
