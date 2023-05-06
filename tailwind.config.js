@@ -7,6 +7,7 @@ export default {
         'dark-green': '#00AA13',
         'light-green': '#82F18F',
         'dropdwon-cream': '#FFF1B9',
+        'black-rgba': 'rgba(0, 0, 0, 0.125)',
       },
       boxShadow: {
         'primary-shadow': '0px 4px 4px rgba(0, 0, 0, 0.25);',

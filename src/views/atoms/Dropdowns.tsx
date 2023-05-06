@@ -1,5 +1,6 @@
 import React from 'react';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
+import { Link, useLocation } from 'react-router-dom';
 import { SidebarChild } from '../../utils/SidebarProps';
 
 interface Props<T> {
@@ -15,6 +16,7 @@ export const DropdownSidebar = <T extends SidebarChild>({
   data,
 }: Props<T>) => {
   const [open, setOpen] = React.useState(false);
+  const { pathname } = useLocation();
 
   const handleOpen = () => {
     setOpen((prev) => !prev);
@@ -42,11 +44,14 @@ export const DropdownSidebar = <T extends SidebarChild>({
           {data?.map((val, index) => {
             return (
               <li className='mb-3' key={index}>
-                <a
-                  className='inline-block w-full hover:text-dark-green'
-                  href={val.href}>
+                <Link
+                  className={
+                    'inline-block w-full hover:text-dark-green' +
+                    (pathname === val.href ? ' text-dark-green' : '')
+                  }
+                  to={val.href}>
                   {val.text}
-                </a>
+                </Link>
               </li>
             );
           })}

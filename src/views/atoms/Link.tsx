@@ -1,27 +1,28 @@
 // import React from 'react'
 
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 interface Props {
   href: string | undefined;
   text: string | undefined;
 }
 
-const Link = ({ href, text }: Props) => {
+const Links = ({ href, text }: Props) => {
   const { pathname } = useLocation();
+
   return (
     <li className='px-8 py-1 relative mb-6 last:mb-0'>
-      <a
+      <Link
         // TODO: benerin link active, dan masih ada bug jg di sidebarnya
-        href={href}
+        to={`${href}`}
         className={
           'inline-block w-full text-xl line-before-after ' +
-          (pathname.includes('murojaah') ? 'active' : '')
+          (pathname === href ? 'active' : '')
         }>
         {text}
-      </a>
+      </Link>
     </li>
   );
 };
 
-export default Link;
+export default Links;

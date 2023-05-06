@@ -21,10 +21,10 @@ const Content = ({
   teacher,
 }: Props) => {
   return (
-    <div className='relative left-[274px] w-[calc(100%-274px)]'>
+    <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition duration-300 ease-out'>
       <Appbar username={username} />
       {/* <Loader /> */}
-      <div className='w-full box-shadow px-7 py-7 rounded-[57px]'>
+      <div className='w-full box-shadow px-[22px] py-[22px] lg:px-7 lg:py-7 rounded-[57px]'>
         <TitlePage page={page} />
         {name && (
           <CardProfile

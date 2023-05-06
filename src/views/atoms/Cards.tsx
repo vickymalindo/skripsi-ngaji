@@ -22,31 +22,35 @@ export const CardProfile = ({
   return (
     <div
       className={
-        'pt-3 pb-5 pr-[35px] pl-[17px] card-shadow flex w-max h-max mb-[26px]' +
+        'pt-1 pb-2 pr-[22px] pl-[11px] sm:pt-2 sm:pb-3 sm:pr-[27px] sm:pl-[13px] lg:pt-3 lg:pb-5 lg:pr-[35px] lg:pl-[17px] card-shadow flex w-max h-max ' +
         (username
           ? ' items-center rounded-bl-[30px]'
-          : ' items-start rounded-[30px]')
+          : ' items-start rounded-[30px] mb-[26px]')
       }>
-      <img src={Profile} alt='profile' className='h-[48px]' />
+      <img
+        src={Profile}
+        alt='profile'
+        className='h-[30px] w-[30px] md:h-[48px]'
+      />
       {username ? (
         <p className='text-base ml-2'>{username}</p>
       ) : (
         <div>
           <div>
-            <span className='font-bold ml-2'>Nama : </span>
-            <span>{name}</span>
+            <span className='font-bold ml-2 text-sm sm:text-base'>Nama : </span>
+            <span className='text-sm sm:text-base'>{name}</span>
           </div>
           <div>
-            <span className='font-bold ml-2'>Kelas : </span>
-            <span>{group}</span>
+            <span className='font-bold ml-2 text-sm sm:text-base'>Kelas :</span>
+            <span className='text-sm sm:text-base'>{group}</span>
           </div>
           <div>
-            <span className='font-bold ml-2'>TTL : </span>
-            <span>{birthdate}</span>
+            <span className='font-bold ml-2 text-sm sm:text-base'>TTL : </span>
+            <span className='text-sm sm:text-base'>{birthdate}</span>
           </div>
           <div>
-            <span className='font-bold ml-2'>Guru : </span>
-            <span>{teacher}</span>
+            <span className='font-bold ml-2 text-sm sm:text-base'>Guru : </span>
+            <span className='text-sm sm:text-base'>{teacher}</span>
           </div>
         </div>
       )}

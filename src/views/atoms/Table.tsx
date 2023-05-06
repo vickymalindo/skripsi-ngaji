@@ -6,20 +6,20 @@ const Table = () => {
   const location = useLocation();
 
   return (
-    <div className='overflow-x-scroll lg:overflow-x-auto px-10'>
+    <div className='overflow-x-scroll lg:overflow-x-auto px-4 md:px-6 lg:px-10'>
       <table className='m-auto'>
         <thead className='bg-gradient-green text-white'>
           <tr>
-            <th className='p-2'>No</th>
-            <th className='p-2'>Hari</th>
-            <th className='p-2'>Tanggal</th>
-            <th className='p-2'>Bulan</th>
-            <th className='p-2'>Tahun</th>
-            <th className='p-2'>Surah</th>
-            <th className='p-2'>Ayat</th>
-            <th className='p-2'>Juz</th>
+            <th className='p-1 md:p-1.5 lg:p-2 '>No</th>
+            <th className='p-1 md:p-1.5 lg:p-2 '>Hari</th>
+            <th className='p-1 md:p-1.5 lg:p-2 '>Tanggal</th>
+            <th className='p-1 md:p-1.5 lg:p-2 '>Bulan</th>
+            <th className='p-1 md:p-1.5 lg:p-2 '>Tahun</th>
+            <th className='p-1 md:p-1.5 lg:p-2 '>Surah</th>
+            <th className='p-1 md:p-1.5 lg:p-2 '>Ayat</th>
+            <th className='p-1 md:p-1.5 lg:p-2 '>Juz</th>
             {location.pathname.includes('ndone') && (
-              <th className='p-2'>Aksi</th>
+              <th className='p-1 md:p-1.5 lg:p-2 '>Aksi</th>
             )}
           </tr>
         </thead>

@@ -32,7 +32,7 @@ export const sidebarOrtu: SidebarProps[] = [
   },
   {
     text: 'Tilawah',
-    href: '/parent/ktilawah',
+    href: '/parent/tilawah',
   },
   {
     text: 'Profile',

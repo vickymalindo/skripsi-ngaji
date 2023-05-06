@@ -6,9 +6,9 @@ const TitlePage = ({ page }: Props) => {
   return (
     <div
       className={
-        'bg-light-green py-[18px] pl-[60.47px] rounded-[30px] mb-[30px]'
+        'bg-light-green py-[11px] pl-[33.47px] sm:py-[15px] sm:pl-[40.47px] lg:py-[18px] lg:pl-[60.47px] rounded-[30px] mb-[30px]'
       }>
-      <p className='text-xl font-semibold'>{page}</p>
+      <p className='text-sm sm:text-base lg:text-xl font-semibold'>{page}</p>
     </div>
   );
 };
