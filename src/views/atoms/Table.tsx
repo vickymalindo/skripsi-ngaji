@@ -39,9 +39,13 @@ const Table = () => {
                   <span className='cursor-pointer inline-block'>
                     <img src={Pencil} alt='Pencil' />
                   </span>
-                  <span className='cursor-pointer inline-block'>
-                    <img src={Trash} alt='Trash' />
-                  </span>
+                  {location.pathname.includes('parent') ? (
+                    ''
+                  ) : (
+                    <span className='cursor-pointer inline-block'>
+                      <img src={Trash} alt='Trash' />
+                    </span>
+                  )}
                 </div>
               </td>
             )}
@@ -61,9 +65,13 @@ const Table = () => {
                   <span className='cursor-pointer inline-block'>
                     <img src={Pencil} alt='Pencil' />
                   </span>
-                  <span className='cursor-pointer inline-block'>
-                    <img src={Trash} alt='Trash' />
-                  </span>
+                  {location.pathname.includes('parent') ? (
+                    ''
+                  ) : (
+                    <span className='cursor-pointer inline-block'>
+                      <img src={Trash} alt='Trash' />
+                    </span>
+                  )}
                 </div>
               </td>
             )}
@@ -83,9 +91,13 @@ const Table = () => {
                   <span className='cursor-pointer inline-block'>
                     <img src={Pencil} alt='Pencil' />
                   </span>
-                  <span className='cursor-pointer inline-block'>
-                    <img src={Trash} alt='Trash' />
-                  </span>
+                  {location.pathname.includes('parent') ? (
+                    ''
+                  ) : (
+                    <span className='cursor-pointer inline-block'>
+                      <img src={Trash} alt='Trash' />
+                    </span>
+                  )}
                 </div>
               </td>
             )}

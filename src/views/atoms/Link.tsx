@@ -11,7 +11,7 @@ const Links = ({ href, text }: Props) => {
   const { pathname } = useLocation();
 
   return (
-    <li className='px-8 py-1 relative mb-6 last:mb-0'>
+    <li className='px-8 py-2 relative mb-6 last:mb-0'>
       <Link
         // TODO: benerin link active, dan masih ada bug jg di sidebarnya
         to={`${href}`}

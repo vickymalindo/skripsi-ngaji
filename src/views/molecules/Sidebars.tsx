@@ -31,7 +31,7 @@ export const SidebarParent = () => {
       }>
       <aside
         className={
-          'lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition duration-300 ease-out' +
+          'lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition duration-150 ease-out' +
           (isOpen ? ' w-[274px]' : 'w-0')
         }>
         <div className='relative px-[9px] pt-[45px]'>

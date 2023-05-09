@@ -1,11 +1,9 @@
-// import React from 'react'
-
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../pages/Main';
 import Murojaah from '../pages/parent/Murojaah';
+import Profile from '../pages/parent/Profile';
 import * as ParentRote from '../pages/parent/Rote/All';
 import Tilawah from '../pages/parent/Tilawah';
-import Table from '../views/atoms/Table';
 const Router = createBrowserRouter([
   {
     path: 'parent',
@@ -36,11 +34,11 @@ const Router = createBrowserRouter([
         path: 'tilawah',
         element: <Tilawah />,
       },
+      {
+        path: 'profile',
+        element: <Profile />,
+      },
     ],
-  },
-  {
-    path: 'table',
-    element: <Table />,
   },
 ]);
 

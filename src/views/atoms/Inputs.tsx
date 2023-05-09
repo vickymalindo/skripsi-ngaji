@@ -10,6 +10,7 @@ interface Props {
   eye?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isOpen?: boolean;
+  classname?: string;
 }
 
 export const InputDefault = ({ label, password, eye, ...props }: Props) => {
@@ -46,15 +47,15 @@ export const InputDefault = ({ label, password, eye, ...props }: Props) => {
   );
 };
 
-export const InputFloating = ({ label, ...props }: Props) => {
+export const InputFloating = ({ label, classname, ...props }: Props) => {
   return (
-    <div className='relative mt-2 w-max'>
+    <div className={'relative mt-2 ' + (classname ? classname : '')}>
       <input
-        className='w-[360px] px-4 py-3 h-[45px] outline-none border-dark-green border rounded-[10px] text-dark-green'
+        className='w-full px-4 py-3 h-[53px] outline-none border-dark-green border rounded-[10px] text-dark-green'
         {...props}
       />
       <span className='absolute -top-3 left-4 px-1 bg-white text-dark-green text-base flex justify-center items-center gap-1'>
-        <span>{label}</span>
+        <span className='text-sm sm:text-base'>{label}</span>
       </span>
     </div>
   );
