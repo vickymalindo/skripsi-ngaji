@@ -43,7 +43,7 @@ export const sidebarOrtu: SidebarProps[] = [
 export const sidebarGuru: SidebarProps[] = [
   {
     text: 'Daftar Nama Siswa',
-    href: '/siswa',
+    href: '/teacher/students',
   },
   {
     text: 'Murojaah',
@@ -51,7 +51,7 @@ export const sidebarGuru: SidebarProps[] = [
   },
   {
     text: 'Penjadwalan',
-    href: '/penjadwalan',
+    href: '/teacher/shedule',
   },
   {
     text: 'Tilawah',
