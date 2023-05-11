@@ -5,7 +5,8 @@ import Profile from '../pages/parent/Profile';
 import * as ParentRote from '../pages/parent/Rote/All';
 import Tilawah from '../pages/parent/Tilawah';
 import Student from '../pages/teacher/Student';
-import Forms from '../views/molecules/Forms';
+import Create from '../pages/teacher/forms/Create';
+import Edit from '../pages/teacher/forms/Edit';
 const Router = createBrowserRouter([
   {
     path: 'parent',
@@ -51,8 +52,22 @@ const Router = createBrowserRouter([
         element: <Student />,
       },
       {
-        path: 'schedule',
-        element: <Forms />,
+        path: 'forms',
+        children: [
+          {
+            path: 'murojaah',
+            children: [
+              {
+                path: 'create',
+                element: <Create />,
+              },
+              {
+                path: 'edit',
+                element: <Edit />,
+              },
+            ],
+          },
+        ],
       },
     ],
   },
