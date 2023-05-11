@@ -1,10 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../pages/Main';
-import Murojaah from '../pages/parent/Murojaah';
+import { Murojaah as ParentMurojaah } from '../pages/parent/Murojaah';
 import Profile from '../pages/parent/Profile';
 import * as ParentRote from '../pages/parent/Rote/All';
-import Tilawah from '../pages/parent/Tilawah';
+import { Tilawah as ParentTilawah } from '../pages/parent/Tilawah';
+import { Murojaah as TeacherMurojaah } from '../pages/teacher/Murojaah';
+import QuranRote from '../pages/teacher/QuranRote';
 import Student from '../pages/teacher/Student';
+import { Tilawah as TeacherTilawah } from '../pages/teacher/Tilawah';
 import Create from '../pages/teacher/forms/Create';
 import Edit from '../pages/teacher/forms/Edit';
 const Router = createBrowserRouter([
@@ -31,11 +34,11 @@ const Router = createBrowserRouter([
       },
       {
         path: 'murojaah',
-        element: <Murojaah />,
+        element: <ParentMurojaah />,
       },
       {
         path: 'tilawah',
-        element: <Tilawah />,
+        element: <ParentTilawah />,
       },
       {
         path: 'profile',
@@ -55,19 +58,30 @@ const Router = createBrowserRouter([
         path: 'forms',
         children: [
           {
-            path: 'murojaah',
-            children: [
-              {
-                path: 'create',
-                element: <Create />,
-              },
-              {
-                path: 'edit',
-                element: <Edit />,
-              },
-            ],
+            path: 'create',
+            element: <Create />,
+          },
+          {
+            path: 'edit',
+            element: <Edit />,
           },
         ],
+      },
+      {
+        path: 'rote',
+        element: <QuranRote />,
+      },
+      {
+        path: 'tilawah',
+        element: <TeacherTilawah />,
+      },
+      {
+        path: 'murojaah',
+        element: <TeacherMurojaah />,
+      },
+      {
+        path: 'profile',
+        element: <Profile />,
       },
     ],
   },

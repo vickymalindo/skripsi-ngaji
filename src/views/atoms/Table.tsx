@@ -2,7 +2,12 @@ import { useLocation } from 'react-router-dom';
 import Pencil from './../../assets/images/pencil.png';
 import Trash from './../../assets/images/trash.png';
 
-const Table = () => {
+interface Props {
+  showAction: boolean;
+  canDelete: boolean;
+}
+
+const Table = ({ showAction, canDelete }: Props) => {
   const location = useLocation();
 
   return (
@@ -18,9 +23,7 @@ const Table = () => {
             <th className='p-1 md:p-1.5 lg:p-2 '>Surah</th>
             <th className='p-1 md:p-1.5 lg:p-2 '>Ayat</th>
             <th className='p-1 md:p-1.5 lg:p-2 '>Juz</th>
-            {location.pathname.includes('ndone') && (
-              <th className='p-1 md:p-1.5 lg:p-2 '>Aksi</th>
-            )}
+            {showAction && <th className='p-1 md:p-1.5 lg:p-2 '>Aksi</th>}
           </tr>
         </thead>
         <tbody>
@@ -33,18 +36,18 @@ const Table = () => {
             <td>Al-Baqarah</td>
             <td>20-23</td>
             <td>1</td>
-            {location.pathname.includes('ndone') && (
+            {showAction && (
               <td>
                 <div className='flex items-center justify-center gap-6'>
                   <span className='cursor-pointer inline-block'>
                     <img src={Pencil} alt='Pencil' />
                   </span>
-                  {location.pathname.includes('parent') ? (
-                    ''
-                  ) : (
+                  {canDelete ? (
                     <span className='cursor-pointer inline-block'>
                       <img src={Trash} alt='Trash' />
                     </span>
+                  ) : (
+                    ''
                   )}
                 </div>
               </td>
@@ -59,18 +62,18 @@ const Table = () => {
             <td>Al-Baqarah</td>
             <td>20-23</td>
             <td>1</td>
-            {location.pathname.includes('ndone') && (
+            {showAction && (
               <td>
                 <div className='flex items-center justify-center gap-6'>
                   <span className='cursor-pointer inline-block'>
                     <img src={Pencil} alt='Pencil' />
                   </span>
-                  {location.pathname.includes('parent') ? (
-                    ''
-                  ) : (
+                  {canDelete ? (
                     <span className='cursor-pointer inline-block'>
                       <img src={Trash} alt='Trash' />
                     </span>
+                  ) : (
+                    ''
                   )}
                 </div>
               </td>
@@ -85,18 +88,18 @@ const Table = () => {
             <td>Al-Baqarah</td>
             <td>20-23</td>
             <td>1</td>
-            {location.pathname.includes('ndone') && (
+            {showAction && (
               <td>
                 <div className='flex items-center justify-center gap-6'>
                   <span className='cursor-pointer inline-block'>
                     <img src={Pencil} alt='Pencil' />
                   </span>
-                  {location.pathname.includes('parent') ? (
-                    ''
-                  ) : (
+                  {canDelete ? (
                     <span className='cursor-pointer inline-block'>
                       <img src={Trash} alt='Trash' />
                     </span>
+                  ) : (
+                    ''
                   )}
                 </div>
               </td>

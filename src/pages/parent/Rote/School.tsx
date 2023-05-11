@@ -12,6 +12,8 @@ export const School = () => {
         group='4IA22'
         birthdate='Jakarta 17/02/01'
         teacher='Swelandiah'
+        showAction={false}
+        canDelete={false}
       />
     </div>
   );

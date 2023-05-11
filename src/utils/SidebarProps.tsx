@@ -46,20 +46,20 @@ export const sidebarGuru: SidebarProps[] = [
     href: '/teacher/students',
   },
   {
-    text: 'Murojaah',
-    href: '/murojaah',
+    text: 'Penjadwalan',
+    href: '/teacher/rote',
   },
   {
-    text: 'Penjadwalan',
-    href: '/teacher/shedule',
+    text: 'Murojaah',
+    href: '/teacher/murojaah',
   },
   {
     text: 'Tilawah',
-    href: '/tilawah',
+    href: '/teacher/tilawah',
   },
   {
     text: 'Profile',
-    href: '/profile',
+    href: '/teacher/profile',
   },
 ];
 

@@ -10,6 +10,10 @@ export const NotDone = () => {
         group='4IA22'
         birthdate='Jakarta 17/02/01'
         teacher='Swelandiah'
+        showAction={true}
+        canDelete={true}
+        showCard={true}
+        showButton={false}
       />
     </div>
   );

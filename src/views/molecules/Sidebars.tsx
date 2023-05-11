@@ -8,7 +8,7 @@ import {
   sidebarOrtu,
 } from '../../utils/SidebarProps';
 import { DropdownSidebar } from '../atoms/Dropdowns';
-import Link from '../atoms/Link';
+import Links from '../atoms/Links';
 import Sosmed from '../atoms/Sosmed';
 import Logo from './../../assets/images/Logo.png';
 
@@ -54,7 +54,14 @@ export const SidebarParent = () => {
                   />
                 );
               } else {
-                return <Link key={index} href={val.href} text={val.text} />;
+                return (
+                  <Links
+                    key={index}
+                    href={val.href}
+                    text={val.text}
+                    isSidebar={true}
+                  />
+                );
               }
             })}
           </ul>
@@ -120,7 +127,12 @@ export const SidebarTeacher = () => {
           <img src={Logo} alt='Logo' className='m-auto mb-[73px]' />
           <ul className='list-none'>
             {sidebarGuru.map((val, index) => (
-              <Link key={index} href={val.href} text={val.text} />
+              <Links
+                key={index}
+                href={val.href}
+                text={val.text}
+                isSidebar={true}
+              />
             ))}
           </ul>
         </div>
