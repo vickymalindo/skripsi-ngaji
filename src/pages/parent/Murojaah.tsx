@@ -10,6 +10,8 @@ export const Murojaah = () => {
         canDelete={false}
         showCard={false}
         showButton={false}
+        showQuranTable={true}
+        showChild={false}
       />
     </div>
   );

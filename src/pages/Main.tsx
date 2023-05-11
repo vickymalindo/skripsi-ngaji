@@ -11,12 +11,12 @@ const Main = () => {
   const location = useLocation();
   return (
     <div>
-      {location.pathname.includes('teacher') ? (
-        <SidebarTeacher />
+      {location.pathname.includes('admin') ? (
+        <SidebarAdmin />
       ) : location.pathname.includes('parent') ? (
         <SidebarParent />
       ) : (
-        <SidebarAdmin />
+        <SidebarTeacher />
       )}
 
       <Outlet />

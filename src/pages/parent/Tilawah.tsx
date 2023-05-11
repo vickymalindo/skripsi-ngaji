@@ -10,6 +10,8 @@ export const Tilawah = () => {
         canDelete={false}
         showCard={true}
         showButton={false}
+        showQuranTable={true}
+        showChild={false}
       />
     </div>
   );

@@ -2,7 +2,7 @@ import { CardProfile } from '../../views/atoms/Cards';
 import TitlePage from '../../views/atoms/TitlePage';
 import Appbar from '../../views/molecules/Appbar';
 
-const Student = () => {
+export const Student = () => {
   return (
     <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition duration-300 ease-out'>
       <Appbar username='Swelandiah' />
@@ -56,5 +56,3 @@ const Student = () => {
     </div>
   );
 };
-
-export default Student;

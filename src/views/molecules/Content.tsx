@@ -1,7 +1,7 @@
 import Button from '../atoms/Button';
 import { CardProfile } from '../atoms/Cards';
 import Links from '../atoms/Links';
-import Table from '../atoms/Table';
+import { QuranTable, UserTable } from '../atoms/Tables';
 import TitlePage from '../atoms/TitlePage';
 import Appbar from './Appbar';
 
@@ -17,6 +17,8 @@ interface Props {
   canDelete: boolean;
   showCard: boolean;
   showButton: boolean;
+  showQuranTable: boolean;
+  showChild: boolean;
 }
 
 const Content = ({
@@ -31,6 +33,8 @@ const Content = ({
   canDelete,
   showCard,
   showButton,
+  showQuranTable,
+  showChild,
 }: Props) => {
   return (
     <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition duration-300 ease-out'>
@@ -75,8 +79,15 @@ const Content = ({
         ) : (
           ''
         )}
-
-        <Table showAction={showAction} canDelete={canDelete} />
+        {showQuranTable ? (
+          <QuranTable showAction={showAction} canDelete={canDelete} />
+        ) : (
+          <UserTable
+            showAction={showAction}
+            canDelete={canDelete}
+            showChild={showChild}
+          />
+        )}
       </div>
     </div>
   );

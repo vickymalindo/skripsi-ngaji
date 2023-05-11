@@ -11,6 +11,8 @@ const QuranRote = () => {
       canDelete={true}
       showCard={false}
       showButton={true}
+      showQuranTable={true}
+      showChild={false}
     />
   );
 };

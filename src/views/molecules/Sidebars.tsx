@@ -73,24 +73,51 @@ export const SidebarParent = () => {
 };
 
 export const SidebarAdmin = () => {
+  const isClick = useAppSelector((state) => state.toggle.clicked);
+  const [isOpen, setIsOpen] = React.useState(isClick);
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    setIsOpen((prev) => (prev = isClick));
+  }, [isClick]);
+
   return (
-    <aside className='w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll'>
-      <div className='px-[9px] pt-[45px]'>
-        <img src={Logo} alt='Logo' className='m-auto mb-[73px]' />
-        <ul className='list-none'>
-          {sidebarAdmin.map((val, index) => {
-            return (
-              <DropdownSidebar
-                key={index}
-                parent={val.text}
-                data={val.children}
-              />
-            );
-          })}
-        </ul>
-      </div>
-      <Sosmed height='h-[calc(100%-558.79px)]' />
-    </aside>
+    <div
+      className={
+        'transition duration-300 ease-out opacity-0 fixed lg:opacity-100' +
+        (isOpen
+          ? ' opacity-100 bg-black-rgba w-full h-screen z-10'
+          : ' opacity-0')
+      }>
+      <aside
+        className={
+          'lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition duration-150 ease-out' +
+          (isOpen ? ' w-[274px]' : 'w-0')
+        }>
+        <div className='relative px-[9px] pt-[45px]'>
+          <IoMdClose
+            className='absolute text-2xl text-white right-3 top-5 opacity-100 lg:opacity-0 transition duration-300 ease-out cursor-pointer'
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(hamburgerClicked());
+            }}
+          />
+          <img src={Logo} alt='Logo' className='m-auto mb-[73px]' />
+          <ul className='list-none'>
+            {sidebarAdmin.map((val, index) => {
+              return (
+                <DropdownSidebar
+                  key={index}
+                  parent={val.text}
+                  data={val.children}
+                />
+              );
+            })}
+          </ul>
+        </div>
+        <Sosmed height='h-[calc(100%-558.79px)]' />
+      </aside>
+    </div>
   );
 };
 

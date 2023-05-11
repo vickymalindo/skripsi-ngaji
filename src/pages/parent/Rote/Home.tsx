@@ -12,6 +12,10 @@ export const Home = () => {
         teacher='Swelandiah'
         showAction={false}
         canDelete={false}
+        showCard={true}
+        showButton={false}
+        showQuranTable={true}
+        showChild={false}
       />
     </div>
   );

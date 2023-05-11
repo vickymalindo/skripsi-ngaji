@@ -69,32 +69,32 @@ export const sidebarAdmin: SidebarProps[] = [
     children: [
       {
         text: 'Guru',
-        href: '/guru',
+        href: '/admin/list/teacher',
       },
       {
         text: 'Murid/Anak',
-        href: '/muridanak',
+        href: '/admin/list/students',
       },
       {
         text: 'Orangtua',
-        href: '/orangtua',
+        href: '/admin/list/parent',
       },
     ],
   },
   {
-    text: 'Buat Akun',
+    text: 'Kelas',
     children: [
       {
-        text: 'Guru',
-        href: '/buat/guru',
+        text: '4IA22',
+        href: '/4IA22',
       },
       {
-        text: 'Murid/Anak',
-        href: '/buat/muridanak',
+        text: '4IA21',
+        href: '/4IA21',
       },
       {
-        text: 'Orangtua',
-        href: '/buat/orangtua',
+        text: '4IA20',
+        href: '/4IA20',
       },
     ],
   },
