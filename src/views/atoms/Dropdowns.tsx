@@ -69,14 +69,14 @@ export const DropdownInput = <T extends string>({
   return (
     <div
       className={
-        'bg-dark-green text-white p-3 absolute top-[45px] w-full' +
+        'bg-dark-green text-white p-3 absolute z-10 top-[45px] w-full' +
         (isOpen && ' rounded-bl-br')
       }>
       {data?.map((value, index) => {
         return (
           <button
             key={index}
-            className='block m-auto p-1 w-full hover:bg-green-300'
+            className='block m-auto p-1 w-full hover:bg-green-400'
             onClick={() => passKelas?.(value)}>
             {value}
           </button>

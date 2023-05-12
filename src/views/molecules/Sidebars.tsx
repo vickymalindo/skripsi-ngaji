@@ -105,13 +105,26 @@ export const SidebarAdmin = () => {
           <img src={Logo} alt='Logo' className='m-auto mb-[73px]' />
           <ul className='list-none'>
             {sidebarAdmin.map((val, index) => {
-              return (
-                <DropdownSidebar
-                  key={index}
-                  parent={val.text}
-                  data={val.children}
-                />
-              );
+              {
+                if (index < 2) {
+                  return (
+                    <DropdownSidebar
+                      key={index}
+                      parent={val.text}
+                      data={val.children}
+                    />
+                  );
+                } else {
+                  return (
+                    <Links
+                      key={index}
+                      href={val.href}
+                      text={val.text}
+                      isSidebar={true}
+                    />
+                  );
+                }
+              }
             })}
           </ul>
         </div>

@@ -1,6 +1,6 @@
 import Content from '../../../views/molecules/Content';
 
-const Teacher = () => {
+export const Teacher = () => {
   return (
     <Content
       username='admin'
@@ -14,5 +14,3 @@ const Teacher = () => {
     />
   );
 };
-
-export default Teacher;

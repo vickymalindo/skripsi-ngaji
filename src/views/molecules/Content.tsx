@@ -18,7 +18,8 @@ interface Props {
   showCard: boolean;
   showButton: boolean;
   showQuranTable: boolean;
-  showChild: boolean;
+  showChild?: boolean;
+  showParent?: boolean;
 }
 
 const Content = ({
@@ -35,6 +36,7 @@ const Content = ({
   showButton,
   showQuranTable,
   showChild,
+  showParent,
 }: Props) => {
   return (
     <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition duration-300 ease-out'>
@@ -86,6 +88,7 @@ const Content = ({
             showAction={showAction}
             canDelete={canDelete}
             showChild={showChild}
+            showParent={showParent}
           />
         )}
       </div>

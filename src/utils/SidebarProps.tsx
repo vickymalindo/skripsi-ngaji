@@ -82,37 +82,24 @@ export const sidebarAdmin: SidebarProps[] = [
     ],
   },
   {
-    text: 'Kelas',
-    children: [
-      {
-        text: '4IA22',
-        href: '/4IA22',
-      },
-      {
-        text: '4IA21',
-        href: '/4IA21',
-      },
-      {
-        text: '4IA20',
-        href: '/4IA20',
-      },
-    ],
-  },
-  {
     text: 'Buat Akun',
     children: [
       {
         text: 'Guru',
-        href: '/buat/guru',
+        href: '/admin/create/teacher',
       },
       {
         text: 'Murid/Anak',
-        href: '/buat/muridanak',
+        href: '/admin/create/student',
       },
       {
         text: 'Orangtua',
-        href: '/buat/orangtua',
+        href: '/admin/create/parent',
       },
     ],
+  },
+  {
+    text: 'Lihat Kelas',
+    href: '/admin/see/class',
   },
 ];

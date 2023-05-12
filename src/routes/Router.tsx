@@ -1,8 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../pages/Main';
-import Parent from '../pages/admin/users/Parent';
+import { Parent as CreateParent } from '../pages/admin/create/Parent';
+import { Student as CreateStudent } from '../pages/admin/create/Student';
+import { Teacher as CreateTeacher } from '../pages/admin/create/Teacher';
+import { Parent as ParentinAdmin } from '../pages/admin/users/Parent';
 import { Student as StudentsinAdmin } from '../pages/admin/users/Student';
-import Teacher from '../pages/admin/users/Teacher';
+import { Teacher as TeacherinAdmin } from '../pages/admin/users/Teacher';
 import { Murojaah as ParentMurojaah } from '../pages/parent/Murojaah';
 import Profile from '../pages/parent/Profile';
 import * as ParentRote from '../pages/parent/Rote/All';
@@ -13,6 +16,7 @@ import { Student as StudentsinTeacher } from '../pages/teacher/Student';
 import { Tilawah as TeacherTilawah } from '../pages/teacher/Tilawah';
 import Create from '../pages/teacher/forms/Create';
 import Edit from '../pages/teacher/forms/Edit';
+
 const Router = createBrowserRouter([
   {
     path: 'parent',
@@ -101,11 +105,28 @@ const Router = createBrowserRouter([
           },
           {
             path: 'parent',
-            element: <Parent />,
+            element: <ParentinAdmin />,
           },
           {
             path: 'teacher',
-            element: <Teacher />,
+            element: <TeacherinAdmin />,
+          },
+        ],
+      },
+      {
+        path: 'create',
+        children: [
+          {
+            path: 'teacher',
+            element: <CreateTeacher />,
+          },
+          {
+            path: 'student',
+            element: <CreateStudent />,
+          },
+          {
+            path: 'parent',
+            element: <CreateParent />,
           },
         ],
       },

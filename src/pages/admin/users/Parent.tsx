@@ -1,6 +1,6 @@
 import Content from '../../../views/molecules/Content';
 
-const Parent = () => {
+export const Parent = () => {
   return (
     <Content
       username='admin'
@@ -14,5 +14,3 @@ const Parent = () => {
     />
   );
 };
-
-export default Parent;

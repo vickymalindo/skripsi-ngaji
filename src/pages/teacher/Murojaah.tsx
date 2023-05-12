@@ -10,7 +10,6 @@ export const Murojaah = () => {
       showCard={false}
       showButton={true}
       showQuranTable={true}
-      showChild={false}
     />
   );
 };

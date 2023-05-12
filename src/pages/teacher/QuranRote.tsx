@@ -12,7 +12,6 @@ const QuranRote = () => {
       showCard={false}
       showButton={true}
       showQuranTable={true}
-      showChild={false}
     />
   );
 };

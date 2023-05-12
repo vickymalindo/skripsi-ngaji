@@ -61,7 +61,7 @@ export const InputFloating = ({ label, classname, ...props }: Props) => {
   );
 };
 
-export const InputDropdown = ({ label }: Props) => {
+export const InputDropdown = ({ label, classname }: Props) => {
   const [open, setOpen] = React.useState(false);
   const [kelas, setKelas] = React.useState<string | undefined>('');
 
@@ -70,11 +70,11 @@ export const InputDropdown = ({ label }: Props) => {
   };
 
   return (
-    <div className='relative w-[360px]'>
+    <div className={'relative mt-2 ' + (classname ? classname : '')}>
       <div className='relative cursor-pointer mt-2' onClick={handleOpen}>
         <div
           className={
-            'px-4 py-3 h-[45px] border-dark-green border text-dark-green' +
+            'w-full px-4 py-3 h-[53px] border-dark-green border text-dark-green' +
             (open ? ' rounded-tl-tr' : ' rounded-[10px]')
           }>
           {kelas}

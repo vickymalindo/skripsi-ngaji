@@ -11,6 +11,7 @@ export const Student = () => {
       showButton={false}
       showQuranTable={false}
       showChild={false}
+      showParent={true}
     />
   );
 };

@@ -10,7 +10,6 @@ export const Tilawah = () => {
       showCard={false}
       showButton={true}
       showQuranTable={true}
-      showChild={false}
     />
   );
 };

@@ -1,8 +1,12 @@
-import Forms from '../../../views/molecules/Forms';
+import { FormQuran } from '../../../views/molecules/Forms';
 
 const Create = () => {
   return (
-    <Forms page='Input Data Muraja’ah' username='Swelandiah' children='Buat' />
+    <FormQuran
+      page='Input Data Muraja’ah'
+      username='Swelandiah'
+      children='Buat'
+    />
   );
 };
 
