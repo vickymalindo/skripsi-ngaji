@@ -1,14 +1,14 @@
 import { FormUser } from '../../../views/molecules/Forms';
 
-export const Parent = () => {
+export const Teacher = () => {
   return (
     <FormUser
       username='Admin'
-      page='Pembuatan akun Orangtua'
-      children='Buat'
-      isClass={false}
+      page='Edit akun Guru'
+      children='Edit'
+      isClass={true}
       isNotStudent={true}
-      isParent={true}
+      isParent={false}
     />
   );
 };

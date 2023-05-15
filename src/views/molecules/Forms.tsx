@@ -51,13 +51,17 @@ export const FormUser = ({
         <div className='px-[33.47px] sm:px-[40.47px] lg:px-[60.47px]'>
           <InputFloating classname='mb-[39px]' label='Nama Lengkap' />
           {isClass && <InputDropdown classname='mb-[39px]' label='Kelas' />}
-          {isParent && <InputDropdown classname='mb-[39px]' label='anak' />}
+          {isParent && <InputDropdown classname='mb-[39px]' label='Anak' />}
           <InputFloating classname='mb-[39px]' label='Jenis Kelamin' />
           <InputFloating classname='mb-[39px]' label='TTL' />
           {isNotStudent && (
             <>
               <InputFloating classname='mb-[39px]' label='Username' />
-              <InputFloating classname='mb-[39px]' label='Kata Sandi' />
+              <InputFloating
+                classname='mb-[39px]'
+                label='Kata Sandi'
+                password={true}
+              />
             </>
           )}
           <div className='flex w-full justify-end mt-[49px] mb-[45px] '>

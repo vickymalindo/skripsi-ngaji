@@ -7,13 +7,11 @@ interface Props {
   type?: string;
   label: string;
   password?: boolean;
-  eye?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  isOpen?: boolean;
   classname?: string;
 }
 
-export const InputDefault = ({ label, password, eye, ...props }: Props) => {
+export const InputDefault = ({ label, password, ...props }: Props) => {
   const [eyeSlash, setEyeSlash] = React.useState(true);
 
   const handleClickEye = () => {
@@ -47,13 +45,43 @@ export const InputDefault = ({ label, password, eye, ...props }: Props) => {
   );
 };
 
-export const InputFloating = ({ label, classname, ...props }: Props) => {
+export const InputFloating = ({
+  label,
+  classname,
+  password,
+  ...props
+}: Props) => {
+  const [eyeSlash, setEyeSlash] = React.useState(true);
+
+  const handleClickEye = () => {
+    setEyeSlash((prev) => !prev);
+  };
+
   return (
     <div className={'relative mt-2 ' + (classname ? classname : '')}>
-      <input
-        className='w-full px-4 py-3 h-[53px] outline-none border-dark-green border rounded-[10px] text-dark-green'
-        {...props}
-      />
+      <div className='px-4 py-3 h-[53px] text-dark-green border-dark-green border rounded-[10px] flex justify-between items-center'>
+        <input
+          type={password ? (eyeSlash ? 'password' : 'text') : 'text'}
+          className={'outline-none ' + (password ? ' w-[92%]' : ' w-full')}
+          {...props}
+        />
+        {password ? (
+          eyeSlash ? (
+            <BsEye
+              className='cursor-pointer text-lg'
+              onClick={handleClickEye}
+            />
+          ) : (
+            <BsEyeSlash
+              className='cursor-pointer text-lg'
+              onClick={handleClickEye}
+            />
+          )
+        ) : (
+          ''
+        )}
+      </div>
+
       <span className='absolute -top-3 left-4 px-1 bg-white text-dark-green text-base flex justify-center items-center gap-1'>
         <span className='text-sm sm:text-base'>{label}</span>
       </span>

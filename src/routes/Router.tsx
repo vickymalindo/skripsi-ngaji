@@ -1,8 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
+import Index from '../pages/Index';
 import Main from '../pages/Main';
 import { Parent as CreateParent } from '../pages/admin/create/Parent';
 import { Student as CreateStudent } from '../pages/admin/create/Student';
 import { Teacher as CreateTeacher } from '../pages/admin/create/Teacher';
+import { Parent as EditParent } from '../pages/admin/edit/Parent';
+import { Student as EditStudent } from '../pages/admin/edit/Student';
+import { Teacher as EditTeacher } from '../pages/admin/edit/Teacher';
 import { Parent as ParentinAdmin } from '../pages/admin/users/Parent';
 import { Student as StudentsinAdmin } from '../pages/admin/users/Student';
 import { Teacher as TeacherinAdmin } from '../pages/admin/users/Teacher';
@@ -18,6 +22,10 @@ import Create from '../pages/teacher/forms/Create';
 import Edit from '../pages/teacher/forms/Edit';
 
 const Router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Index />,
+  },
   {
     path: 'parent',
     element: <Main />,
@@ -127,6 +135,23 @@ const Router = createBrowserRouter([
           {
             path: 'parent',
             element: <CreateParent />,
+          },
+        ],
+      },
+      {
+        path: 'edit',
+        children: [
+          {
+            path: 'teacher',
+            element: <EditTeacher />,
+          },
+          {
+            path: 'parent',
+            element: <EditParent />,
+          },
+          {
+            path: 'student',
+            element: <EditStudent />,
           },
         ],
       },

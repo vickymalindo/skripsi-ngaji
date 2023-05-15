@@ -4,8 +4,8 @@ export const Parent = () => {
   return (
     <FormUser
       username='Admin'
-      page='Pembuatan akun Orangtua'
-      children='Buat'
+      page='Edit akun Orangtua'
+      children='Edit'
       isClass={false}
       isNotStudent={true}
       isParent={true}
