@@ -24,19 +24,19 @@ export const SidebarParent = () => {
   return (
     <div
       className={
-        'transition duration-300 ease-out opacity-0 fixed lg:opacity-100' +
+        'transition-all duration-300 ease-in-out opacity-0 fixed lg:opacity-100' +
         (isOpen
           ? ' opacity-100 bg-black-rgba w-full h-screen z-10'
           : ' opacity-0')
       }>
       <aside
         className={
-          'lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition duration-150 ease-out' +
+          'lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition-all duration-300 ease-in-out' +
           (isOpen ? ' w-[274px]' : 'w-0')
         }>
         <div className='relative px-[9px] pt-[45px]'>
           <IoMdClose
-            className='absolute text-2xl text-white right-3 top-5 opacity-100 lg:opacity-0 transition duration-300 ease-out cursor-pointer'
+            className='absolute text-2xl text-white right-3 top-5 opacity-100 lg:opacity-0 transition-all duration-300 ease-in-out cursor-pointer'
             onClick={(e) => {
               e.preventDefault();
               dispatch(hamburgerClicked());
@@ -51,6 +51,7 @@ export const SidebarParent = () => {
                     key={index}
                     parent='Hafalan'
                     data={val.children}
+                    isCream={false}
                   />
                 );
               } else {
@@ -84,19 +85,19 @@ export const SidebarAdmin = () => {
   return (
     <div
       className={
-        'transition duration-300 ease-out opacity-0 fixed lg:opacity-100' +
+        'transition-all duration-300 ease-in-out opacity-0 fixed lg:opacity-100' +
         (isOpen
           ? ' opacity-100 bg-black-rgba w-full h-screen z-10'
           : ' opacity-0')
       }>
       <aside
         className={
-          'lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition duration-150 ease-out' +
+          'lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition-all duration-300 ease-in-out' +
           (isOpen ? ' w-[274px]' : 'w-0')
         }>
         <div className='relative px-[9px] pt-[45px]'>
           <IoMdClose
-            className='absolute text-2xl text-white right-3 top-5 opacity-100 lg:opacity-0 transition duration-300 ease-out cursor-pointer'
+            className='absolute text-2xl text-white right-3 top-5 opacity-100 lg:opacity-0 transition-all duration-300 ease-in-out cursor-pointer'
             onClick={(e) => {
               e.preventDefault();
               dispatch(hamburgerClicked());
@@ -112,6 +113,7 @@ export const SidebarAdmin = () => {
                       key={index}
                       parent={val.text}
                       data={val.children}
+                      isCream={false}
                     />
                   );
                 } else {
@@ -146,19 +148,19 @@ export const SidebarTeacher = () => {
   return (
     <div
       className={
-        'transition duration-300 ease-out opacity-0 fixed lg:opacity-100' +
+        'transition-all duration-300 ease-in-out opacity-0 fixed lg:opacity-100' +
         (isOpen
           ? ' opacity-100 bg-black-rgba w-full h-screen z-10'
           : ' opacity-0')
       }>
       <aside
         className={
-          'lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition duration-150 ease-out' +
+          'lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition-all duration-300 ease-in-out' +
           (isOpen ? ' w-[274px]' : 'w-0')
         }>
         <div className='relative px-[9px] pt-[45px]'>
           <IoMdClose
-            className='absolute text-2xl text-white right-3 top-5 opacity-100 lg:opacity-0 transition duration-300 ease-out cursor-pointer'
+            className='absolute text-2xl text-white right-3 top-5 opacity-100 lg:opacity-0 transition-all duration-300 ease-in-out cursor-pointer'
             onClick={(e) => {
               e.preventDefault();
               dispatch(hamburgerClicked());

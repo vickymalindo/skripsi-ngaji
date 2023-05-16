@@ -1,21 +1,27 @@
 import React from 'react';
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 interface Props {
   children: string;
   onClick?: React.MouseEventHandler;
   className?: string;
+  trash: boolean;
 }
 
-const Button = ({ children, onClick, className }: Props) => {
+const Button = ({ children, trash, className, ...props }: Props) => {
   return (
-    <button
+    <div
       className={
-        'outline-none bg-dark-green py-[10px] px-[30px] sm:text-[20px] text-white rounded-[10px] text-sm' +
-        (className ? ` ${className}` : '')
+        'shadow-primary-shadow outline-none bg-dark-green py-[10px] px-[30px] sm:text-[20px] text-white rounded-[10px]  flex justify-center items-center gap-2 w-max' +
+        (className ? ` ${className}` : '') +
+        (trash ? ' mt-[21px]' : '')
       }
-      onClick={onClick}>
-      {children}
-    </button>
+      {...props}>
+      <button className='outline-none bg-transparent text-base'>
+        {children}
+      </button>
+      {trash && <FaRegTrashAlt className='text-base' />}
+    </div>
   );
 };
 

@@ -100,6 +100,6 @@ export const sidebarAdmin: SidebarProps[] = [
   },
   {
     text: 'Lihat Kelas',
-    href: '/admin/see/class',
+    href: '/admin/class',
   },
 ];

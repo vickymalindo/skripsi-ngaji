@@ -11,7 +11,12 @@ interface Props {
   classname?: string;
 }
 
-export const InputDefault = ({ label, password, ...props }: Props) => {
+export const InputDefault = ({
+  label,
+  password,
+  classname,
+  ...props
+}: Props) => {
   const [eyeSlash, setEyeSlash] = React.useState(true);
 
   const handleClickEye = () => {
@@ -19,7 +24,11 @@ export const InputDefault = ({ label, password, ...props }: Props) => {
   };
 
   return (
-    <div className='px-4 py-3 h-[45px] border border-dark-green rounded-[10px] text-dark-green w-[360px] flex justify-between items-center'>
+    <div
+      className={
+        'px-4 py-3 h-[45px] border border-dark-green rounded-[10px] text-dark-green max-w-[505px] sm:w-[505px] flex justify-between items-center' +
+        (classname ? ` ${classname}` : '')
+      }>
       <input
         type={password ? (eyeSlash ? 'password' : 'text') : 'text'}
         className={
@@ -115,8 +124,8 @@ export const InputDropdown = ({ label, classname }: Props) => {
       {open && (
         <DropdownInput
           data={['4IA22', '4IA19', '4IA20', '4IA18']}
-          isOpen={open}
           passKelas={setKelas}
+          isCream={false}
         />
       )}
     </div>

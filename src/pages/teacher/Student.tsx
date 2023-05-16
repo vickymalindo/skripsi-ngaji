@@ -14,42 +14,49 @@ export const Student = () => {
             group='4IA22'
             birthdate='Jakarta 17/02/01'
             teacher='Swelandiah'
+            isDelete={false}
           />
           <CardProfile
             name='Vicky Malindo'
             group='4IA22'
             birthdate='Jakarta 17/02/01'
             teacher='Swelandiah'
+            isDelete={false}
           />
           <CardProfile
             name='Vicky Malindo'
             group='4IA22'
             birthdate='Jakarta 17/02/01'
             teacher='Swelandiah'
+            isDelete={false}
           />
           <CardProfile
             name='Vicky Malindo'
             group='4IA22'
             birthdate='Jakarta 17/02/01'
             teacher='Swelandiah'
+            isDelete={false}
           />
           <CardProfile
             name='Vicky Malindo'
             group='4IA22'
             birthdate='Jakarta 17/02/01'
             teacher='Swelandiah'
+            isDelete={false}
           />
           <CardProfile
             name='Vicky Malindo'
             group='4IA22'
             birthdate='Jakarta 17/02/01'
             teacher='Swelandiah'
+            isDelete={false}
           />
           <CardProfile
             name='Vicky Malindo'
             group='4IA22'
             birthdate='Jakarta 17/02/01'
             teacher='Swelandiah'
+            isDelete={false}
           />
         </div>
       </div>

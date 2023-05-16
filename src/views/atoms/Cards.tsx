@@ -1,4 +1,5 @@
 import Profile from './../../assets/images/profile.png';
+import Button from './Button';
 import MyIcon from './MyIcon';
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
   icon?: string;
   title?: string;
   description?: string;
+  isDelete: boolean;
 }
 
 export const CardProfile = ({
@@ -18,6 +20,7 @@ export const CardProfile = ({
   birthdate,
   teacher,
   username,
+  isDelete,
 }: Props) => {
   return (
     <div
@@ -41,17 +44,27 @@ export const CardProfile = ({
             <span className='text-sm sm:text-base'>{name}</span>
           </div>
           <div>
-            <span className='font-bold ml-2 text-sm sm:text-base'>Kelas :</span>
-            <span className='text-sm sm:text-base'>{group}</span>
-          </div>
-          <div>
             <span className='font-bold ml-2 text-sm sm:text-base'>TTL : </span>
             <span className='text-sm sm:text-base'>{birthdate}</span>
           </div>
-          <div>
-            <span className='font-bold ml-2 text-sm sm:text-base'>Guru : </span>
-            <span className='text-sm sm:text-base'>{teacher}</span>
-          </div>
+          {isDelete ? (
+            <Button children='Hapus' trash={true} />
+          ) : (
+            <>
+              <div>
+                <span className='font-bold ml-2 text-sm sm:text-base'>
+                  Kelas :
+                </span>
+                <span className='text-sm sm:text-base'>{group}</span>
+              </div>
+              <div>
+                <span className='font-bold ml-2 text-sm sm:text-base'>
+                  Guru :
+                </span>
+                <span className='text-sm sm:text-base'>{teacher}</span>
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>

@@ -1,6 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Index from '../pages/Index';
+import Login from '../pages/Login';
 import Main from '../pages/Main';
+import Class from '../pages/admin/Class';
 import { Parent as CreateParent } from '../pages/admin/create/Parent';
 import { Student as CreateStudent } from '../pages/admin/create/Student';
 import { Teacher as CreateTeacher } from '../pages/admin/create/Teacher';
@@ -15,7 +17,8 @@ import Profile from '../pages/parent/Profile';
 import * as ParentRote from '../pages/parent/Rote/All';
 import { Tilawah as ParentTilawah } from '../pages/parent/Tilawah';
 import { Murojaah as TeacherMurojaah } from '../pages/teacher/Murojaah';
-import QuranRote from '../pages/teacher/QuranRote';
+import Quran from '../pages/teacher/Quran';
+import RoteStudent from '../pages/teacher/RoteStudent';
 import { Student as StudentsinTeacher } from '../pages/teacher/Student';
 import { Tilawah as TeacherTilawah } from '../pages/teacher/Tilawah';
 import Create from '../pages/teacher/forms/Create';
@@ -25,6 +28,10 @@ const Router = createBrowserRouter([
   {
     path: '/',
     element: <Index />,
+  },
+  {
+    path: 'login',
+    element: <Login />,
   },
   {
     path: 'parent',
@@ -83,8 +90,12 @@ const Router = createBrowserRouter([
         ],
       },
       {
+        path: 'rote/student',
+        element: <RoteStudent />,
+      },
+      {
         path: 'rote',
-        element: <QuranRote />,
+        element: <Quran />,
       },
       {
         path: 'tilawah',
@@ -154,6 +165,10 @@ const Router = createBrowserRouter([
             element: <EditStudent />,
           },
         ],
+      },
+      {
+        path: 'class',
+        element: <Class />,
       },
     ],
   },

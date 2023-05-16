@@ -13,10 +13,10 @@ const Appbar = ({ username }: Props) => {
   return (
     <div className='flex justify-between items-center'>
       <FaBars
-        className='text-xl md:text-2xl ml-8 cursor-pointer opacity-100 lg:opacity-0 transition duration-300 ease-out'
+        className='text-xl md:text-2xl ml-8 cursor-pointer opacity-100 lg:opacity-0 transition-all duration-300 ease-in-out'
         onClick={() => dispatch(hamburgerClicked())}
       />
-      <CardProfile username={username} />
+      <CardProfile username={username} isDelete={false} />
     </div>
   );
 };

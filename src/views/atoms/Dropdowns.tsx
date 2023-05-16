@@ -6,9 +6,9 @@ import { SidebarChild } from '../../utils/SidebarProps';
 interface Props<T> {
   parent?: string;
   onClick?: React.MouseEventHandler;
-  isOpen?: boolean;
   passKelas?: (e: string) => void;
   data?: T[];
+  isCream: boolean;
 }
 
 export const DropdownSidebar = <T extends SidebarChild>({
@@ -25,7 +25,7 @@ export const DropdownSidebar = <T extends SidebarChild>({
   return (
     <div
       className={
-        'bg-dropdwon-cream mb-[29px] rounded-[27.34px] pt-[25.65px] px-7 cursor-pointer last:mb-0' +
+        'bg-dropdown-cream mb-[29px] rounded-[27.34px] pt-[25.65px] px-7 cursor-pointer last:mb-0' +
         (open ? ' pb-[39.3px]' : ' pb-[25.65px]')
       }
       onClick={handleOpen}>
@@ -63,20 +63,25 @@ export const DropdownSidebar = <T extends SidebarChild>({
 
 export const DropdownInput = <T extends string>({
   data,
-  isOpen,
   passKelas,
+  isCream,
 }: Props<T>) => {
   return (
     <div
       className={
-        'bg-dark-green text-white p-3 absolute z-10 top-[45px] w-full' +
-        (isOpen && ' rounded-bl-br')
+        'p-3 absolute z-10 top-[45px] w-full rounded-bl-br ' +
+        (isCream
+          ? 'bg-dropdown-cream text-dark-green'
+          : 'bg-dark-green text-white')
       }>
       {data?.map((value, index) => {
         return (
           <button
             key={index}
-            className='block m-auto p-1 w-full hover:bg-green-400'
+            className={
+              'block m-auto p-1 w-full ' +
+              (isCream ? 'hover:bg-[#f5e8b3]' : 'hover:bg-light-green')
+            }
             onClick={() => passKelas?.(value)}>
             {value}
           </button>

@@ -1,6 +1,6 @@
 import Content from '../../views/molecules/Content';
 
-const QuranRote = () => {
+const RoteStudent = () => {
   return (
     <Content
       username='Swelandiah'
@@ -16,4 +16,4 @@ const QuranRote = () => {
   );
 };
 
-export default QuranRote;
+export default RoteStudent;

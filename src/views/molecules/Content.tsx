@@ -39,7 +39,7 @@ const Content = ({
   showParent,
 }: Props) => {
   return (
-    <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition duration-300 ease-out'>
+    <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition-all duration-300 ease-in-out-out'>
       <Appbar username={username} />
       {/* <Loader /> */}
       <div className='w-full box-shadow px-[22px] py-[22px] lg:px-7 lg:py-7 rounded-[57px]'>
@@ -50,6 +50,7 @@ const Content = ({
             group={group}
             birthdate={birthdate}
             teacher={teacher}
+            isDelete={false}
           />
         ) : showButton ? (
           parentName ? (
@@ -63,9 +64,17 @@ const Content = ({
                 </p>
               </div>
               <div className='flex flex-wrap flex-col min-[522px]:flex-row min-[522px]:justify-around items-end min-[522px]:items-center mb-[45px]'>
-                <Button children='Belum' className='mb-2 min-[522px]:mb-0' />
-                <Button children='Sekolah' className='mb-2 min-[522px]:mb-0' />
-                <Button children='Rumah' />
+                <Button
+                  children='Belum'
+                  className='mb-2 min-[522px]:mb-0'
+                  trash={false}
+                />
+                <Button
+                  children='Sekolah'
+                  className='mb-2 min-[522px]:mb-0'
+                  trash={false}
+                />
+                <Button children='Rumah' trash={false} />
               </div>
             </div>
           ) : (
