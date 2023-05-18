@@ -2,16 +2,19 @@ import Profile from './../../assets/images/profile.png';
 import Button from './Button';
 import MyIcon from './MyIcon';
 
-interface Props {
+interface PropsProfile {
   name?: string;
   group?: string;
   birthdate?: string;
   teacher?: string;
   username?: string;
-  icon?: string;
-  title?: string;
-  description?: string;
-  isDelete: boolean;
+  isDelete?: boolean;
+}
+
+interface PropsInfo {
+  icon: 'calendar' | 'eye' | 'clock';
+  title: string;
+  description: string;
 }
 
 export const CardProfile = ({
@@ -21,7 +24,7 @@ export const CardProfile = ({
   teacher,
   username,
   isDelete,
-}: Props) => {
+}: PropsProfile) => {
   return (
     <div
       className={
@@ -71,15 +74,15 @@ export const CardProfile = ({
   );
 };
 
-export const CardInfo = ({ title, description }: Props) => {
+export const CardInfo = ({ title, description, icon }: PropsInfo) => {
   return (
-    <div className='relative w-[458px] h-[209px] pt-[27px] pl-[70px] pr-[34px] shadow-primary-shadow rounded-[47px] ml-3'>
+    <div className='relative w-[358px] h-[109px] sm:w-[408px] sm:h-[159px] lg:w-[458px] lg:h-[209px] pt-[15px] pl-[30px] pr-[24px] sm:pt-[23px] sm:pl-[55px] sm:pr-[30px] lg:pt-[27px] Lg:pl-[70px] lg:pr-[34px] bg-white shadow-primary-shadow rounded-[47px]'>
       <div>
-        <h3 className='font-bold text-xl'>{title}</h3>
-        <p className='text-base mt-2'>{description}</p>
+        <h3 className='font-bold text-base sm:text-lg lg:text-xl'>{title}</h3>
+        <p className='text-xs sm:text-sm lg:text-base mt-2'>{description}</p>
       </div>
-      <div className='w-12 h-12 p-1.5 absolute -top-2.5 -left-1.5 rounded-full gradient-icon'>
-        <MyIcon name='calendar' classname='w-full h-full' />
+      <div className='w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 p-1.5 absolute -top-2.5 -left-1.5 rounded-full gradient-icon'>
+        <MyIcon name={icon} classname='w-full h-full' />
       </div>
     </div>
   );

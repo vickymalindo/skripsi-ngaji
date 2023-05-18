@@ -5,6 +5,7 @@ interface Props {
   name: 'calendar' | 'eye' | 'clock';
   classname: string;
 }
+
 const MyIcon = ({ name, classname }: Props) => {
   const Icons: Record<Props['name'], any> = {
     calendar: <HiCalendar className={classname} />,
