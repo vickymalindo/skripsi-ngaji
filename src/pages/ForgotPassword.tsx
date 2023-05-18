@@ -1,26 +1,31 @@
+// import React from 'react'
+
 import { IoMdArrowBack } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import Button from '../views/atoms/Button';
 import { InputDefault } from '../views/atoms/Inputs';
 import Logo from './../assets/images/Logo.png';
 
-const Login = () => {
+const ForgotPassword = () => {
   return (
     <div className='lg:flex lg:justify-center'>
-      <Link to='/' className='absolute top-4 left-4'>
+      <Link to='/login' className='absolute top-4 left-4'>
         <IoMdArrowBack className='text-3xl inline-block' />
       </Link>
       <div className='h-screen w-full flex justify-center items-center lg:w-2/3 transition-all duration-300 ease-in-out'>
         <div>
-          <InputDefault label='Username' classname='mb-[47.05px]' />
-          <InputDefault label='Password' password={true} classname='mb-1' />
-          <span className='text-sm sm:text-base lg:text-xl text-dark-green mb-[45px] inline-block'>
-            Lupa kata sandi?
-            <Link to='/forgot' className='underline'>
-              Klik di sini
-            </Link>
-          </span>
-          <Button children='Masuk' trash={false} />
+          <InputDefault label='Nama Pengguna' classname='mb-[47.05px]' />
+          <InputDefault
+            label='Kata Sandi Baru'
+            password={true}
+            classname='mb-[47.05px]'
+          />
+          <InputDefault
+            label='Konfirmasi Kata Sandi'
+            password={true}
+            classname='mb-[47.05px]'
+          />
+          <Button children='Simpan' trash={false} />
         </div>
       </div>
       <div className='bg-gradient-green-no-rounded h-screen w-0 opacity-0 transition-all duration-300 ease-in-out lg:w-1/3 lg:opacity-100 flex justify-center items-center'>
@@ -30,4 +35,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;

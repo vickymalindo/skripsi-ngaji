@@ -27,7 +27,7 @@ export const FormQuran = ({ username, page, children }: Props) => {
           <InputFloating classname='mb-[39px]' label='Ayat' />
           <InputFloating classname='mb-[39px]' label='Juz' />
           <div className='flex w-full justify-end mt-[49px] mb-[45px] '>
-            <Button children={children} />
+            <Button children={children} trash={false} />
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@ export const FormUser = ({
             </>
           )}
           <div className='flex w-full justify-end mt-[49px] mb-[45px] '>
-            <Button children={children} />
+            <Button children={children} trash={false} />
           </div>
         </div>
       </div>

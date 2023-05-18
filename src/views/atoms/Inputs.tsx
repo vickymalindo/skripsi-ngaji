@@ -26,7 +26,7 @@ export const InputDefault = ({
   return (
     <div
       className={
-        'px-4 py-3 h-[45px] border border-dark-green rounded-[10px] text-dark-green max-w-[505px] sm:w-[505px] flex justify-between items-center' +
+        'px-3 py-2 sm:px-4 sm:py-3 h-[45px] sm:h-[53px] border border-dark-green rounded-[10px] text-dark-green max-w-[505px] sm:w-[505px] flex justify-between items-center' +
         (classname ? ` ${classname}` : '')
       }>
       <input
@@ -68,7 +68,7 @@ export const InputFloating = ({
 
   return (
     <div className={'relative mt-2 ' + (classname ? classname : '')}>
-      <div className='px-4 py-3 h-[53px] text-dark-green border-dark-green border rounded-[10px] flex justify-between items-center'>
+      <div className='px-3 py-2 sm:px-4 sm:py-3 h-[43px] sm:h-[53px] text-dark-green border-dark-green border rounded-[10px] flex justify-between items-center'>
         <input
           type={password ? (eyeSlash ? 'password' : 'text') : 'text'}
           className={'outline-none ' + (password ? ' w-[92%]' : ' w-full')}

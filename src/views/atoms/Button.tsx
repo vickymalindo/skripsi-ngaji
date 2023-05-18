@@ -1,9 +1,8 @@
-import React from 'react';
 import { FaRegTrashAlt } from 'react-icons/fa';
 
 interface Props {
   children: string;
-  onClick?: React.MouseEventHandler;
+  onClick?: () => void;
   className?: string;
   trash: boolean;
 }
@@ -12,7 +11,7 @@ const Button = ({ children, trash, className, ...props }: Props) => {
   return (
     <div
       className={
-        'shadow-primary-shadow outline-none bg-dark-green py-[10px] px-[30px] sm:text-[20px] text-white rounded-[10px]  flex justify-center items-center gap-2 w-max' +
+        'shadow-primary-shadow outline-none bg-dark-green py-[10px] px-[30px] sm:text-[20px] text-white rounded-[10px] flex justify-center items-center gap-2 w-max cursor-pointer' +
         (className ? ` ${className}` : '') +
         (trash ? ' mt-[21px]' : '')
       }
