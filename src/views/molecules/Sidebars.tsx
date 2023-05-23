@@ -31,8 +31,8 @@ export const SidebarParent = () => {
       }>
       <aside
         className={
-          'lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition-all duration-300 ease-in-out' +
-          (isOpen ? ' w-[274px]' : 'w-0')
+          'w-0 lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition-all duration-300 ease-in-out' +
+          (isOpen ? ' w-[274px]' : ' w-0')
         }>
         <div className='relative px-[9px] pt-[45px]'>
           <IoMdClose
@@ -92,8 +92,8 @@ export const SidebarAdmin = () => {
       }>
       <aside
         className={
-          'lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition-all duration-300 ease-in-out' +
-          (isOpen ? ' w-[274px]' : 'w-0')
+          'w-0 lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition-all duration-300 ease-in-out' +
+          (isOpen ? ' w-[274px]' : ' w-0')
         }>
         <div className='relative px-[9px] pt-[45px]'>
           <IoMdClose
@@ -155,8 +155,8 @@ export const SidebarTeacher = () => {
       }>
       <aside
         className={
-          'lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition-all duration-300 ease-in-out' +
-          (isOpen ? ' w-[274px]' : 'w-0')
+          'w-0 lg:w-[274px] bg-dark-green fixed left-0 h-full overflow-y-scroll transition-all duration-300 ease-in-out' +
+          (isOpen ? ' w-[274px]' : ' w-0')
         }>
         <div className='relative px-[9px] pt-[45px]'>
           <IoMdClose
