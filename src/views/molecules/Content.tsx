@@ -1,3 +1,4 @@
+import { Rote } from '../../types/ApiParent';
 import Button from '../atoms/Button';
 import { CardProfile } from '../atoms/Cards';
 import Links from '../atoms/Links';
@@ -20,6 +21,7 @@ interface Props {
   showQuranTable: boolean;
   showChild?: boolean;
   showParent?: boolean;
+  dataTable: Rote[];
 }
 
 const Content = ({
@@ -37,6 +39,7 @@ const Content = ({
   showQuranTable,
   showChild,
   showParent,
+  dataTable,
 }: Props) => {
   return (
     <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition-all duration-300 ease-in-out-out'>
@@ -90,14 +93,20 @@ const Content = ({
         ) : (
           ''
         )}
+        {/* TODO: buat tampilan jika datanya kosong */}
         {showQuranTable ? (
-          <QuranTable showAction={showAction} canDelete={canDelete} />
+          <QuranTable
+            showAction={showAction}
+            canDelete={canDelete}
+            data={dataTable}
+          />
         ) : (
           <UserTable
             showAction={showAction}
             canDelete={canDelete}
             showChild={showChild}
             showParent={showParent}
+            data={dataTable}
           />
         )}
       </div>

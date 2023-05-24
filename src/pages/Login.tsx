@@ -33,14 +33,14 @@ const Login = () => {
           password,
         }
       );
-      console.log(login);
+
       const { access_token } = login.data;
+      localStorage.setItem('token', encrypt(access_token));
       const user = await axios({
         method: 'POST',
         url: import.meta.env.VITE_BASE_URL + 'auth/me',
         headers: { Authorization: `Bearer${access_token}` },
       });
-      console.log(user.data);
 
       localStorage.setItem('data', encrypt(user.data));
 

@@ -9,6 +9,7 @@ interface Props {
   password?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   classname?: string;
+  value?: string;
 }
 
 export const InputDefault = ({

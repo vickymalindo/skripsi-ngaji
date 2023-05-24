@@ -1,4 +1,6 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import CryptoJS from 'crypto-js';
+import React from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import {
   SidebarAdmin,
   SidebarParent,
@@ -6,12 +8,28 @@ import {
 } from './../views/molecules/Sidebars';
 
 const Main = () => {
-  const location = useLocation();
+  const navigate = useNavigate();
+  const [userData, setUserData] = React.useState<any>({});
+  const data = localStorage.getItem('data');
+
+  React.useEffect(() => {
+    if (!data) {
+      navigate('/login');
+    } else {
+      const bytes = CryptoJS.AES.decrypt(
+        data,
+        import.meta.env.VITE_SECRET_KEY_CRYPTO_JS
+      );
+      const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      setUserData(decryptedData);
+    }
+  }, []);
+
   return (
     <div>
-      {location.pathname.includes('admin') ? (
+      {userData.level === 'admin' ? (
         <SidebarAdmin />
-      ) : location.pathname.includes('parent') ? (
+      ) : userData.level === 'Ortu' ? (
         <SidebarParent />
       ) : (
         <SidebarTeacher />
