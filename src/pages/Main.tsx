@@ -1,6 +1,6 @@
-import CryptoJS from 'crypto-js';
 import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { getUser } from '../fetch/storage/Gets';
 import {
   SidebarAdmin,
   SidebarParent,
@@ -16,11 +16,7 @@ const Main = () => {
     if (!data) {
       navigate('/login');
     } else {
-      const bytes = CryptoJS.AES.decrypt(
-        data,
-        import.meta.env.VITE_SECRET_KEY_CRYPTO_JS
-      );
-      const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      const decryptedData = getUser(data);
       setUserData(decryptedData);
     }
   }, []);

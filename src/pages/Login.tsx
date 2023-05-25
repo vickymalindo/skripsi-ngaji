@@ -98,7 +98,7 @@ const Login = () => {
           <img src={Logo} alt='Logo' className='w-[258px] h-[290px]' />
         </div>
       </div>
-      {isLoading && <Loader />}
+      {isLoading && <Loader isWhite={false} />}
     </>
   );
 };

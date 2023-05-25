@@ -10,6 +10,7 @@ const Quran = () => {
       showCard={false}
       showButton={true}
       showQuranTable={true}
+      dataTableQuran={[]}
     />
   );
 };

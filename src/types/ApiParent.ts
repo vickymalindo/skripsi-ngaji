@@ -12,3 +12,8 @@ export interface Rote {
   deleted_at: null;
   id_input: string;
 }
+
+export interface Kelas {
+  id: number;
+  nama_kelas: string;
+}

@@ -1,6 +1,6 @@
-import CryptoJS from 'crypto-js';
 import React from 'react';
 import { fetchChild, fetchTilawah } from '../../fetch/api/Parent';
+import { getToken, getUser } from '../../fetch/storage/Gets';
 import { Rote } from '../../types/ApiParent';
 import Loader from '../../views/atoms/Loader';
 import Content from '../../views/molecules/Content';
@@ -15,18 +15,8 @@ export const Tilawah = () => {
   React.useEffect(() => {
     async function fetch() {
       if (data && token) {
-        const bytesData = CryptoJS.AES.decrypt(
-          data,
-          import.meta.env.VITE_SECRET_KEY_CRYPTO_JS
-        );
-        const decryptedData = JSON.parse(bytesData.toString(CryptoJS.enc.Utf8));
-        const bytesToken = CryptoJS.AES.decrypt(
-          token,
-          import.meta.env.VITE_SECRET_KEY_CRYPTO_JS
-        );
-        const decryptedToken = JSON.parse(
-          bytesToken.toString(CryptoJS.enc.Utf8)
-        );
+        const decryptedData = getUser(data);
+        const decryptedToken = getToken(token);
         // TODO: buat refresh tokennya
         const { childData } = await fetchChild(decryptedToken);
 
@@ -41,7 +31,7 @@ export const Tilawah = () => {
   }, []);
 
   if (isLoading) {
-    return <Loader />;
+    return <Loader isWhite={true} />;
   }
   return (
     <div>
@@ -54,7 +44,7 @@ export const Tilawah = () => {
         showButton={false}
         showQuranTable={true}
         showChild={false}
-        dataTable={tilawah}
+        dataTableQuran={tilawah}
       />
     </div>
   );

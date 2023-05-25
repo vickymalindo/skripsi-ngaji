@@ -19,7 +19,7 @@ const Profiles = ({ isParent, data }: Props) => {
           <InputFloating
             classname='mb-[39px]'
             label='Nama Lengkap'
-            value={data.nama_lengkap}
+            value={data.nama_lengkap || ''}
           />
           {isParent ? (
             ''
@@ -30,7 +30,11 @@ const Profiles = ({ isParent, data }: Props) => {
             </>
           )}
 
-          <InputFloating classname='mb-[39px]' label='TTL' value={data.ttl} />
+          <InputFloating
+            classname='mb-[39px]'
+            label='TTL'
+            value={data.ttl || ''}
+          />
           <div className='flex w-full justify-end mt-[49px] mb-[45px] '>
             <Button children='Simpan' trash={false} />
           </div>

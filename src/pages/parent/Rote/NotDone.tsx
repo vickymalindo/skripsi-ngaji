@@ -1,6 +1,11 @@
-import CryptoJS from 'crypto-js';
 import React from 'react';
-import { fetchChild, fetchRoteChildNotDone } from '../../../fetch/api/Parent';
+import {
+  fetchChild,
+  fetchChildKelas,
+  fetchChildTeacher,
+  fetchRoteChildNotDone,
+} from '../../../fetch/api/Parent';
+import { getToken, getUser } from '../../../fetch/storage/Gets';
 import { Rote } from '../../../types/ApiParent';
 import { StudentData } from '../../../types/UserData';
 import Loader from '../../../views/atoms/Loader';
@@ -17,29 +22,25 @@ export const NotDone = () => {
   React.useEffect(() => {
     async function fetch() {
       if (data && token) {
-        const bytesData = CryptoJS.AES.decrypt(
-          data,
-          import.meta.env.VITE_SECRET_KEY_CRYPTO_JS
-        );
-        const decryptedData = JSON.parse(bytesData.toString(CryptoJS.enc.Utf8));
-        const bytesToken = CryptoJS.AES.decrypt(
-          token,
-          import.meta.env.VITE_SECRET_KEY_CRYPTO_JS
-        );
-        const decryptedToken = JSON.parse(
-          bytesToken.toString(CryptoJS.enc.Utf8)
-        );
+        const decryptedData = getUser(data);
+        const decryptedToken = getToken(token);
         // TODO: buat refresh tokennya
         const { status, childData } = await fetchChild(decryptedToken);
         if (status === 200) {
           setUserChildData(childData);
         }
-
         const responseRoteChildSchool = await fetchRoteChildNotDone(
           childData[0].id
         );
+        const { id, nama_kelas } = await fetchChildKelas(childData[0].id_kelas);
+        const responseNameTeacher = await fetchChildTeacher(id);
+        const finalUserData = {
+          ...decryptedData,
+          nama_kelas,
+          responseNameTeacher,
+        };
         setChildRote(responseRoteChildSchool);
-        setUserData(decryptedData);
+        setUserData(finalUserData);
         setIsLoading((prev) => (prev === false ? prev : !prev));
       }
     }
@@ -48,7 +49,7 @@ export const NotDone = () => {
   }, []);
 
   if (isLoading) {
-    return <Loader />;
+    return <Loader isWhite={true} />;
   }
 
   return (
@@ -61,12 +62,12 @@ export const NotDone = () => {
         birthdate={userChildData[0].ttl || 'Data belum dimasukan'}
         teacher='Swelandiah'
         showAction={true}
-        canDelete={true}
+        canDelete={false}
         showCard={true}
         showButton={false}
         showQuranTable={true}
         showChild={false}
-        dataTable={childRote}
+        dataTableQuran={childRote}
       />
     </div>
   );

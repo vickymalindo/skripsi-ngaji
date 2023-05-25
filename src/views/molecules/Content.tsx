@@ -1,4 +1,6 @@
 import { Rote } from '../../types/ApiParent';
+import { MurojaahType } from '../../types/ApiTeacher';
+import { StudentData, UserData } from '../../types/UserData';
 import Button from '../atoms/Button';
 import { CardProfile } from '../atoms/Cards';
 import Links from '../atoms/Links';
@@ -21,7 +23,8 @@ interface Props {
   showQuranTable: boolean;
   showChild?: boolean;
   showParent?: boolean;
-  dataTable: Rote[];
+  dataTableQuran?: (Rote | MurojaahType)[];
+  dataTableUser?: (UserData | StudentData)[];
 }
 
 const Content = ({
@@ -39,7 +42,8 @@ const Content = ({
   showQuranTable,
   showChild,
   showParent,
-  dataTable,
+  dataTableQuran,
+  dataTableUser,
 }: Props) => {
   return (
     <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition-all duration-300 ease-in-out-out'>
@@ -98,7 +102,7 @@ const Content = ({
           <QuranTable
             showAction={showAction}
             canDelete={canDelete}
-            data={dataTable}
+            data={dataTableQuran}
           />
         ) : (
           <UserTable
@@ -106,7 +110,7 @@ const Content = ({
             canDelete={canDelete}
             showChild={showChild}
             showParent={showParent}
-            data={dataTable}
+            // data={dataTable}
           />
         )}
       </div>

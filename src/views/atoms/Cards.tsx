@@ -6,6 +6,7 @@ interface PropsProfile {
   name?: string;
   group?: string;
   birthdate?: string;
+  gender?: string;
   teacher?: string;
   username?: string;
   isDelete?: boolean;
@@ -21,6 +22,7 @@ export const CardProfile = ({
   name,
   group,
   birthdate,
+  gender,
   teacher,
   username,
   isDelete,
@@ -60,12 +62,21 @@ export const CardProfile = ({
                 </span>
                 <span className='text-sm sm:text-base'>{group}</span>
               </div>
-              <div>
-                <span className='font-bold ml-2 text-sm sm:text-base'>
-                  Guru :
-                </span>
-                <span className='text-sm sm:text-base'>{teacher}</span>
-              </div>
+              {gender ? (
+                <div>
+                  <span className='font-bold ml-2 text-sm sm:text-base'>
+                    Jenis Kelamin :
+                  </span>
+                  <span className='text-sm sm:text-base'>{gender}</span>
+                </div>
+              ) : (
+                <div>
+                  <span className='font-bold ml-2 text-sm sm:text-base'>
+                    Guru :
+                  </span>
+                  <span className='text-sm sm:text-base'>{teacher}</span>
+                </div>
+              )}
             </>
           )}
         </div>

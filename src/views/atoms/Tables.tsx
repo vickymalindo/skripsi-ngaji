@@ -1,16 +1,22 @@
 import { Rote } from '../../types/ApiParent';
+import { MurojaahType } from '../../types/ApiTeacher';
+import { StudentData, UserData } from '../../types/UserData';
 import Pencil from './../../assets/images/pencil.png';
 import Trash from './../../assets/images/trash.png';
 
-interface Props {
+interface Props<T> {
   showAction: boolean;
   canDelete: boolean;
   showChild?: boolean;
   showParent?: boolean;
-  data: Rote[];
+  data?: T[];
 }
 
-export const QuranTable = ({ showAction, canDelete, data }: Props) => {
+export const QuranTable = <T extends MurojaahType | Rote>({
+  showAction,
+  canDelete,
+  data,
+}: Props<T>) => {
   return (
     <div className='overflow-x-scroll lg:overflow-x-auto px-4 md:px-6 lg:px-10'>
       <table className='m-auto'>
@@ -24,7 +30,7 @@ export const QuranTable = ({ showAction, canDelete, data }: Props) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => {
+          {data?.map((item, index) => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
@@ -56,12 +62,13 @@ export const QuranTable = ({ showAction, canDelete, data }: Props) => {
   );
 };
 
-export const UserTable = ({
+export const UserTable = <T extends UserData | StudentData>({
   showAction,
   canDelete,
   showChild,
   showParent,
-}: Props) => {
+  data,
+}: Props<T>) => {
   return (
     <div className='overflow-x-scroll lg:overflow-x-auto px-4 md:px-6 lg:px-10'>
       <table className='m-auto'>
