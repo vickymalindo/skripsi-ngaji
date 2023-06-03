@@ -1,14 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   fetchChild,
   fetchChildKelas,
   fetchChildTeacher,
   fetchRoteChildNotDone,
+  updateHafalan,
 } from '../../../fetch/api/Parent';
 import { getToken, getUser } from '../../../fetch/storage/Gets';
 import { Rote } from '../../../types/ApiParent';
 import { StudentData } from '../../../types/UserData';
 import Loader from '../../../views/atoms/Loader';
+import Modal from '../../../views/atoms/Modal';
 import Content from '../../../views/molecules/Content';
 
 export const NotDone = () => {
@@ -16,30 +19,69 @@ export const NotDone = () => {
   const [userChildData, setUserChildData] = React.useState<StudentData[]>([]);
   const [childRote, setChildRote] = React.useState<Rote[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [openModal, setOpenModal] = React.useState<boolean>(false);
+  const [isError, setIsError] = React.useState<boolean>(false);
+  const [message, setMessage] = React.useState<string>('');
+  const [id, setId] = React.useState<string>('');
   const data = localStorage.getItem('data');
   const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    const inputHome = '' + 2;
+    const { status } = await updateHafalan(id, inputHome);
+    if (status === 200) {
+      const responseRoteChildSchool = await fetchRoteChildNotDone(
+        userChildData[0].id
+      );
+      setChildRote(responseRoteChildSchool);
+      setIsError((prev) => (prev === false ? prev : !prev));
+      setMessage('Berhasil update hafalan');
+      setOpenModal((prev) => !prev);
+    } else {
+      setIsError((prev) => (prev === true ? prev : !prev));
+    }
+  };
+
+  const handleUpdate = (id: number) => {
+    const numberIdToStr = '' + id;
+    setId(numberIdToStr);
+    setOpenModal((prev) => !prev);
+  };
 
   React.useEffect(() => {
     async function fetch() {
       if (data && token) {
         const decryptedData = getUser(data);
         const decryptedToken = getToken(token);
-        // TODO: buat refresh tokennya
-        const { status, childData } = await fetchChild(decryptedToken);
-        if (status === 200) {
-          setUserChildData(childData);
+        let globalChildDtata;
+        try {
+          const { status, childData } = await fetchChild(decryptedToken);
+          if (status === 200) {
+            globalChildDtata = childData;
+            setUserChildData(childData);
+          }
+        } catch (error) {
+          localStorage.clear();
+          navigate('/login');
         }
-        const responseRoteChildSchool = await fetchRoteChildNotDone(
-          childData[0].id
+        try {
+          const responseRoteChildSchool = await fetchRoteChildNotDone(
+            globalChildDtata[0].id
+          );
+          setChildRote(responseRoteChildSchool);
+        } catch (error) {
+          setChildRote([]);
+        }
+        const { id, nama_kelas } = await fetchChildKelas(
+          globalChildDtata[0].id_kelas
         );
-        const { id, nama_kelas } = await fetchChildKelas(childData[0].id_kelas);
         const responseNameTeacher = await fetchChildTeacher(id);
         const finalUserData = {
           ...decryptedData,
           nama_kelas,
           responseNameTeacher,
         };
-        setChildRote(responseRoteChildSchool);
         setUserData(finalUserData);
         setIsLoading((prev) => (prev === false ? prev : !prev));
       }
@@ -60,7 +102,7 @@ export const NotDone = () => {
         name={userChildData[0]?.nama_lengkap || 'Data belum dimasukan'}
         group='4IA22'
         birthdate={userChildData[0].ttl || 'Data belum dimasukan'}
-        teacher='Swelandiah'
+        teacher={userData.responseNameTeacher}
         showAction={true}
         canDelete={false}
         showCard={true}
@@ -68,7 +110,19 @@ export const NotDone = () => {
         showQuranTable={true}
         showChild={false}
         dataTableQuran={childRote}
+        update={(id) => handleUpdate(id)}
+        message={message}
+        isError={isError}
       />
+      {openModal ? (
+        <Modal
+          onClose={() => setOpenModal((prev) => !prev)}
+          children='Apakah anda yakin ingin konfirmasi hafalan'
+          showInput={false}
+          buttonText='Ya'
+          onSubmit={handleSubmit}
+        />
+      ) : null}
     </div>
   );
 };

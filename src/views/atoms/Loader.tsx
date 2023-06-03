@@ -5,7 +5,7 @@ const Loader = ({ isWhite }: Props) => {
   return (
     <div
       className={
-        'fixed top-0 left-0 w-full h-full overflow-hidden' +
+        'fixed top-0 left-0 w-full h-full overflow-hidden z-50' +
         (isWhite ? ' bg-white' : ' bg-black-rgba')
       }>
       <div className='h-screen w-full flex justify-center items-center'>

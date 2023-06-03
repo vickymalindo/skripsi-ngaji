@@ -1,6 +1,7 @@
 import React from 'react';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { FaCaretDown } from 'react-icons/fa';
+import { AllKelas } from '../../types/ApiAdmin';
 import { DropdownInput } from './Dropdowns';
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   classname?: string;
   value?: string;
+  data?: AllKelas[];
 }
 
 export const InputDefault = ({
@@ -99,20 +101,18 @@ export const InputFloating = ({
   );
 };
 
-export const InputDropdown = ({ label, classname }: Props) => {
+export const InputDropdown = ({ label, classname, data }: Props) => {
   const [open, setOpen] = React.useState(false);
   const [kelas, setKelas] = React.useState<string | undefined>('');
 
-  const handleOpen = () => {
-    setOpen((prev) => !prev);
-  };
-
   return (
     <div className={'relative mt-2 ' + (classname ? classname : '')}>
-      <div className='relative cursor-pointer mt-2' onClick={handleOpen}>
+      <div
+        className='relative cursor-pointer mt-2'
+        onClick={() => setOpen((prev) => !prev)}>
         <div
           className={
-            'w-full px-4 py-3 h-[53px] border-dark-green border text-dark-green' +
+            'w-full px-3 py-2 sm:px-4 sm:py-3 h-[43px] sm:h-[53px] border-dark-green border text-dark-green' +
             (open ? ' rounded-tl-tr' : ' rounded-[10px]')
           }>
           {kelas}
@@ -123,11 +123,7 @@ export const InputDropdown = ({ label, classname }: Props) => {
         </span>
       </div>
       {open && (
-        <DropdownInput
-          data={['4IA22', '4IA19', '4IA20', '4IA18']}
-          passKelas={setKelas}
-          isCream={false}
-        />
+        <DropdownInput data={data} passKelas={setKelas} isCream={false} />
       )}
     </div>
   );

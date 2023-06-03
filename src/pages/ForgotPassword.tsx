@@ -33,11 +33,11 @@ const ForgotPassword = () => {
       }
     );
     if (changePassword.data.status === 200) {
-      setIsError((prev) => (prev === true ? prev : !prev));
+      setIsError((prev) => (prev === false ? prev : !prev));
       setMessage('Selamat, password berhasil di ubah');
       setIsLoading((prev) => !prev);
     } else {
-      setIsError((prev) => (prev === false ? prev : !prev));
+      setIsError((prev) => (prev === true ? prev : !prev));
       setMessage('Email tidak ditemukan');
       setIsLoading((prev) => !prev);
     }
@@ -56,8 +56,8 @@ const ForgotPassword = () => {
                 className={
                   'px-4 py-3 rounded-lg text-base sm:text-lg xl:text-xl font-bold mb-4' +
                   (isError
-                    ? ' text-green-800 bg-green-400'
-                    : ' text-red-800 bg-red-400')
+                    ? ' text-red-800 bg-red-400'
+                    : ' text-green-800 bg-green-400')
                 }>
                 <p>{message}</p>
               </div>

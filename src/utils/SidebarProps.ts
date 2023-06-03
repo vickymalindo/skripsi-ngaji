@@ -27,7 +27,7 @@ export const sidebarOrtu: SidebarProps[] = [
     ],
   },
   {
-    text: 'Murojaah',
+    text: 'Hafalan Lama',
     href: '/parent/murojaah',
   },
   {
@@ -46,11 +46,11 @@ export const sidebarGuru: SidebarProps[] = [
     href: '/teacher/students',
   },
   {
-    text: 'Penjadwalan',
+    text: 'Hafalan Baru',
     href: '/teacher/rote',
   },
   {
-    text: 'Murojaah',
+    text: 'Hafalan Lama',
     href: '/teacher/murojaah',
   },
   {

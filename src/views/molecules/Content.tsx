@@ -1,10 +1,10 @@
 import { Rote } from '../../types/ApiParent';
 import { MurojaahType } from '../../types/ApiTeacher';
-import { StudentData, UserData } from '../../types/UserData';
+import { UserData } from '../../types/UserData';
 import Button from '../atoms/Button';
 import { CardProfile } from '../atoms/Cards';
 import Links from '../atoms/Links';
-import { QuranTable, UserTable } from '../atoms/Tables';
+import { QuranTable, UserNotStudentTable } from '../atoms/Tables';
 import TitlePage from '../atoms/TitlePage';
 import Appbar from './Appbar';
 
@@ -24,7 +24,14 @@ interface Props {
   showChild?: boolean;
   showParent?: boolean;
   dataTableQuran?: (Rote | MurojaahType)[];
-  dataTableUser?: (UserData | StudentData)[];
+  dataTableUser?: UserData[];
+  createdTo?: string;
+  update?: (id: number) => any;
+  handleDelete?: (id: number) => any;
+  message?: string;
+  isError?: boolean;
+  active?: number;
+  onClick?: (num: number) => void;
 }
 
 const Content = ({
@@ -44,11 +51,17 @@ const Content = ({
   showParent,
   dataTableQuran,
   dataTableUser,
+  createdTo,
+  update,
+  handleDelete,
+  message,
+  isError,
+  active,
+  onClick,
 }: Props) => {
   return (
     <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition-all duration-300 ease-in-out-out'>
       <Appbar username={username} />
-      {/* <Loader /> */}
       <div className='w-full box-shadow px-[22px] py-[22px] lg:px-7 lg:py-7 rounded-[57px]'>
         <TitlePage page={page} />
         {showCard ? (
@@ -73,22 +86,46 @@ const Content = ({
               <div className='flex flex-wrap flex-col min-[522px]:flex-row min-[522px]:justify-around items-end min-[522px]:items-center mb-[45px]'>
                 <Button
                   children='Belum'
-                  className='mb-2 min-[522px]:mb-0'
+                  className={
+                    'mb-2 min-[522px]:mb-0' +
+                    (active === 0
+                      ? ' bg-transparent outline-dark-green text-dark-green'
+                      : null)
+                  }
+                  isActive={active === 0 ? ' text-dark-green' : ''}
                   trash={false}
+                  onClick={() => onClick?.(0)}
                 />
                 <Button
                   children='Sekolah'
-                  className='mb-2 min-[522px]:mb-0'
+                  className={
+                    'mb-2 min-[522px]:mb-0' +
+                    (active === 1
+                      ? ' bg-transparent outline-dark-green text-dark-green'
+                      : null)
+                  }
+                  isActive={active === 1 ? ' text-dark-green' : ''}
                   trash={false}
+                  onClick={() => onClick?.(1)}
                 />
-                <Button children='Rumah' trash={false} />
+                <Button
+                  children='Rumah'
+                  className={
+                    active === 2
+                      ? ' bg-transparent outline-dark-green text-dark-green'
+                      : ''
+                  }
+                  isActive={active === 2 ? ' text-dark-green' : ''}
+                  trash={false}
+                  onClick={() => onClick?.(2)}
+                />
               </div>
             </div>
           ) : (
             <div className='w-full flex justify-end'>
               <Links
                 text='Create'
-                href='/teacher/forms/create'
+                href={`/teacher/forms/create/${createdTo}`}
                 className='mb-[22px]'
                 isSidebar={false}
               />
@@ -97,20 +134,25 @@ const Content = ({
         ) : (
           ''
         )}
-        {/* TODO: buat tampilan jika datanya kosong */}
         {showQuranTable ? (
           <QuranTable
             showAction={showAction}
             canDelete={canDelete}
             data={dataTableQuran}
+            update={(id) => update?.(id)}
+            handleDelete={(id) => handleDelete?.(id)}
+            message={message}
+            isError={isError}
           />
         ) : (
-          <UserTable
+          <UserNotStudentTable
             showAction={showAction}
             canDelete={canDelete}
-            showChild={showChild}
-            showParent={showParent}
-            // data={dataTable}
+            message={message}
+            isError={isError}
+            data={dataTableUser}
+            update={(id) => update?.(id)}
+            handleDelete={(id) => handleDelete?.(id)}
           />
         )}
       </div>

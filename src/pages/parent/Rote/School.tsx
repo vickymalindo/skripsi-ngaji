@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   fetchChild,
   fetchChildKelas,
@@ -18,28 +19,41 @@ export const School = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const data = localStorage.getItem('data');
   const token = localStorage.getItem('token');
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     async function fetch() {
       if (data && token) {
         const decryptedData = getUser(data);
         const decryptedToken = getToken(token);
-        // TODO: buat refresh tokennya
-        const { status, childData } = await fetchChild(decryptedToken);
-        if (status === 200) {
-          setUserChildData(childData);
+        let globalChildDtata;
+        try {
+          const { status, childData } = await fetchChild(decryptedToken);
+          if (status === 200) {
+            globalChildDtata = childData;
+            setUserChildData(childData);
+          }
+        } catch (error) {
+          localStorage.clear();
+          navigate('/login');
         }
-        const responseRoteChildSchool = await fetchRoteChildSchool(
-          childData[0].id
+        try {
+          const responseRoteChildSchool = await fetchRoteChildSchool(
+            globalChildDtata[0].id
+          );
+          setChildRote(responseRoteChildSchool);
+        } catch (error) {
+          setChildRote([]);
+        }
+        const { id, nama_kelas } = await fetchChildKelas(
+          globalChildDtata[0].id_kelas
         );
-        const { id, nama_kelas } = await fetchChildKelas(childData[0].id_kelas);
         const responseNameTeacher = await fetchChildTeacher(id);
         const finalUserData = {
           ...decryptedData,
           nama_kelas,
           responseNameTeacher,
         };
-        setChildRote(responseRoteChildSchool);
         setUserData(finalUserData);
         setIsLoading((prev) => (prev === false ? prev : !prev));
       }

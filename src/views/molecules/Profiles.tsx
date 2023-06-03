@@ -5,11 +5,20 @@ import TitlePage from '../atoms/TitlePage';
 import Appbar from './Appbar';
 
 interface Props {
-  isParent: boolean;
   data: UserData;
+  onChangeFullName: string;
+  onChangeUsername: string;
+  onChangeTtl: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeEmail: string;
 }
 
-const Profiles = ({ isParent, data }: Props) => {
+const Profiles = ({
+  data,
+  onChangeFullName,
+  onChangeUsername,
+  onChangeEmail,
+  onChangeTtl,
+}: Props) => {
   return (
     <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition duration-300 ease-out'>
       <Appbar username='vickymalindo' />
@@ -18,22 +27,24 @@ const Profiles = ({ isParent, data }: Props) => {
         <div className='px-[33.47px] sm:px-[40.47px] lg:px-[60.47px]'>
           <InputFloating
             classname='mb-[39px]'
-            label='Nama Lengkap'
-            value={data.nama_lengkap || ''}
+            label='Email'
+            value={data.email}
           />
-          {isParent ? (
-            ''
-          ) : (
-            <>
-              <InputFloating classname='mb-[39px]' label='Kelas' />
-              <InputFloating classname='mb-[39px]' label='Jenis Kelamin' />
-            </>
-          )}
-
+          <InputFloating
+            classname='mb-[39px]'
+            label='Username'
+            value={data.username}
+          />
+          <InputFloating
+            classname='mb-[39px]'
+            label='Nama Lengkap'
+            value={data.nama_lengkap}
+          />
           <InputFloating
             classname='mb-[39px]'
             label='TTL'
-            value={data.ttl || ''}
+            value={data.ttl}
+            // onChange={(e) => onChangeTtl(e.target.value)}
           />
           <div className='flex w-full justify-end mt-[49px] mb-[45px] '>
             <Button children='Simpan' trash={false} />

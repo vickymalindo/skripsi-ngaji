@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchStudents, fetchTeacherKelas } from '../../fetch/api/Teacher';
 import { getToken, getUser } from '../../fetch/storage/Gets';
 import { StudentData } from '../../types/UserData';
@@ -14,18 +15,23 @@ export const Student = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const data = localStorage.getItem('data');
   const token = localStorage.getItem('token');
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     (async function () {
       if (data && token) {
         const decryptedData = getUser(data);
         const decryptedToken = getToken(token);
-        const responseStudents = await fetchStudents(decryptedToken);
+        try {
+          const responseStudents = await fetchStudents(decryptedToken);
+          setStudents(responseStudents);
+        } catch (error) {
+          setStudents([]);
+        }
         const responseKelas = await fetchTeacherKelas(decryptedData.id_kelas);
 
         setKelas(responseKelas);
         setUserData(decryptedData);
-        setStudents(responseStudents);
         setIsLoading((prev) => (prev === false ? prev : !prev));
       }
     })();
@@ -40,7 +46,7 @@ export const Student = () => {
       <Appbar username={userData?.username} />
       <div className='w-full box-shadow px-[22px] py-[22px] lg:px-7 lg:py-7 rounded-[57px]'>
         <TitlePage page='Daftar Nama Siswa' />
-        <div className='grid grid-cols-1 min-[560px]:grid-cols-2 min-[886px]:grid-cols-3 lg:grid-cols-2 xl:grid-cols-4 place-items-center px-[33.47px] sm:px-[40.47px] lg:px-[60.47px]'>
+        <div className='grid grid-cols-1 min-[560px]:grid-cols-2 min-[886px]:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 place-items-center px-[33.47px] sm:px-[40.47px] lg:px-[60.47px]'>
           {students.map((item) => {
             return (
               <CardProfile
@@ -50,6 +56,7 @@ export const Student = () => {
                 birthdate={item.ttl}
                 gender={item.jenis_kelamin}
                 isDelete={false}
+                onClick={() => navigate(`/teacher/rote/student/${item.id}`)}
               />
             );
           })}

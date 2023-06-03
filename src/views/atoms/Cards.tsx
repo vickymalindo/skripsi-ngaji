@@ -10,6 +10,9 @@ interface PropsProfile {
   teacher?: string;
   username?: string;
   isDelete?: boolean;
+  onClick?: () => void;
+  handleDelete?: () => void;
+  isOpen?: boolean;
 }
 
 interface PropsInfo {
@@ -26,15 +29,19 @@ export const CardProfile = ({
   teacher,
   username,
   isDelete,
+  onClick,
+  handleDelete,
+  isOpen,
 }: PropsProfile) => {
   return (
     <div
       className={
-        'pt-1 pb-2 pr-[22px] pl-[11px] sm:pt-2 sm:pb-3 sm:pr-[27px] sm:pl-[13px] lg:pt-3 lg:pb-5 lg:pr-[35px] lg:pl-[17px] card-shadow flex w-max h-max ' +
+        'pt-1 pb-2 pr-[22px] pl-[11px] sm:pt-2 sm:pb-3 sm:pr-[27px] sm:pl-[13px] lg:pt-3 lg:pb-5 lg:pr-[35px] lg:pl-[17px] card-shadow flex w-max h-max cursor-pointer' +
         (username
-          ? ' items-center rounded-bl-[30px]'
+          ? ' items-center' + (isOpen ? '' : ' rounded-bl-[30px]')
           : ' items-start rounded-[30px] mb-[26px]')
-      }>
+      }
+      onClick={onClick}>
       <img
         src={Profile}
         alt='profile'
@@ -53,7 +60,7 @@ export const CardProfile = ({
             <span className='text-sm sm:text-base'>{birthdate}</span>
           </div>
           {isDelete ? (
-            <Button children='Hapus' trash={true} />
+            <Button children='Hapus' trash={true} onClick={handleDelete} />
           ) : (
             <>
               <div>

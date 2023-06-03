@@ -1,12 +1,13 @@
 import React from 'react';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import { Link, useLocation } from 'react-router-dom';
+import { AllKelas } from '../../types/ApiAdmin';
 import { SidebarChild } from '../../utils/SidebarProps';
 
 interface Props<T> {
   parent?: string;
   onClick?: React.MouseEventHandler;
-  passKelas?: (e: string) => void;
+  passKelas?: (e: string, id: number) => void;
   data?: T[];
   isCream: boolean;
 }
@@ -61,7 +62,7 @@ export const DropdownSidebar = <T extends SidebarChild>({
   );
 };
 
-export const DropdownInput = <T extends string>({
+export const DropdownInput = <T extends AllKelas>({
   data,
   passKelas,
   isCream,
@@ -82,8 +83,8 @@ export const DropdownInput = <T extends string>({
               'block m-auto p-1 w-full ' +
               (isCream ? 'hover:bg-[#f5e8b3]' : 'hover:bg-light-green')
             }
-            onClick={() => passKelas?.(value)}>
-            {value}
+            onClick={() => passKelas?.(value.nama_kelas, value.id)}>
+            {value.nama_kelas}
           </button>
         );
       })}

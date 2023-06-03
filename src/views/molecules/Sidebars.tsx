@@ -1,5 +1,7 @@
 import React from 'react';
 import { IoMdClose } from 'react-icons/io';
+import Auth from '../../auth/Auth';
+import { getUser } from '../../fetch/storage/Gets';
 import { hamburgerClicked } from '../../redux/features/toggleSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import {
@@ -16,6 +18,13 @@ export const SidebarParent = () => {
   const isClick = useAppSelector((state) => state.toggle.clicked);
   const [isOpen, setIsOpen] = React.useState(isClick);
   const dispatch = useAppDispatch();
+  const data = localStorage.getItem('data');
+  if (data) {
+    const userData = getUser(data);
+    if (userData.level !== 'Ortu') {
+      return <Auth />;
+    }
+  }
 
   React.useEffect(() => {
     setIsOpen((prev) => (prev = isClick));
@@ -77,6 +86,13 @@ export const SidebarAdmin = () => {
   const isClick = useAppSelector((state) => state.toggle.clicked);
   const [isOpen, setIsOpen] = React.useState(isClick);
   const dispatch = useAppDispatch();
+  const data = localStorage.getItem('data');
+  if (data) {
+    const userData = getUser(data);
+    if (userData.level !== 'admin') {
+      return <Auth />;
+    }
+  }
 
   React.useEffect(() => {
     setIsOpen((prev) => (prev = isClick));
@@ -140,6 +156,13 @@ export const SidebarTeacher = () => {
   const isClick = useAppSelector((state) => state.toggle.clicked);
   const [isOpen, setIsOpen] = React.useState(isClick);
   const dispatch = useAppDispatch();
+  const data = localStorage.getItem('data');
+  if (data) {
+    const userData = getUser(data);
+    if (userData.level !== 'guru') {
+      return <Auth />;
+    }
+  }
 
   React.useEffect(() => {
     setIsOpen((prev) => (prev = isClick));

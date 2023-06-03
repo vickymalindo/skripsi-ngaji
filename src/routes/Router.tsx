@@ -14,16 +14,21 @@ import { Parent as ParentinAdmin } from '../pages/admin/users/Parent';
 import { Student as StudentsinAdmin } from '../pages/admin/users/Student';
 import { Teacher as TeacherinAdmin } from '../pages/admin/users/Teacher';
 import { Murojaah as ParentMurojaah } from '../pages/parent/Murojaah';
-import Profile from '../pages/parent/Profile';
+import { Profile as ProfileParent } from '../pages/parent/Profile';
 import * as ParentRote from '../pages/parent/Rote/All';
 import { Tilawah as ParentTilawah } from '../pages/parent/Tilawah';
 import { Murojaah as TeacherMurojaah } from '../pages/teacher/Murojaah';
+import { Profile as ProfileTeacher } from '../pages/teacher/Profile';
 import Quran from '../pages/teacher/Quran';
 import RoteStudent from '../pages/teacher/RoteStudent';
 import { Student as StudentsinTeacher } from '../pages/teacher/Student';
 import { Tilawah as TeacherTilawah } from '../pages/teacher/Tilawah';
-import Create from '../pages/teacher/forms/Create';
-import Edit from '../pages/teacher/forms/Edit';
+import CreateMurojaah from '../pages/teacher/forms/CreateMurojaah';
+import { default as CreateRote } from '../pages/teacher/forms/CreateRote';
+import CreateTilawah from '../pages/teacher/forms/CreateTilawah';
+import EditMurojaah from '../pages/teacher/forms/EditMurojaah';
+import EditRote from '../pages/teacher/forms/EditRote';
+import EditTilawah from '../pages/teacher/forms/EditTilawah';
 
 const Router = createBrowserRouter([
   {
@@ -69,7 +74,7 @@ const Router = createBrowserRouter([
       },
       {
         path: 'profile',
-        element: <Profile />,
+        element: <ProfileParent />,
       },
     ],
   },
@@ -85,17 +90,33 @@ const Router = createBrowserRouter([
         path: 'forms',
         children: [
           {
-            path: 'create',
-            element: <Create />,
+            path: 'create/murojaah',
+            element: <CreateMurojaah />,
           },
           {
-            path: 'edit',
-            element: <Edit />,
+            path: 'create/tilawah',
+            element: <CreateTilawah />,
+          },
+          {
+            path: 'create/penjadwalan',
+            element: <CreateRote />,
+          },
+          {
+            path: 'edit/tilawah/:id',
+            element: <EditTilawah />,
+          },
+          {
+            path: 'edit/hafalan/:id',
+            element: <EditRote />,
+          },
+          {
+            path: 'edit/murojaah/:id',
+            element: <EditMurojaah />,
           },
         ],
       },
       {
-        path: 'rote/student',
+        path: 'rote/student/:id',
         element: <RoteStudent />,
       },
       {
@@ -112,7 +133,7 @@ const Router = createBrowserRouter([
       },
       {
         path: 'profile',
-        element: <Profile />,
+        element: <ProfileTeacher />,
       },
     ],
   },
@@ -158,15 +179,15 @@ const Router = createBrowserRouter([
         path: 'edit',
         children: [
           {
-            path: 'teacher',
+            path: 'teacher/:id',
             element: <EditTeacher />,
           },
           {
-            path: 'parent',
+            path: 'parent/:id',
             element: <EditParent />,
           },
           {
-            path: 'student',
+            path: 'student/:id',
             element: <EditStudent />,
           },
         ],

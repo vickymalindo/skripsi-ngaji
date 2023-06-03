@@ -52,7 +52,7 @@ const Index = () => {
             <img src={Text} alt='Teks' className='mb-9' />
             <p className='text-base sm:text-lg md:text-xl mb-[46px]'>
               Membaca Al-Quran tidak pernah semudah ini sebelumnya. <br />
-              Jelajahi keindahan Al-Quran dan tingkatkan spiritualitasmu dengan{' '}
+              Jelajahi keindahan Al-Quran dan tingkatkan spiritualitasmu dengan
               <br />
               membacanya di sini.
             </p>

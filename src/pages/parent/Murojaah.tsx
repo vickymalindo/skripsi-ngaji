@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchChild, fetchMurojaah } from '../../fetch/api/Parent';
 import { getToken, getUser } from '../../fetch/storage/Gets';
 import { Rote } from '../../types/ApiParent';
@@ -11,17 +12,30 @@ export const Murojaah = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const data = localStorage.getItem('data');
   const token = localStorage.getItem('token');
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     async function fetch() {
       if (data && token) {
         const decryptedData = getUser(data);
         const decryptedToken = getToken(token);
-        // TODO: buat refresh tokennya
-        const { childData } = await fetchChild(decryptedToken);
+        let globalChildDtata;
+        try {
+          const { childData } = await fetchChild(decryptedToken);
+          globalChildDtata = childData;
+        } catch (error) {
+          localStorage.clear();
+          navigate('/login');
+        }
+        try {
+          const responseMurojaah = await fetchMurojaah(
+            globalChildDtata[0].id_kelas
+          );
+          setMurojaah(responseMurojaah);
+        } catch (error) {
+          setMurojaah([]);
+        }
 
-        const responseMurojaah = await fetchMurojaah(childData[0].id_kelas);
-        setMurojaah(responseMurojaah);
         setUserData(decryptedData);
         setIsLoading((prev) => (prev === false ? prev : !prev));
       }
@@ -38,7 +52,7 @@ export const Murojaah = () => {
     <div>
       <Content
         username={userData?.username}
-        page='Muraja’ah 4IA22'
+        page='Hafalan Lama 4IA22'
         showAction={false}
         canDelete={false}
         showCard={false}

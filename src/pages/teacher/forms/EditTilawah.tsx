@@ -1,54 +1,90 @@
 import axios from 'axios';
 import React from 'react';
 import { FaCaretDown } from 'react-icons/fa';
-import { ApiQuran } from '../../types/QuranApi';
-import { juz } from '../../utils/Juz';
-import Button from '../atoms/Button';
-import { InputDropdown, InputFloating } from '../atoms/Inputs';
-import TitlePage from '../atoms/TitlePage';
-import Appbar from './Appbar';
+import { useParams } from 'react-router-dom';
+import { editTilawah, getDetailTilawah } from '../../../fetch/api/Teacher';
+import { getUser } from '../../../fetch/storage/Gets';
+import { ApiQuran } from '../../../types/QuranApi';
+import { juz } from '../../../utils/Juz';
+import Button from '../../../views/atoms/Button';
+import { InputFloating } from '../../../views/atoms/Inputs';
+import Loader from '../../../views/atoms/Loader';
+import TitlePage from '../../../views/atoms/TitlePage';
+import Appbar from '../../../views/molecules/Appbar';
 
-interface Props {
-  username: string;
-  page: string;
-  children: string;
-  isClass?: boolean;
-  isNotStudent?: boolean;
-  isParent?: boolean;
-}
-
-export const FormQuran = ({ username, page, children }: Props) => {
+const EditTilawah = () => {
+  const [userData, setUserData] = React.useState<any>({});
   const [open, setOpen] = React.useState(false);
   const [openJuz, setOpenJuz] = React.useState(false);
-  const [clickSurah, setClickSurah] = React.useState<string | undefined>('');
-  const [ayat, setAyat] = React.useState<string | undefined>('');
+  const [clickSurah, setClickSurah] = React.useState<string>('');
+  const [ayatState, setAyatState] = React.useState<string>('');
   const [clickJuz, setClickJuz] = React.useState<number | null>(null);
   const [surah, setSurah] = React.useState<ApiQuran[]>([]);
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [isError, setIsError] = React.useState<boolean>(false);
+  const [message, setMessage] = React.useState<string | undefined>('');
+  const data = localStorage.getItem('data');
+  const { id } = useParams();
 
-  const handleClick = () => {
-    console.log(ayat, clickJuz, clickSurah);
+  const handleClick = async () => {
+    let juz = '' + clickJuz;
+    let surah = clickSurah;
+    let ayat = '' + ayatState;
+    const res = await editTilawah(surah, juz, ayat, id);
+    const { status } = res;
+    if (status === 200) {
+      setIsError((prev) => (prev === false ? prev : !prev));
+      setMessage('Berhasil edit tilawah');
+    } else {
+      setIsError((prev) => (prev === true ? prev : !prev));
+      setMessage('Gagal edit tilawah');
+    }
   };
 
   React.useEffect(() => {
     (async function getSurah() {
+      if (data) {
+        const decryptedData = getUser(data);
+        setUserData(decryptedData);
+      }
       const getSurah = await axios.get('https://equran.id/api/v2/surat');
+      const getDataTilawah = await getDetailTilawah(id);
+      setClickJuz(getDataTilawah.data.data.juz);
+      setClickSurah(getDataTilawah.data.data.surah);
+      setAyatState(getDataTilawah.data.data.ayat);
       setSurah(getSurah.data.data);
+      setIsLoading((prev) => (prev === false ? prev : !prev));
     })();
   }, []);
 
+  if (isLoading) {
+    return <Loader isWhite={true} />;
+  }
+
   return (
     <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition duration-300 ease-out'>
-      <Appbar username={username} />
+      <Appbar username={userData?.username} />
       <div className='w-full box-shadow px-[22px] py-[22px] lg:px-7 lg:py-7 rounded-[57px]'>
-        <TitlePage page={page} />
+        <TitlePage page='Edit Tilawah' />
         <div className='px-[33.47px] sm:px-[40.47px] lg:px-[60.47px]'>
+          {message && (
+            <div
+              className={
+                'px-4 py-3 rounded-lg text-base sm:text-lg xl:text-xl font-bold mb-4' +
+                (isError
+                  ? ' text-red-800 bg-red-400'
+                  : ' text-green-800 bg-green-400')
+              }>
+              <p>{message}</p>
+            </div>
+          )}
           <div className={'relative mt-2 mb-[39px]'}>
             <div
               className='relative cursor-pointer mt-2'
               onClick={() => setOpen((prev) => !prev)}>
               <div
                 className={
-                  'w-full px-4 py-3 h-[53px] border-dark-green border text-dark-green' +
+                  'w-full px-3 py-2 sm:px-4 sm:py-3 h-[43px] sm:h-[53px] border-dark-green border text-dark-green' +
                   (open ? ' rounded-tl-tr' : ' rounded-[10px]')
                 }>
                 {clickSurah}
@@ -79,7 +115,8 @@ export const FormQuran = ({ username, page, children }: Props) => {
           <InputFloating
             classname='mb-[39px]'
             label='Ayat'
-            onChange={(e) => setAyat(e.target.value)}
+            onChange={(e) => setAyatState(e.target.value)}
+            value={ayatState}
           />
           <div className={'relative mt-2 mb-[39px]'}>
             <div
@@ -87,7 +124,7 @@ export const FormQuran = ({ username, page, children }: Props) => {
               onClick={() => setOpenJuz((prev) => !prev)}>
               <div
                 className={
-                  'w-full px-4 py-3 h-[53px] border-dark-green border text-dark-green' +
+                  'w-full px-3 py-2 sm:px-4 sm:py-3 h-[43px] sm:h-[53px] border-dark-green border text-dark-green' +
                   (open ? ' rounded-tl-tr' : ' rounded-[10px]')
                 }>
                 {clickJuz}
@@ -116,7 +153,7 @@ export const FormQuran = ({ username, page, children }: Props) => {
             )}
           </div>
           <div className='flex w-full justify-end mt-[49px] mb-[45px] '>
-            <Button children={children} trash={false} onClick={handleClick} />
+            <Button children='Edit' trash={false} onClick={handleClick} />
           </div>
         </div>
       </div>
@@ -124,40 +161,4 @@ export const FormQuran = ({ username, page, children }: Props) => {
   );
 };
 
-export const FormUser = ({
-  username,
-  page,
-  children,
-  isClass,
-  isNotStudent,
-  isParent,
-}: Props) => {
-  return (
-    <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition duration-300 ease-out'>
-      <Appbar username={username} />
-      <div className='w-full box-shadow px-[22px] py-[22px] lg:px-7 lg:py-7 rounded-[57px]'>
-        <TitlePage page={page} />
-        <div className='px-[33.47px] sm:px-[40.47px] lg:px-[60.47px]'>
-          <InputFloating classname='mb-[39px]' label='Nama Lengkap' />
-          {isClass && <InputDropdown classname='mb-[39px]' label='Kelas' />}
-          {isParent && <InputDropdown classname='mb-[39px]' label='Anak' />}
-          <InputFloating classname='mb-[39px]' label='Jenis Kelamin' />
-          <InputFloating classname='mb-[39px]' label='TTL' />
-          {isNotStudent && (
-            <>
-              <InputFloating classname='mb-[39px]' label='Username' />
-              <InputFloating
-                classname='mb-[39px]'
-                label='Kata Sandi'
-                password={true}
-              />
-            </>
-          )}
-          <div className='flex w-full justify-end mt-[49px] mb-[45px] '>
-            <Button children={children} trash={false} />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+export default EditTilawah;

@@ -1,9 +1,8 @@
 import axios from 'axios';
-import CryptoJS from 'crypto-js';
 import React from 'react';
 import { IoMdArrowBack } from 'react-icons/io';
 import { Link, useNavigate } from 'react-router-dom';
-import { UserData } from '../types/UserData';
+import { encrypt } from '../fetch/storage/Gets';
 import Button from '../views/atoms/Button';
 import { InputDefault } from '../views/atoms/Inputs';
 import Loader from '../views/atoms/Loader';
@@ -15,13 +14,6 @@ const Login = () => {
   const [isError, setIsError] = React.useState<string | undefined>('');
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const navigate = useNavigate();
-
-  const encrypt = (userData: UserData): string => {
-    return CryptoJS.AES.encrypt(
-      JSON.stringify(userData),
-      import.meta.env.VITE_SECRET_KEY_CRYPTO_JS
-    ).toString();
-  };
 
   const handleLogin = async () => {
     try {
