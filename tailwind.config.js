@@ -2,9 +2,9 @@
 export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    backgroundImage: {
-      hero: "url('./src/assets/images/al-quran.png')",
-    },
+    // backgroundImage: {
+    //   hero: "url('./src/assets/images/al-quran.png')",
+    // },
     extend: {
       colors: {
         'dark-green': '#00AA13',

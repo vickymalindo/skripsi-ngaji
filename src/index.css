@@ -25,6 +25,10 @@ body {
   text-fill-color: transparent;
 }
 
+.bg-hero {
+  background-image: url('./assets/images/al-quran.png');
+}
+
 .bg-gradient-green {
   background: linear-gradient(151.91deg, #00aa13 26.89%, #07e420 82.6%);
   border-radius: 10px 10px 0px 0px;
