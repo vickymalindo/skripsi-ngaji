@@ -25,10 +25,6 @@ export const FormQuran = ({ username, page, children }: Props) => {
   const [clickJuz, setClickJuz] = React.useState<number | null>(null);
   const [surah, setSurah] = React.useState<ApiQuran[]>([]);
 
-  const handleClick = () => {
-    console.log(ayat, clickJuz, clickSurah);
-  };
-
   React.useEffect(() => {
     (async function getSurah() {
       const getSurah = await axios.get('https://equran.id/api/v2/surat');
@@ -116,7 +112,7 @@ export const FormQuran = ({ username, page, children }: Props) => {
             )}
           </div>
           <div className='flex w-full justify-end mt-[49px] mb-[45px] '>
-            <Button children={children} trash={false} onClick={handleClick} />
+            <Button children={children} trash={false} />
           </div>
         </div>
       </div>

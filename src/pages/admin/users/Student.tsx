@@ -46,7 +46,6 @@ export const Student = () => {
 
   const handleUpdate = (idStudent: number) => {
     navigate(`/admin/edit/student/${idStudent}`);
-    console.log(idStudent);
   };
 
   React.useEffect(() => {

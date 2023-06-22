@@ -36,10 +36,10 @@ export const Student = () => {
     const { status } = res;
     if (status === 200) {
       setIsError((prev) => (prev === false ? prev : !prev));
-      setMessage('Behasil edit data Guru');
+      setMessage('Behasil edit data Murid/Anak');
     } else {
       setIsError((prev) => (prev === true ? prev : !prev));
-      setMessage('Gagal edit data Guru');
+      setMessage('Gagal edit data Murid/Anak');
     }
   };
 
@@ -61,7 +61,7 @@ export const Student = () => {
           setJenisKelamin(resGlobalStudent.jenis_kelamin);
           setIdKelas(resGlobalStudent.id_kelas);
         }
-        const resKelas = await fetchKelas(resGlobalStudent.id);
+        const resKelas = await fetchKelas(resGlobalStudent.id_kelas);
         const resAllKelas = await fetchAllKelas();
         setUserData(decryptedData);
         setAllKelas(resAllKelas.data.data);

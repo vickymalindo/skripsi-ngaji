@@ -69,6 +69,7 @@ const RoteStudent = () => {
         } else {
           setStudentRote([]);
         }
+        setMessage('');
         setParent(responseParent);
         setStudent(datas.data);
         setUserData(decryptedData);

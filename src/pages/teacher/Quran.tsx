@@ -27,7 +27,6 @@ const Quran = () => {
   const handleSubmit = async () => {
     const resRote = await fetchRote(id);
     const deleteRote = await deleteAllRote(resRote.data.data.id_input);
-    console.log(deleteRote);
     const { status } = deleteRote.data;
     if (status === 200) {
       const resAllRote = await fetchAllRote(userData.id_kelas);
