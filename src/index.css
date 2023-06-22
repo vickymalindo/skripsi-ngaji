@@ -27,6 +27,8 @@ body {
 
 .bg-hero {
   background-image: url('./assets/images/al-quran.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .bg-gradient-green {
