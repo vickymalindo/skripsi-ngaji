@@ -29,6 +29,7 @@ body {
   background-image: url('./assets/images/al-quran.png');
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
 }
 
 .bg-gradient-green {
