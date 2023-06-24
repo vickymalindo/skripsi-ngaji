@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
   fetchParent,
   fetchRoteStudent,
@@ -23,7 +23,6 @@ const RoteStudent = () => {
   const [isError, setIsError] = React.useState<boolean>(false);
   const [message, setMessage] = React.useState<string | undefined>('');
   const { id } = useParams();
-  const navigate = useNavigate();
   const data = localStorage.getItem('data');
 
   const handleSubmit = async () => {
@@ -88,7 +87,7 @@ const RoteStudent = () => {
         username={userData.username}
         page='Pantau Kegiatan Hafalan Murid'
         name={student.nama_lengkap}
-        parentName={parent.nama_lengkap}
+        parentName={parent?.nama_lengkap || 'Belum ada Orangtua'}
         showAction={activeButton !== 0 ? false : true}
         canDelete={false}
         showCard={false}

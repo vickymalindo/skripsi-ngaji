@@ -9,7 +9,7 @@ const Loader = ({ isWhite }: Props) => {
         (isWhite ? ' bg-white' : ' bg-black-rgba')
       }>
       <div className='h-screen w-full flex justify-center items-center'>
-        <div className='loader animate-spin'></div>;
+        <div className='loader animate-spin'></div>
       </div>
     </div>
   );
