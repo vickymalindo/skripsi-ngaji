@@ -200,6 +200,13 @@ export const fetchRoteStudent = async (id: string, status: number) => {
   return res;
 };
 
+export const fetchRoteStudentHome = async (id: string, status: number) => {
+  const res = axios.get(
+    import.meta.env.VITE_BASE_URL + `ortu/datahafalanfilterumah/${id}/${status}`
+  );
+  return res;
+};
+
 export const updateRoteStatusById = async (id: string) => {
   const res = await axios.put(
     import.meta.env.VITE_BASE_URL + `guru/updatestatushafalan/${id}`

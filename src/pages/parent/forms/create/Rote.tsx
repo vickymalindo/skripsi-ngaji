@@ -1,18 +1,17 @@
 import axios from 'axios';
 import React from 'react';
 import { FaCaretDown } from 'react-icons/fa';
-import { useParams } from 'react-router-dom';
-import { editAllRote, fetchRote } from '../../../fetch/api/Teacher';
-import { getToken, getUser } from '../../../fetch/storage/Gets';
-import { ApiQuran } from '../../../types/QuranApi';
-import { juz } from '../../../utils/Juz';
-import Button from '../../../views/atoms/Button';
-import { InputFloating } from '../../../views/atoms/Inputs';
-import Loader from '../../../views/atoms/Loader';
-import TitlePage from '../../../views/atoms/TitlePage';
-import Appbar from '../../../views/molecules/Appbar';
+import { postRoteParent } from '../../../../fetch/api/Parent';
+import { getToken, getUser } from '../../../../fetch/storage/Gets';
+import { ApiQuran } from '../../../../types/QuranApi';
+import { juz } from '../../../../utils/Juz';
+import Button from '../../../../views/atoms/Button';
+import { InputFloating } from '../../../../views/atoms/Inputs';
+import Loader from '../../../../views/atoms/Loader';
+import TitlePage from '../../../../views/atoms/TitlePage';
+import Appbar from '../../../../views/molecules/Appbar';
 
-const EditRote = () => {
+export const Rote = () => {
   const [userData, setUserData] = React.useState<any>({});
   const [open, setOpen] = React.useState(false);
   const [openJuz, setOpenJuz] = React.useState(false);
@@ -23,25 +22,24 @@ const EditRote = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [isError, setIsError] = React.useState<boolean>(false);
   const [message, setMessage] = React.useState<string | undefined>('');
-  const [idInput, setIdInput] = React.useState<string>('');
   const data = localStorage.getItem('data');
   const token = localStorage.getItem('token');
-  const { id } = useParams();
 
+  // TODO:  testing ini
   const handleClick = async () => {
-    let juz = '' + clickJuz;
-    let surah = clickSurah;
-    let ayat = '' + ayatState;
     if (token) {
       const decryptedToken = getToken(token);
-      const res = await editAllRote(idInput, surah, juz, ayat, decryptedToken);
-      const { status } = res.data;
+      let juz = '' + clickJuz;
+      let surah = clickSurah;
+      let ayat = '' + ayatState;
+
+      const { status } = await postRoteParent(surah, juz, ayat, decryptedToken);
       if (status === 200) {
         setIsError((prev) => (prev === false ? prev : !prev));
-        setMessage('Berhasil edit hafalan baru');
+        setMessage('Berhasil membuat hafalan baru');
       } else {
         setIsError((prev) => (prev === true ? prev : !prev));
-        setMessage('Gagal edit hafalan baru, silahkan login kembali');
+        setMessage('Gagal membuat hafalan baru');
       }
     }
   };
@@ -50,16 +48,11 @@ const EditRote = () => {
     (async function getSurah() {
       if (data) {
         const decryptedData = getUser(data);
+        const getSurah = await axios.get('https://equran.id/api/v2/surat');
+        setSurah(getSurah.data.data);
         setUserData(decryptedData);
+        setIsLoading((prev) => (prev === false ? prev : !prev));
       }
-      const getSurah = await axios.get('https://equran.id/api/v2/surat');
-      const getDataRote = await fetchRote('' + id);
-      setIdInput(getDataRote.data.data.id_input);
-      setClickJuz(getDataRote.data.data.juz);
-      setClickSurah(getDataRote.data.data.surah);
-      setAyatState(getDataRote.data.data.ayat);
-      setSurah(getSurah.data.data);
-      setIsLoading((prev) => (prev === false ? prev : !prev));
     })();
   }, []);
 
@@ -71,7 +64,7 @@ const EditRote = () => {
     <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition duration-300 ease-out'>
       <Appbar username={userData?.username} />
       <div className='w-full box-shadow px-[22px] py-[22px] lg:px-7 lg:py-7 rounded-[57px]'>
-        <TitlePage page='Edit Hafalan Lama' />
+        <TitlePage page='Buat Hafalan Baru' />
         <div className='px-[33.47px] sm:px-[40.47px] lg:px-[60.47px]'>
           {message && (
             <div
@@ -84,7 +77,7 @@ const EditRote = () => {
               <p>{message}</p>
             </div>
           )}
-          <div className='relative mt-2 mb-[39px]'>
+          <div className={'relative mt-2 mb-[39px]'}>
             <div
               className='relative cursor-pointer mt-2'
               onClick={() => setOpen((prev) => !prev)}>
@@ -122,7 +115,6 @@ const EditRote = () => {
             classname='mb-[39px]'
             label='Ayat'
             onChange={(e) => setAyatState(e.target.value)}
-            value={ayatState}
           />
           <div className={'relative mt-2 mb-[39px]'}>
             <div
@@ -159,12 +151,10 @@ const EditRote = () => {
             )}
           </div>
           <div className='flex w-full justify-end mt-[49px] mb-[45px] '>
-            <Button children='Edit' trash={false} onClick={handleClick} />
+            <Button children='Buat' trash={false} onClick={handleClick} />
           </div>
         </div>
       </div>
     </div>
   );
 };
-
-export default EditRote;

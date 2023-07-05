@@ -15,8 +15,14 @@ import { Student as StudentsinAdmin } from '../pages/admin/users/Student';
 import { Teacher as TeacherinAdmin } from '../pages/admin/users/Teacher';
 import { Murojaah as ParentMurojaah } from '../pages/parent/Murojaah';
 import { Profile as ProfileParent } from '../pages/parent/Profile';
-import * as ParentRote from '../pages/parent/Rote/All';
+import { RoteParent as ParentRote } from '../pages/parent/RoteParent';
 import { Tilawah as ParentTilawah } from '../pages/parent/Tilawah';
+import { Murojaah as CreateMurojaahParent } from '../pages/parent/forms/create/Murojaah';
+import { Rote as CreateRoteParent } from '../pages/parent/forms/create/Rote';
+import { Tilawah as CreateTilawahParent } from '../pages/parent/forms/create/Tilawah';
+import { Murojaah as EditMurojaahParent } from '../pages/parent/forms/edit/Murojaah';
+import { Rote as EditRoteParent } from '../pages/parent/forms/edit/Rote';
+import { Tilawah as EditTilawahParent } from '../pages/parent/forms/edit/Tilawah';
 import { Murojaah as TeacherMurojaah } from '../pages/teacher/Murojaah';
 import { Profile as ProfileTeacher } from '../pages/teacher/Profile';
 import Quran from '../pages/teacher/Quran';
@@ -48,21 +54,42 @@ const Router = createBrowserRouter([
     element: <Main />,
     children: [
       {
-        path: 'rote',
+        path: 'create',
         children: [
           {
-            path: 'school',
-            element: <ParentRote.School />,
+            path: 'murojaah',
+            element: <CreateMurojaahParent />,
           },
           {
-            path: 'home',
-            element: <ParentRote.Home />,
+            path: 'tilawah',
+            element: <CreateTilawahParent />,
           },
           {
-            path: 'ndone',
-            element: <ParentRote.NotDone />,
+            path: 'rote',
+            element: <CreateRoteParent />,
           },
         ],
+      },
+      {
+        path: 'edit',
+        children: [
+          {
+            path: 'murojaah/:id',
+            element: <EditMurojaahParent />,
+          },
+          {
+            path: 'tilawah/:id',
+            element: <EditTilawahParent />,
+          },
+          {
+            path: 'rote/:id',
+            element: <EditRoteParent />,
+          },
+        ],
+      },
+      {
+        path: 'rote',
+        element: <ParentRote />,
       },
       {
         path: 'murojaah',

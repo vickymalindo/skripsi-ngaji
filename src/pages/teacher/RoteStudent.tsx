@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import {
   fetchParent,
   fetchRoteStudent,
+  fetchRoteStudentHome,
   fetchStudent,
   updateRoteStatusById,
 } from '../../fetch/api/Teacher';
@@ -58,11 +59,21 @@ const RoteStudent = () => {
         const numberIdToStr = '' + id;
         const { data: datas } = await fetchStudent(numberIdToStr);
         const responseParent = await fetchParent(numberIdToStr);
-        const responseRote = await fetchRoteStudent(
-          numberIdToStr,
-          activeButton
-        );
-        const { status } = responseRote;
+        let responseRote;
+        if (activeButton < 2) {
+          responseRote = await fetchRoteStudent(numberIdToStr, activeButton);
+        } else {
+          if (activeButton === 2) {
+            responseRote = await fetchRoteStudentHome(
+              numberIdToStr,
+              activeButton
+            );
+          } else {
+            responseRote = await fetchRoteStudentHome(numberIdToStr, 0);
+          }
+        }
+
+        const { status } = responseRote.data;
         if (status === 200) {
           setStudentRote(responseRote.data.data);
         } else {

@@ -54,25 +54,14 @@ export const SidebarParent = () => {
           <img src={Logo} alt='Logo' className='m-auto mb-[73px]' />
           <ul className='list-none'>
             {sidebarOrtu.map((val, index) => {
-              if (index === 0) {
-                return (
-                  <DropdownSidebar
-                    key={index}
-                    parent='Hafalan'
-                    data={val.children}
-                    isCream={false}
-                  />
-                );
-              } else {
-                return (
-                  <Links
-                    key={index}
-                    href={val.href}
-                    text={val.text}
-                    isSidebar={true}
-                  />
-                );
-              }
+              return (
+                <Links
+                  key={index}
+                  href={val.href}
+                  text={val.text}
+                  isSidebar={true}
+                />
+              );
             })}
           </ul>
         </div>

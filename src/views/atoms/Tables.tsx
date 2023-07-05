@@ -1,3 +1,4 @@
+import { BsEye } from 'react-icons/bs';
 import { Rote } from '../../types/ApiParent';
 import { MurojaahType } from '../../types/ApiTeacher';
 import { UserData } from '../../types/UserData';
@@ -9,10 +10,12 @@ interface Props<T> {
   showAction: boolean;
   canDelete: boolean;
   showChild?: boolean;
+  showIconEye?: boolean;
   showParent?: boolean;
   data?: T[];
   update?: (id: number) => any;
   handleDelete?: (id: number) => any;
+  handleEdit?: (id: number) => any;
   message?: string;
   isError?: boolean;
 }
@@ -20,10 +23,12 @@ interface Props<T> {
 // TODO: buat field tanggal
 export const QuranTable = <T extends MurojaahType | Rote>({
   showAction,
+  showIconEye,
   canDelete,
   data,
   update,
   handleDelete,
+  handleEdit,
   message,
   isError,
 }: Props<T>) => {
@@ -43,7 +48,7 @@ export const QuranTable = <T extends MurojaahType | Rote>({
       {data?.length === 0 ? (
         <EmptyData />
       ) : (
-        <div className='overflow-x-scroll lg:overflow-x-auto px-4 md:px-6 lg:px-10'>
+        <div className='overflow-x-scroll lg:overflow-x-auto px-4 md:px-6 lg:px-10 mb-7'>
           <table className='m-auto'>
             <thead className='bg-gradient-green text-white'>
               <tr>
@@ -79,6 +84,15 @@ export const QuranTable = <T extends MurojaahType | Rote>({
                               className='cursor-pointer inline-block'
                               onClick={() => handleDelete?.(item.id)}>
                               <img src={Trash} alt='Trash' />
+                            </span>
+                          ) : (
+                            ''
+                          )}
+                          {showIconEye ? (
+                            <span
+                              className='cursor-pointer inline-block'
+                              onClick={() => handleEdit?.(item.id)}>
+                              <BsEye className='text-dark-green text-[19px]' />
                             </span>
                           ) : (
                             ''

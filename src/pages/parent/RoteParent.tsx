@@ -1,14 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  deleteMurojaahHome,
+  deleteRoteHome,
   fetchChild,
   fetchChildKelas,
   fetchChildTeacher,
-  fetchMurojaah,
-  fetchMurojaahHome,
-  updateMurojaahStatus,
+  updateRoteStatus,
 } from '../../fetch/api/Parent';
+import {
+  fetchRoteStudent,
+  fetchRoteStudentHome,
+} from '../../fetch/api/Teacher';
 import { getToken, getUser } from '../../fetch/storage/Gets';
 import { Rote } from '../../types/ApiParent';
 import { StudentData } from '../../types/UserData';
@@ -16,11 +18,11 @@ import Loader from '../../views/atoms/Loader';
 import Modal from '../../views/atoms/Modal';
 import Content from '../../views/molecules/Content';
 
-export const Murojaah = () => {
+export const RoteParent = () => {
   const [userData, setUserData] = React.useState<any>({});
   const [userChildData, setUserChildData] = React.useState<StudentData[]>([]);
   const [activeButton, setActiveButton] = React.useState<number>(0);
-  const [murojaah, setMurojaah] = React.useState<Rote[]>([]);
+  const [rote, setRote] = React.useState<Rote[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [id, setId] = React.useState('');
   const [isError, setIsError] = React.useState<boolean>(false);
@@ -31,10 +33,13 @@ export const Murojaah = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    const { status: statusCode } = await updateMurojaahStatus(id, 2);
+    const { status: statusCode } = await updateRoteStatus(id, 2);
     if (statusCode === 200) {
-      const responseMurojaah = await fetchMurojaahHome(userData.id_murid, 0);
-      setMurojaah(responseMurojaah);
+      const responseRote = await fetchRoteStudentHome(
+        '' + userData.id_murid,
+        0
+      );
+      setRote(responseRote.data.data);
       setIsError((prev) => (prev === false ? prev : !prev));
       setMessage('Berhasil konfirmasi');
     }
@@ -43,18 +48,21 @@ export const Murojaah = () => {
 
   const handleDelete = async (id: number) => {
     const numberIdToStr = '' + id;
-    const responseDeleteMurojaah = await deleteMurojaahHome(numberIdToStr);
+    const responseDeleteMurojaah = await deleteRoteHome(numberIdToStr);
     const { status } = responseDeleteMurojaah.data;
     if (status === 200) {
-      const responseMurojaah = await fetchMurojaahHome(userData.id_murid, 0);
-      setMurojaah(responseMurojaah);
+      const responseRote = await fetchRoteStudentHome(
+        '' + userData.id_murid,
+        0
+      );
+      setRote(responseRote.data.data);
       setIsError((prev) => (prev === false ? prev : !prev));
       setMessage('Berhasil Hapus');
     }
   };
 
   const handleEdit = (id: number) => {
-    navigate(`/parent/edit/murojaah/${id}`);
+    navigate(`/parent/edit/rote/${id}`);
   };
 
   const handleUpdate = (id: number) => {
@@ -80,27 +88,31 @@ export const Murojaah = () => {
           localStorage.clear();
           navigate('/login');
         }
-        if (activeButton === 1) {
-          try {
-            const responseMurojaah = await fetchMurojaah(
-              globalChildDtata[0].id_kelas
-            );
-            setMurojaah(responseMurojaah);
-          } catch (error) {
-            setMurojaah([]);
-          }
+        let responseRote;
+        if (activeButton < 2) {
+          responseRote = await fetchRoteStudent(
+            '' + decryptedData.id_murid,
+            activeButton
+          );
         } else {
-          try {
-            const responseMurojaah = await fetchMurojaahHome(
-              decryptedData.id_murid,
+          if (activeButton === 2) {
+            responseRote = await fetchRoteStudentHome(
+              '' + decryptedData.id_murid,
               activeButton
             );
-            setMurojaah(responseMurojaah);
-          } catch (error) {
-            setMurojaah([]);
+          } else {
+            responseRote = await fetchRoteStudentHome(
+              '' + decryptedData.id_murid,
+              0
+            );
           }
         }
-
+        const { status } = responseRote.data;
+        if (status === 200) {
+          setRote(responseRote.data.data);
+        } else {
+          setRote([]);
+        }
         const { id, nama_kelas } = await fetchChildKelas(
           globalChildDtata[0].id_kelas
         );
@@ -126,19 +138,20 @@ export const Murojaah = () => {
     <div>
       <Content
         username={userData?.username}
-        page='Hafalan Lama'
+        page='Hafalan Baru'
         name={userChildData[0]?.nama_lengkap || 'Data belum dimasukan'}
         group={userData?.nama_kelas || 'Data belum dimasukan'}
         birthdate={userChildData[0]?.ttl || 'Data belum dimasukan'}
         teacher={userData?.responseNameTeacher}
-        showAction={activeButton !== 0 ? false : true}
-        canDelete={activeButton !== 0 ? false : true}
-        showIconEye={activeButton !== 0 ? false : true}
+        showAction={activeButton !== 3 ? false : true}
+        canDelete={activeButton !== 3 ? false : true}
+        showIconEye={activeButton !== 3 ? false : true}
         showCard={true}
         showButton={false}
         showQuranTable={true}
-        dataTableQuran={murojaah}
-        btnParent={true}
+        dataTableQuran={rote}
+        btnParent={false}
+        btnParentRote={true}
         active={activeButton}
         onClick={(nums) => setActiveButton(nums)}
         update={(id) => handleUpdate(id)}
@@ -147,7 +160,7 @@ export const Murojaah = () => {
         message={message}
         isError={isError}
         addButton={true}
-        createdTo='murojaah'
+        createdTo='rote'
       />
       {openModal ? (
         <Modal

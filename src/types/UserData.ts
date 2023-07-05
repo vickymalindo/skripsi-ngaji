@@ -5,6 +5,7 @@ export interface UserData {
   email_verified_at: string;
   id: number;
   id_kelas: number;
+  id_murid: number;
   level: string;
   nama_lengkap: string;
   ttl: string;

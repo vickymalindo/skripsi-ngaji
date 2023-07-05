@@ -2,17 +2,20 @@ import axios from 'axios';
 import React from 'react';
 import { FaCaretDown } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
-import { editAllRote, fetchRote } from '../../../fetch/api/Teacher';
-import { getToken, getUser } from '../../../fetch/storage/Gets';
-import { ApiQuran } from '../../../types/QuranApi';
-import { juz } from '../../../utils/Juz';
-import Button from '../../../views/atoms/Button';
-import { InputFloating } from '../../../views/atoms/Inputs';
-import Loader from '../../../views/atoms/Loader';
-import TitlePage from '../../../views/atoms/TitlePage';
-import Appbar from '../../../views/molecules/Appbar';
+import {
+  editMurojaahParent,
+  getDetailMurojaahParent,
+} from '../../../../fetch/api/Parent';
+import { getUser } from '../../../../fetch/storage/Gets';
+import { ApiQuran } from '../../../../types/QuranApi';
+import { juz } from '../../../../utils/Juz';
+import Button from '../../../../views/atoms/Button';
+import { InputFloating } from '../../../../views/atoms/Inputs';
+import Loader from '../../../../views/atoms/Loader';
+import TitlePage from '../../../../views/atoms/TitlePage';
+import Appbar from '../../../../views/molecules/Appbar';
 
-const EditRote = () => {
+export const Murojaah = () => {
   const [userData, setUserData] = React.useState<any>({});
   const [open, setOpen] = React.useState(false);
   const [openJuz, setOpenJuz] = React.useState(false);
@@ -23,26 +26,21 @@ const EditRote = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [isError, setIsError] = React.useState<boolean>(false);
   const [message, setMessage] = React.useState<string | undefined>('');
-  const [idInput, setIdInput] = React.useState<string>('');
   const data = localStorage.getItem('data');
-  const token = localStorage.getItem('token');
   const { id } = useParams();
 
   const handleClick = async () => {
     let juz = '' + clickJuz;
     let surah = clickSurah;
     let ayat = '' + ayatState;
-    if (token) {
-      const decryptedToken = getToken(token);
-      const res = await editAllRote(idInput, surah, juz, ayat, decryptedToken);
-      const { status } = res.data;
-      if (status === 200) {
-        setIsError((prev) => (prev === false ? prev : !prev));
-        setMessage('Berhasil edit hafalan baru');
-      } else {
-        setIsError((prev) => (prev === true ? prev : !prev));
-        setMessage('Gagal edit hafalan baru, silahkan login kembali');
-      }
+    const res = await editMurojaahParent(surah, juz, ayat, id);
+    const { status } = res;
+    if (status === 200) {
+      setIsError((prev) => (prev === false ? prev : !prev));
+      setMessage('Berhasil edit hafalan lama');
+    } else {
+      setIsError((prev) => (prev === true ? prev : !prev));
+      setMessage('Gagal edit hafalan lama');
     }
   };
 
@@ -53,11 +51,10 @@ const EditRote = () => {
         setUserData(decryptedData);
       }
       const getSurah = await axios.get('https://equran.id/api/v2/surat');
-      const getDataRote = await fetchRote('' + id);
-      setIdInput(getDataRote.data.data.id_input);
-      setClickJuz(getDataRote.data.data.juz);
-      setClickSurah(getDataRote.data.data.surah);
-      setAyatState(getDataRote.data.data.ayat);
+      const getDataMurojaah = await getDetailMurojaahParent(id);
+      setClickJuz(getDataMurojaah.data.data.juz);
+      setClickSurah(getDataMurojaah.data.data.surah);
+      setAyatState(getDataMurojaah.data.data.ayat);
       setSurah(getSurah.data.data);
       setIsLoading((prev) => (prev === false ? prev : !prev));
     })();
@@ -166,5 +163,3 @@ const EditRote = () => {
     </div>
   );
 };
-
-export default EditRote;

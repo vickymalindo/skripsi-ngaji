@@ -11,20 +11,8 @@ interface SidebarProps {
 
 export const sidebarOrtu: SidebarProps[] = [
   {
-    children: [
-      {
-        text: 'Sekolah',
-        href: '/parent/rote/school',
-      },
-      {
-        text: 'Rumah',
-        href: '/parent/rote/home',
-      },
-      {
-        text: 'Belum Selesai',
-        href: '/parent/rote/ndone',
-      },
-    ],
+    text: 'Hafalan Baru',
+    href: '/parent/rote',
   },
   {
     text: 'Hafalan Lama',

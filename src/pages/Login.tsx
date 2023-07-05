@@ -43,7 +43,7 @@ const Login = () => {
       } else if (level === 'guru') {
         navigate('/teacher/students');
       } else {
-        navigate('/parent/rote/school');
+        navigate('/parent/rote');
       }
     } catch (error) {
       setIsError('Password / email salah');

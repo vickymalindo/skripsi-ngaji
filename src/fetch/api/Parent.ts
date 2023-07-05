@@ -49,6 +49,22 @@ export const fetchMurojaah = async (id: number): Promise<Rote[] | []> => {
   return murojaah;
 };
 
+export const fetchMurojaahHome = async (id: number, status: number) => {
+  const response = await axios.get(
+    import.meta.env.VITE_BASE_URL + `ortu/datamurojaahfilter/${id}/${status}`
+  );
+  const { data: murojaah } = response.data;
+  return murojaah;
+};
+
+export const fetchTilawahHome = async (id: number, status: number) => {
+  const response = await axios.get(
+    import.meta.env.VITE_BASE_URL + `ortu/datatilawahfilter/${id}/${status}`
+  );
+  const { data: murojaah } = response.data;
+  return murojaah;
+};
+
 export const fetchTilawah = async (id: number): Promise<Rote[] | []> => {
   const response = await axios.get(
     import.meta.env.VITE_BASE_URL + `ortu/datatilawah/${id}`
@@ -106,6 +122,169 @@ export const updateHafalan = (id: string, status: string) => {
     import.meta.env.VITE_BASE_URL + `ortu/updatehafalan/${id}`,
     {
       status,
+    }
+  );
+  return res;
+};
+
+export const updateRoteStatus = async (id: string, status: number) => {
+  const res = await axios.post(
+    import.meta.env.VITE_BASE_URL + `ortu/updatestatushafalan/${id}`,
+    { status }
+  );
+  return res;
+};
+
+export const updateMurojaahStatus = async (id: string, status: number) => {
+  const res = await axios.post(
+    import.meta.env.VITE_BASE_URL + `ortu/updatestatusmurojaah/${id}`,
+    { status }
+  );
+  return res;
+};
+
+export const deleteMurojaahHome = async (id: string) => {
+  const res = await axios.delete(
+    import.meta.env.VITE_BASE_URL + `ortu/deletemurojaah/${id}`
+  );
+
+  return res;
+};
+
+export const deleteRoteHome = async (id: string) => {
+  const res = await axios.delete(
+    import.meta.env.VITE_BASE_URL + `ortu/deletehafalan/${id}`
+  );
+
+  return res;
+};
+
+export const deleteTilawahHome = async (id: string) => {
+  const res = await axios.delete(
+    import.meta.env.VITE_BASE_URL + `ortu/deletetilawah/${id}`
+  );
+
+  return res;
+};
+
+export const postMurojaahParent = async (
+  surah: string,
+  juz: string,
+  ayat: string,
+  decryptedToken: string
+) => {
+  const res = await axios.post(
+    import.meta.env.VITE_BASE_URL + 'ortu/tambahmurojaah',
+    { surah, juz, ayat },
+    {
+      headers: { Authorization: `Bearer${decryptedToken}` },
+    }
+  );
+  return res;
+};
+
+export const postRoteParent = async (
+  surah: string,
+  juz: string,
+  ayat: string,
+  decryptedToken: string
+) => {
+  const res = await axios.post(
+    import.meta.env.VITE_BASE_URL + 'ortu/tambahhafalan',
+    { surah, juz, ayat },
+    {
+      headers: { Authorization: `Bearer${decryptedToken}` },
+    }
+  );
+  return res;
+};
+
+export const postTilawahParent = async (
+  surah: string,
+  juz: string,
+  ayat: string,
+  decryptedToken: string
+) => {
+  const res = await axios.post(
+    import.meta.env.VITE_BASE_URL + 'ortu/tambahtilawah',
+    { surah, juz, ayat },
+    {
+      headers: { Authorization: `Bearer${decryptedToken}` },
+    }
+  );
+  return res;
+};
+
+export const getDetailMurojaahParent = async (id: string | undefined) => {
+  const res = await axios.get(
+    import.meta.env.VITE_BASE_URL + `ortu/detailmurojaahrumah/${id}`
+  );
+
+  return res;
+};
+
+export const getDetailTilawahParent = async (id: string | undefined) => {
+  const res = await axios.get(
+    import.meta.env.VITE_BASE_URL + `ortu/detailtilawahrumah/${id}`
+  );
+
+  return res;
+};
+
+export const getDetailRoteParent = async (id: string | undefined) => {
+  const res = await axios.get(
+    import.meta.env.VITE_BASE_URL + `ortu/detailhafalanrumah/${id}`
+  );
+
+  return res;
+};
+
+export const editMurojaahParent = async (
+  surah: string,
+  juz: string,
+  ayat: string,
+  id: string | undefined
+) => {
+  const res = await axios.post(
+    import.meta.env.VITE_BASE_URL + `ortu/updatemurojaah/${id}`,
+    {
+      surah,
+      juz,
+      ayat,
+    }
+  );
+  return res;
+};
+
+export const editTilawahParent = async (
+  surah: string,
+  juz: string,
+  ayat: string,
+  id: string | undefined
+) => {
+  const res = await axios.post(
+    import.meta.env.VITE_BASE_URL + `ortu/updatetilawah/${id}`,
+    {
+      surah,
+      juz,
+      ayat,
+    }
+  );
+  return res;
+};
+
+export const editRoteParent = async (
+  surah: string,
+  juz: string,
+  ayat: string,
+  id: string | undefined
+) => {
+  const res = await axios.post(
+    import.meta.env.VITE_BASE_URL + `ortu/updatehafalan/${id}`,
+    {
+      surah,
+      juz,
+      ayat,
     }
   );
   return res;
