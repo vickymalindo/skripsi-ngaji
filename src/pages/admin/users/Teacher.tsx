@@ -80,7 +80,6 @@ export const Teacher = () => {
         showCard={false}
         showButton={false}
         showQuranTable={false}
-        showChild={true}
         dataTableUser={teachers}
         update={(id) => handleUpdate(id)}
         handleDelete={(id) => handleDelete(id)}

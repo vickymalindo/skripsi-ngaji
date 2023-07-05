@@ -79,7 +79,6 @@ export const Parent = () => {
         showCard={false}
         showButton={false}
         showQuranTable={false}
-        showChild={true}
         dataTableUser={parents}
         update={(id) => handleUpdate(id)}
         handleDelete={(id) => handleDelete(id)}
