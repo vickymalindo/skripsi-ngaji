@@ -143,6 +143,14 @@ export const updateMurojaahStatus = async (id: string, status: number) => {
   return res;
 };
 
+export const updateTilawahStatus = async (id: string, status: number) => {
+  const res = await axios.post(
+    import.meta.env.VITE_BASE_URL + `ortu/updatestatustilawah/${id}`,
+    { status }
+  );
+  return res;
+};
+
 export const deleteMurojaahHome = async (id: string) => {
   const res = await axios.delete(
     import.meta.env.VITE_BASE_URL + `ortu/deletemurojaah/${id}`

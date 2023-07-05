@@ -5,10 +5,9 @@ import {
   fetchChild,
   fetchChildKelas,
   fetchChildTeacher,
-  fetchMurojaahHome,
   fetchTilawah,
   fetchTilawahHome,
-  updateMurojaahStatus,
+  updateTilawahStatus,
 } from '../../fetch/api/Parent';
 import { getToken, getUser } from '../../fetch/storage/Gets';
 import { Rote } from '../../types/ApiParent';
@@ -32,9 +31,9 @@ export const Tilawah = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    const { status: statusCode } = await updateMurojaahStatus(id, 2);
+    const { status: statusCode } = await updateTilawahStatus(id, 2);
     if (statusCode === 200) {
-      const responseTilawah = await fetchMurojaahHome(userData.id_murid, 0);
+      const responseTilawah = await fetchTilawahHome(userData.id_murid, 0);
       setTilawah(responseTilawah);
       setIsError((prev) => (prev === false ? prev : !prev));
       setMessage('Berhasil konfirmasi');
