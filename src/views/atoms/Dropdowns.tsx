@@ -75,19 +75,21 @@ export const DropdownInput = <T extends AllKelas>({
           ? 'bg-dropdown-cream text-dark-green'
           : 'bg-dark-green text-white')
       }>
-      {data?.map((value, index) => {
-        return (
-          <button
-            key={index}
-            className={
-              'block m-auto p-1 w-full ' +
-              (isCream ? 'hover:bg-[#f5e8b3]' : 'hover:bg-light-green')
-            }
-            onClick={() => passKelas?.(value.nama_kelas, value.id)}>
-            {value.nama_kelas}
-          </button>
-        );
-      })}
+      {data
+        ? data.map((value, index) => {
+            return (
+              <button
+                key={index}
+                className={
+                  'block m-auto p-1 w-full ' +
+                  (isCream ? 'hover:bg-[#f5e8b3]' : 'hover:bg-light-green')
+                }
+                onClick={() => passKelas?.(value.nama_kelas, value.id)}>
+                {value.nama_kelas}
+              </button>
+            );
+          })
+        : 'Kosong'}
     </div>
   );
 };

@@ -103,6 +103,8 @@ const Class = () => {
   React.useEffect(() => {
     (async function () {
       if (data) {
+        setMessageTeacher('');
+        setMessageStudent('');
         const decryptedData = getUser(data);
         const resAllKelas = await fetchAllKelas();
         const studentsKelas = await fetchStudentsKelas(
@@ -111,6 +113,7 @@ const Class = () => {
         const teachersKelas = await fetchTeachersKelas(
           resAllKelas.data.data[0].id
         );
+        console.log(resAllKelas);
         setIdKelas(resAllKelas.data.data[0].id);
         setKelas(resAllKelas.data.data[0].nama_kelas);
         setStudents(studentsKelas.data.data);
@@ -133,7 +136,7 @@ const Class = () => {
         <div className='flex justify-evenly items-end sm:items-start flex-col-reverse sm:flex-row'>
           <div className='box-shadow px-[22px] py-[22px] lg:px-7 lg:py-7 rounded-[57px] w-full sm:w-2/3'>
             <div className='mb-6 sm:mb-20 md:mb-40'>
-              <TitlePage page={`Daftar Guru ${kelas}`} />
+              <TitlePage page={`Daftar Guru ${kelas || 'Kelas Kosong'}`} />
               {messageTeacher && (
                 <div
                   className={
@@ -167,7 +170,7 @@ const Class = () => {
               </div>
             </div>
             <div>
-              <TitlePage page={`Daftar Murid ${kelas}`} />
+              <TitlePage page={`Daftar Murid ${kelas || 'Kelas Kosong'}`} />
               {messageStudent && (
                 <div
                   className={
@@ -210,7 +213,9 @@ const Class = () => {
               <div
                 className='py-[10px] px-[13px] flex justify-between items-center text-dark-green'
                 onClick={() => setOpen((prev) => !prev)}>
-                <span className='font-bold text-lg'>{kelas}</span>
+                <span className='font-bold text-lg'>
+                  {kelas || 'Kelas Kosong'}
+                </span>
                 <FaCaretDown className='font-bold text-lg' />
               </div>
               {open && (
