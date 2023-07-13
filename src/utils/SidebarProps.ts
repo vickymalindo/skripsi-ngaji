@@ -90,4 +90,8 @@ export const sidebarAdmin: SidebarProps[] = [
     text: 'Lihat Kelas',
     href: '/admin/class',
   },
+  {
+    text: 'Unduh Data',
+    href: '/admin/export',
+  },
 ];

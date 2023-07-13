@@ -1,4 +1,7 @@
 import axios from 'axios';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+import { ExportData } from '../../types/ApiAdmin';
 
 export const fetchAllKelas = async () => {
   const res = axios.get(import.meta.env.VITE_BASE_URL + 'admin/daftarkelas');
@@ -196,4 +199,82 @@ export const createKelas = async (nama_kelas: string) => {
   );
 
   return res;
+};
+
+let fileName: string;
+
+export const datasToExport = async (
+  date: string,
+  dateSecond: string,
+  role: string,
+  typeData: string
+): Promise<ExportData[]> => {
+  let datas;
+
+  if (role === 'Guru') {
+    if (typeData === 'baru') {
+      const res = await axios.get(
+        import.meta.env.VITE_BASE_URL +
+          `admin/filterlaporan/${date}/${dateSecond}`
+      );
+      const { data } = await res.data;
+      fileName = 'Hafalan Baru Sekolah';
+      datas = data;
+    } else if (typeData === 'lama') {
+      const res = await axios.get(
+        import.meta.env.VITE_BASE_URL +
+          `admin/filterlaporanlama/${date}/${dateSecond}`
+      );
+      const { data } = await res.data;
+      fileName = 'Hafalan Lama Sekolah';
+      datas = data;
+    } else {
+      const res = await axios.get(
+        import.meta.env.VITE_BASE_URL +
+          `admin/filterlaporantilawah/${date}/${dateSecond}`
+      );
+      const { data } = await res.data;
+      fileName = 'Tilawah Sekolah';
+      datas = data;
+    }
+  } else {
+    if (typeData === 'baru') {
+      const res = await axios.get(
+        import.meta.env.VITE_BASE_URL +
+          `admin/filterlaporanhafalanrumah/${date}/${dateSecond}`
+      );
+      const { data } = await res.data;
+      fileName = 'Hafalan Baru Rumah';
+      datas = data;
+    } else if (typeData === 'lama') {
+      const res = await axios.get(
+        import.meta.env.VITE_BASE_URL +
+          `admin/filterlaporanhafalanlamarumah/${date}/${dateSecond}`
+      );
+      const { data } = await res.data;
+      fileName = 'Hafalan Lama Rumah';
+      datas = data;
+    } else {
+      const res = await axios.get(
+        import.meta.env.VITE_BASE_URL +
+          `admin/filterlaporantilawahrumah/${date}/${dateSecond}`
+      );
+      const { data } = await res.data;
+      fileName = 'Tilawah Rumah';
+      datas = data;
+    }
+  }
+  return datas;
+};
+
+export const excelNewRoteSchool = (
+  fileType: string,
+  fileExtension: string,
+  datas: ExportData[]
+) => {
+  const ws = XLSX.utils.json_to_sheet(datas);
+  const wb = { Sheets: { data: ws }, SheetNames: ['data'] };
+  const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+  const data = new Blob([excelBuffer], { type: fileType });
+  FileSaver.saveAs(data, fileName + fileExtension);
 };

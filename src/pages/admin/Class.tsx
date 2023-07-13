@@ -113,7 +113,6 @@ const Class = () => {
         const teachersKelas = await fetchTeachersKelas(
           resAllKelas.data.data[0].id
         );
-        console.log(resAllKelas);
         setIdKelas(resAllKelas.data.data[0].id);
         setKelas(resAllKelas.data.data[0].nama_kelas);
         setStudents(studentsKelas.data.data);

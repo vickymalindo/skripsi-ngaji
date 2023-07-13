@@ -4,6 +4,7 @@ import Index from '../pages/Index';
 import Login from '../pages/Login';
 import Main from '../pages/Main';
 import Class from '../pages/admin/Class';
+import Export from '../pages/admin/Export';
 import { Parent as CreateParent } from '../pages/admin/create/Parent';
 import { Student as CreateStudent } from '../pages/admin/create/Student';
 import { Teacher as CreateTeacher } from '../pages/admin/create/Teacher';
@@ -222,6 +223,10 @@ const Router = createBrowserRouter([
       {
         path: 'class',
         element: <Class />,
+      },
+      {
+        path: 'export',
+        element: <Export />,
       },
     ],
   },
