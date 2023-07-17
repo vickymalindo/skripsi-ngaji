@@ -24,10 +24,10 @@ import { Tilawah as CreateTilawahParent } from '../pages/parent/forms/create/Til
 import { Murojaah as EditMurojaahParent } from '../pages/parent/forms/edit/Murojaah';
 import { Rote as EditRoteParent } from '../pages/parent/forms/edit/Rote';
 import { Tilawah as EditTilawahParent } from '../pages/parent/forms/edit/Tilawah';
+import AllRoteStudent from '../pages/teacher/AllRoteStudent';
 import { Murojaah as TeacherMurojaah } from '../pages/teacher/Murojaah';
 import { Profile as ProfileTeacher } from '../pages/teacher/Profile';
 import Quran from '../pages/teacher/Quran';
-import RoteStudent from '../pages/teacher/RoteStudent';
 import { Student as StudentsinTeacher } from '../pages/teacher/Student';
 import { Tilawah as TeacherTilawah } from '../pages/teacher/Tilawah';
 import CreateMurojaah from '../pages/teacher/forms/CreateMurojaah';
@@ -144,8 +144,8 @@ const Router = createBrowserRouter([
         ],
       },
       {
-        path: 'rote/student/:id',
-        element: <RoteStudent />,
+        path: 'allrote/student/:id',
+        element: <AllRoteStudent />,
       },
       {
         path: 'rote',

@@ -61,8 +61,8 @@ export const fetchTilawahHome = async (id: number, status: number) => {
   const response = await axios.get(
     import.meta.env.VITE_BASE_URL + `ortu/datatilawahfilter/${id}/${status}`
   );
-  const { data: murojaah } = response.data;
-  return murojaah;
+  const { data: tilawah } = await response.data;
+  return tilawah;
 };
 
 export const fetchTilawah = async (id: number): Promise<Rote[] | []> => {

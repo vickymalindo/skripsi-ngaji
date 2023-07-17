@@ -56,7 +56,7 @@ export const Student = () => {
                 birthdate={item.ttl}
                 gender={item.jenis_kelamin}
                 isDelete={false}
-                onClick={() => navigate(`/teacher/rote/student/${item.id}`)}
+                onClick={() => navigate(`/teacher/allrote/student/${item.id}`)}
               />
             );
           })}

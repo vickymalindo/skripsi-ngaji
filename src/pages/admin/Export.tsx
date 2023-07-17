@@ -72,7 +72,7 @@ const Export = () => {
         )}
         <div>
           <h4 className='text-base sm:text-lg md:text-xl text-dark-green font-semibold'>
-            Silahkan Pilih Kategori :
+            Pilih Kategori :
           </h4>
           <div className='flex justify-center items-center w-max gap-1.5 pl-3'>
             <input
@@ -103,7 +103,7 @@ const Export = () => {
         </div>
         <div>
           <h4 className='text-base sm:text-lg md:text-xl text-dark-green font-semibold'>
-            Jenis Data :
+            Pilih Data :
           </h4>
           <div className='flex justify-center items-center w-max gap-1.5 pl-3'>
             <input
