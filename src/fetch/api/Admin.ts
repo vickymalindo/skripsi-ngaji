@@ -176,14 +176,14 @@ export const deleteStudent = async (id: string) => {
   return res;
 };
 
-export const fetchStudentsKelas = async (id: number) => {
+export const fetchStudentsKelas = async (id: string | undefined) => {
   const res = axios.get(
     import.meta.env.VITE_BASE_URL + `admin/muridkelas/${id}`
   );
   return res;
 };
 
-export const fetchTeachersKelas = async (id: number) => {
+export const fetchTeachersKelas = async (id: string | undefined) => {
   const res = axios.get(
     import.meta.env.VITE_BASE_URL + `admin/gurukelas/${id}`
   );
@@ -277,4 +277,26 @@ export const excelNewRoteSchool = (
   const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
   const data = new Blob([excelBuffer], { type: fileType });
   FileSaver.saveAs(data, fileName + fileExtension);
+};
+
+export const deleteKelas = async (id: number) => {
+  const res = await axios.delete(
+    import.meta.env.VITE_BASE_URL + `admin/deletekelas/${id}`
+  );
+  const { status } = await res.data;
+  return status;
+};
+
+export const updateKelas = async (
+  id: string | undefined,
+  nama_kelas: string
+) => {
+  const res = await axios.put(
+    import.meta.env.VITE_BASE_URL + `admin/updatekelas/${id}`,
+    {
+      nama_kelas,
+    }
+  );
+
+  return res;
 };

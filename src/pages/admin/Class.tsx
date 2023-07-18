@@ -1,122 +1,107 @@
 import React from 'react';
-import { FaCaretDown } from 'react-icons/fa';
+import { BsEye } from 'react-icons/bs';
+import { IoMdClose } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 import {
   createKelas,
-  deleteStudent,
-  deleteUser,
+  deleteKelas,
   fetchAllKelas,
-  fetchStudentsKelas,
-  fetchTeachersKelas,
+  updateKelas,
 } from '../../fetch/api/Admin';
 import { getUser } from '../../fetch/storage/Gets';
 import { AllKelas } from '../../types/ApiAdmin';
-import { StudentData, UserData } from '../../types/UserData';
 import Button from '../../views/atoms/Button';
-import { CardProfile } from '../../views/atoms/Cards';
-import { DropdownInput } from '../../views/atoms/Dropdowns';
+import EmptyData from '../../views/atoms/EmptyData';
+import { InputFloating } from '../../views/atoms/Inputs';
 import Loader from '../../views/atoms/Loader';
 import Modal from '../../views/atoms/Modal';
 import TitlePage from '../../views/atoms/TitlePage';
 import Appbar from '../../views/molecules/Appbar';
+import Pencil from './../../assets/images/pencil.png';
+import Trash from './../../assets/images/trash.png';
 
 const Class = () => {
   const [userData, setUserdata] = React.useState<any>({});
-  const [allKelas, setAllKelas] = React.useState<AllKelas[]>([]);
-  const [students, setStudents] = React.useState<StudentData[]>([]);
-  const [teachers, setTeachers] = React.useState<UserData[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [kelas, setKelas] = React.useState('');
-  const [nameKelas, setNameKelas] = React.useState<string>('');
-  const [open, setOpen] = React.useState(false);
-  const [openModal, setOpenModal] = React.useState(false);
-  const [idKelas, setIdKelas] = React.useState(0);
+  const [allKelas, setAllKelas] = React.useState<AllKelas[]>([]);
+  const [openModalCreate, setOpenModalCreate] = React.useState(false);
+  const [openModalEdit, setOpenModalEdit] = React.useState(false);
   const [isError, setIsError] = React.useState<boolean>(false);
-  const [messageTeacher, setMessageTeacher] = React.useState<
-    string | undefined
-  >('');
-  const [messageStudent, setMessageStudent] = React.useState<
-    string | undefined
-  >('');
   const [messageKelas, setMessageKelas] = React.useState<string | undefined>(
     ''
   );
+  const [message, setMessage] = React.useState<string | undefined>('');
+  const [nameKelas, setNameKelas] = React.useState<string>('');
+  const [idKelas, setIdKelas] = React.useState<string | undefined>('');
   const data = localStorage.getItem('data');
+  const navigate = useNavigate();
+
+  const handleDelete = async (idKelas: number) => {
+    const statusDeleteKelas = await deleteKelas(idKelas);
+    if (statusDeleteKelas === 200) {
+      const resAllKelas = await fetchAllKelas();
+      setAllKelas(resAllKelas.data.data);
+      setMessage('Berhasil Hapus Kelas');
+      setIsError((prev) => (prev === false ? prev : !prev));
+    } else {
+      setMessage('Gagal Hapus Kelas');
+      setIsError((prev) => (prev === true ? prev : !prev));
+    }
+  };
+
+  const handleEdit = (idKelas: number, kelas: string) => {
+    setIdKelas(' ' + idKelas);
+    setNameKelas(kelas);
+    setOpenModalEdit((prev) => !prev);
+  };
 
   const handleCloseModal = () => {
     setMessageKelas('');
-    setOpenModal((prev) => !prev);
+    if (openModalCreate) {
+      setOpenModalCreate((prev) => !prev);
+    } else if (openModalEdit) {
+      setOpenModalEdit((prev) => !prev);
+    }
   };
 
   const handleSubmit = async () => {
-    const resCreateKelas = await createKelas(nameKelas);
-    const { status } = resCreateKelas;
-    if (status === 200) {
-      const resAllKelas = await fetchAllKelas();
-      setAllKelas(resAllKelas.data.data);
-      setIsError((prev) => (prev === false ? prev : !prev));
-      setMessageKelas('Berhasil buat kelas');
-    }
-  };
-
-  const handleDelete = async (id: number, role: string) => {
-    if (role === 'guru') {
-      const resDeleteTeacher = await deleteUser('' + id);
-      const { status } = resDeleteTeacher.data;
-      if (status === 200) {
-        const teachersKelas = await fetchTeachersKelas(idKelas);
-        setTeachers(teachersKelas.data.data);
-        setIsError((prev) => (prev === false ? prev : !prev));
-        setMessageTeacher('Berhasil hapus data guru');
-      } else {
+    if (openModalCreate) {
+      try {
+        const resCreateKelas = await createKelas(nameKelas);
+        const { status } = resCreateKelas;
+        if (status === 200) {
+          const resAllKelas = await fetchAllKelas();
+          setAllKelas(resAllKelas.data.data);
+          setIsError((prev) => (prev === false ? prev : !prev));
+          setMessageKelas('Berhasil buat kelas');
+        }
+      } catch (error) {
         setIsError((prev) => (prev === true ? prev : !prev));
-        setMessageTeacher('gaga; hapus data guru');
+        setMessageKelas('Nama kelas sudah ada');
       }
     } else {
-      const resDeleteStudent = await deleteStudent('' + id);
-      const { status } = resDeleteStudent.data;
-      if (status === 200) {
-        const studentsKelas = await fetchStudentsKelas(idKelas);
-        setStudents(studentsKelas.data.data);
-        setIsError((prev) => (prev === false ? prev : !prev));
-        setMessageStudent('Berhasil hapus data murid');
-      } else {
-        setIsError((prev) => (prev === false ? prev : !prev));
-        setMessageStudent('Berhasil hapus data murid');
+      try {
+        const resEditKelas = await updateKelas(idKelas, nameKelas);
+        const { status } = resEditKelas.data;
+        if (status === 200) {
+          const resAllKelas = await fetchAllKelas();
+          setAllKelas(resAllKelas.data.data);
+          setIsError((prev) => (prev === false ? prev : !prev));
+          setMessageKelas('Berhasil edit kelas');
+        }
+      } catch (error) {
+        setIsError((prev) => (prev === true ? prev : !prev));
+        setMessageKelas('Nama kelas sudah ada');
       }
     }
-  };
-
-  const handleFetchUserClass = async (e: string, id: number) => {
-    setIsLoading((prev) => (prev = true));
-    const studentsKelas = await fetchStudentsKelas(id);
-    const teachersKelas = await fetchTeachersKelas(id);
-    setIdKelas(id);
-    setStudents(studentsKelas.data.data);
-    setTeachers(teachersKelas.data.data);
-    setMessageStudent('');
-    setMessageTeacher('');
-    setKelas(e);
-    setOpen((prev) => !prev);
-    setIsLoading((prev) => (prev = false));
   };
 
   React.useEffect(() => {
     (async function () {
       if (data) {
-        setMessageTeacher('');
-        setMessageStudent('');
         const decryptedData = getUser(data);
         const resAllKelas = await fetchAllKelas();
-        const studentsKelas = await fetchStudentsKelas(
-          resAllKelas.data.data[0].id
-        );
-        const teachersKelas = await fetchTeachersKelas(
-          resAllKelas.data.data[0].id
-        );
-        setIdKelas(resAllKelas.data.data[0].id);
-        setKelas(resAllKelas.data.data[0].nama_kelas);
-        setStudents(studentsKelas.data.data);
-        setTeachers(teachersKelas.data.data);
+        // setIdKelas(resAllKelas.data.data[0].id);
         setAllKelas(resAllKelas.data.data);
         setUserdata(decryptedData);
         setIsLoading((prev) => (prev = false));
@@ -130,123 +115,140 @@ const Class = () => {
 
   return (
     <>
-      <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition duration-300 ease-out'>
+      <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition-all duration-300 ease-in-out-out'>
         <Appbar username={userData?.username} />
-        <div className='flex justify-evenly items-end sm:items-start flex-col-reverse sm:flex-row'>
-          <div className='box-shadow px-[22px] py-[22px] lg:px-7 lg:py-7 rounded-[57px] w-full sm:w-2/3'>
-            <div className='mb-6 sm:mb-20 md:mb-40'>
-              <TitlePage page={`Daftar Guru ${kelas || 'Kelas Kosong'}`} />
-              {messageTeacher && (
-                <div
-                  className={
-                    'px-4 py-3 rounded-lg text-base sm:text-lg xl:text-xl font-bold mb-4' +
-                    (isError
-                      ? ' text-red-800 bg-red-400'
-                      : ' text-green-800 bg-green-400')
-                  }>
-                  <p>{messageTeacher}</p>
-                </div>
-              )}
-              <div className='flex flex-wrap items-center gap-3'>
-                {teachers.map((value) => {
-                  return (
-                    <CardProfile
-                      key={value.id}
-                      isDelete={true}
-                      name={value.nama_lengkap}
-                      birthdate={value.ttl}
-                      handleDelete={() => handleDelete(value.id, 'guru')}
-                    />
-                  );
-                })}
-                {teachers.length === 0 ? (
-                  <p className='ml-2 font-semibold text-sm sm:text-base text-center w-full'>
-                    Data guru tidak ada
-                  </p>
-                ) : (
-                  ''
-                )}
-              </div>
-            </div>
-            <div>
-              <TitlePage page={`Daftar Murid ${kelas || 'Kelas Kosong'}`} />
-              {messageStudent && (
-                <div
-                  className={
-                    'px-4 py-3 rounded-lg text-base sm:text-lg xl:text-xl font-bold mb-4' +
-                    (isError
-                      ? ' text-red-800 bg-red-400'
-                      : ' text-green-800 bg-green-400')
-                  }>
-                  <p>{messageStudent}</p>
-                </div>
-              )}
-              <div className='flex flex-wrap items-center gap-3'>
-                {students.map((value) => {
-                  return (
-                    <CardProfile
-                      key={value.id}
-                      isDelete={true}
-                      name={value.nama_lengkap}
-                      birthdate={value.ttl}
-                      handleDelete={() => handleDelete(value.id, 'murid')}
-                    />
-                  );
-                })}
-                {students.length === 0 ? (
-                  <p className='ml-2 font-semibold text-sm sm:text-base text-center w-full'>
-                    Data murid tidak ada
-                  </p>
-                ) : (
-                  ''
-                )}
-              </div>
-            </div>
+        <div className='w-full box-shadow px-[22px] py-[22px] lg:px-7 lg:py-7 rounded-[57px] relative'>
+          <TitlePage page='Daftar Kelas' />
+          <div className='w-full flex justify-end'>
+            <Button
+              children='Buat Kelas'
+              className='mb-[22px]'
+              trash={false}
+              onClick={() => setOpenModalCreate((prev) => !prev)}
+            />
           </div>
-          <div className='w-full sm:w-1/4 mt-2 sm:mt-20 flex flex-col items-end px-3 sm:px-0'>
+          {message && (
             <div
               className={
-                'bg-dropdown-cream rounded-[10px] relative h-max cursor-pointer w-[236.49px] sm:w-full' +
-                (open ? ' rounded-tl-tr' : ' rounded-[10px]')
+                'px-4 py-3 rounded-lg text-base sm:text-lg xl:text-xl font-bold mb-4' +
+                (isError
+                  ? ' text-red-800 bg-red-400'
+                  : ' text-green-800 bg-green-400')
               }>
-              <div
-                className='py-[10px] px-[13px] flex justify-between items-center text-dark-green'
-                onClick={() => setOpen((prev) => !prev)}>
-                <span className='font-bold text-lg'>
-                  {kelas || 'Kelas Kosong'}
-                </span>
-                <FaCaretDown className='font-bold text-lg' />
-              </div>
-              {open && (
-                <DropdownInput
-                  data={allKelas}
-                  isCream={true}
-                  passKelas={(str, id) => handleFetchUserClass(str, id)}
-                />
-              )}
+              <p>{message}</p>
             </div>
-            <div className='w-full flex sm:justify-center justify-end'>
-              <Button
-                children='Buat Kelas'
-                className='mt-[27px] sm:mt-[27px] sm:m-auto'
-                trash={false}
-                onClick={() => setOpenModal((prev) => !prev)}
-              />
+          )}
+          {allKelas.length === 0 ? (
+            <EmptyData />
+          ) : (
+            <div className='overflow-x-scroll lg:overflow-x-auto px-4 md:px-6 lg:px-10 mb-7'>
+              <table className='m-auto'>
+                <thead className='bg-gradient-green text-white'>
+                  <tr>
+                    <th className='p-1 md:p-1.5 lg:p-2'>No</th>
+                    <th className='p-1 md:p-1.5 lg:p-2'>Nama Kelas</th>
+                    <th className='p-1 md:p-1.5 lg:p-2'>Dibuat</th>
+                    <th className='p-1 md:p-1.5 lg:p-2'>Diedit</th>
+                    <th className='p-1 md:p-1.5 lg:p-2'>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {allKelas?.map((item, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{item.nama_kelas}</td>
+                        <td>{item.created_at}</td>
+                        <td>{item.updated_at}</td>
+                        <td>
+                          <div className='flex items-center justify-center gap-6'>
+                            <span
+                              className='cursor-pointer inline-block'
+                              onClick={() =>
+                                handleEdit(item.id, item.nama_kelas)
+                              }>
+                              <img src={Pencil} alt='Pencil' />
+                            </span>
+                            <span
+                              className='cursor-pointer inline-block'
+                              onClick={() => handleDelete(item.id)}>
+                              <img src={Trash} alt='Trash' />
+                            </span>
+
+                            <span
+                              className='cursor-pointer inline-block'
+                              onClick={() =>
+                                navigate(`/admin/class/detail/${item.id}`)
+                              }>
+                              <BsEye className='text-dark-green text-[19px]' />
+                            </span>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
-          </div>
+          )}
         </div>
       </div>
-      {openModal ? (
+      {openModalCreate ? (
         <Modal
           onClose={handleCloseModal}
           showInput={true}
-          children='Buat Kelas'
-          buttonText='Buat'
+          children={'Buat Kelas'}
+          buttonText={'Buat'}
           onSubmit={handleSubmit}
           onChange={(e) => setNameKelas(e)}
           message={messageKelas}
           isError={isError}
         />
+      ) : (
+        ''
+      )}
+      {openModalEdit ? (
+        <div className={'fixed top-0 left-0 w-full h-full bg-black-rgba block'}>
+          <div className='w-full h-screen flex justify-center items-center px-4 sm:px-0'>
+            <div className='w-full max-w-[766px] py-5 px-8 sm:py-[30px] sm:px-[42px] bg-white rounded-xl md:rounded-[57px]'>
+              <div className='w-full h-5 relative'>
+                <IoMdClose
+                  className='absolute right-3 top-0 text-lg md:text-2xl cursor-pointer'
+                  onClick={handleCloseModal}
+                />
+              </div>
+              {messageKelas && (
+                <div
+                  className={
+                    'px-4 py-3 rounded-lg text-base sm:text-lg xl:text-xl font-bold mb-4 mt-3' +
+                    (isError
+                      ? ' text-red-800 bg-red-400'
+                      : ' text-green-800 bg-green-400')
+                  }>
+                  <p>{messageKelas}</p>
+                </div>
+              )}
+              <h1 className=' text-[18px] sm:text-xl md:text-2xl font-bold gradient-green mb-8'>
+                Edit Kelas
+              </h1>
+              <div>
+                <InputFloating
+                  label='Nama Kelas'
+                  classname='mb-7'
+                  onChange={(e) => setNameKelas(e.target.value)}
+                  value={nameKelas}
+                />
+                <div className='w-full flex justify-end'>
+                  <Button
+                    children={'Edit'}
+                    trash={false}
+                    onClick={handleSubmit}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       ) : (
         ''
       )}
