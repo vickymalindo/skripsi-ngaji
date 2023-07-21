@@ -26,7 +26,7 @@ export const Teacher = () => {
   const data = localStorage.getItem('data');
 
   const handleSubmit = async () => {
-    const resAddParent = await postTeacher(
+    const resAddTeacher = await postTeacher(
       email,
       username,
       nama_lengkap,
@@ -34,7 +34,7 @@ export const Teacher = () => {
       ttl,
       id
     );
-    const { status } = resAddParent;
+    const { status } = resAddTeacher;
     if (status === 200) {
       setIsError((prev) => (prev === false ? prev : !prev));
       setMessage('Berhasil membuat Guru');
@@ -95,12 +95,12 @@ export const Teacher = () => {
           <InputFloating
             classname='mb-[39px]'
             label='Nama Lengkap'
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setNama_lengkap(e.target.value)}
           />
           <InputFloating
             classname='mb-[39px]'
             label='Password'
-            onChange={(e) => setNama_lengkap(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <div className={'relative mt-2 mb-[39px]'}>
             <div

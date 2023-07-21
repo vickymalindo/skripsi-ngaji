@@ -1,33 +1,25 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import {
-  createKelas,
   deleteStudent,
   deleteUser,
-  fetchAllKelas,
   fetchKelas,
   fetchStudentsKelas,
   fetchTeachersKelas,
 } from '../../fetch/api/Admin';
 import { getUser } from '../../fetch/storage/Gets';
-import { AllKelas } from '../../types/ApiAdmin';
 import { StudentData, UserData } from '../../types/UserData';
 import { CardProfile } from '../../views/atoms/Cards';
 import Loader from '../../views/atoms/Loader';
-import Modal from '../../views/atoms/Modal';
 import TitlePage from '../../views/atoms/TitlePage';
 import Appbar from '../../views/molecules/Appbar';
 
 const ClassDetail = () => {
   const [userData, setUserdata] = React.useState<any>({});
-  const [allKelas, setAllKelas] = React.useState<AllKelas[]>([]);
   const [students, setStudents] = React.useState<StudentData[]>([]);
   const [teachers, setTeachers] = React.useState<UserData[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [kelas, setKelas] = React.useState('');
-  const [nameKelas, setNameKelas] = React.useState<string>('');
-  const [openModal, setOpenModal] = React.useState(false);
-  const [idKelas, setIdKelas] = React.useState(0);
   const [isError, setIsError] = React.useState<boolean>(false);
   const [messageTeacher, setMessageTeacher] = React.useState<
     string | undefined
@@ -35,27 +27,8 @@ const ClassDetail = () => {
   const [messageStudent, setMessageStudent] = React.useState<
     string | undefined
   >('');
-  const [messageKelas, setMessageKelas] = React.useState<string | undefined>(
-    ''
-  );
   const data = localStorage.getItem('data');
   const { id } = useParams();
-
-  const handleCloseModal = () => {
-    setMessageKelas('');
-    setOpenModal((prev) => !prev);
-  };
-
-  const handleSubmit = async () => {
-    const resCreateKelas = await createKelas(nameKelas);
-    const { status } = resCreateKelas;
-    if (status === 200) {
-      const resAllKelas = await fetchAllKelas();
-      setAllKelas(resAllKelas.data.data);
-      setIsError((prev) => (prev === false ? prev : !prev));
-      setMessageKelas('Berhasil buat kelas');
-    }
-  };
 
   const handleDelete = async (idUser: number, role: string) => {
     if (role === 'guru') {
@@ -84,20 +57,6 @@ const ClassDetail = () => {
       }
     }
   };
-
-  // const handleFetchUserClass = async (e: string, id: number) => {
-  //   setIsLoading((prev) => (prev = true));
-  //   const studentsKelas = await fetchStudentsKelas(id);
-  //   const teachersKelas = await fetchTeachersKelas(id);
-  //   setIdKelas(id);
-  //   setStudents(studentsKelas.data.data);
-  //   setTeachers(teachersKelas.data.data);
-  //   setMessageStudent('');
-  //   setMessageTeacher('');
-  //   setKelas(e);
-  //   setOpen((prev) => !prev);
-  //   setIsLoading((prev) => (prev = false));
-  // };
 
   React.useEffect(() => {
     (async function () {
@@ -201,52 +160,7 @@ const ClassDetail = () => {
             </div>
           </div>
         </div>
-        {/* <div className='w-full sm:w-1/4 mt-2 sm:mt-20 flex flex-col items-end px-3 sm:px-0'>
-            <div
-              className={
-                'bg-dropdown-cream rounded-[10px] relative h-max cursor-pointer w-[236.49px] sm:w-full' +
-                (open ? ' rounded-tl-tr' : ' rounded-[10px]')
-              }>
-              <div
-                className='py-[10px] px-[13px] flex justify-between items-center text-dark-green'
-                onClick={() => setOpen((prev) => !prev)}>
-                <span className='font-bold text-lg'>
-                  {kelas || 'Kelas Kosong'}
-                </span>
-                <FaCaretDown className='font-bold text-lg' />
-              </div>
-              {open && (
-                <DropdownInput
-                  data={allKelas}
-                  isCream={true}
-                  passKelas={(str, id) => handleFetchUserClass(str, id)}
-                />
-              )}
-            </div>
-            <div className='w-full flex sm:justify-center justify-end'>
-              <Button
-                children='Buat Kelas'
-                className='mt-[27px] sm:mt-[27px] sm:m-auto'
-                trash={false}
-                onClick={() => setOpenModal((prev) => !prev)}
-              />
-            </div>
-          </div> */}
       </div>
-      {openModal ? (
-        <Modal
-          onClose={handleCloseModal}
-          showInput={true}
-          children='Buat Kelas'
-          buttonText='Buat'
-          onSubmit={handleSubmit}
-          onChange={(e) => setNameKelas(e)}
-          message={messageKelas}
-          isError={isError}
-        />
-      ) : (
-        ''
-      )}
     </>
   );
 };

@@ -92,8 +92,8 @@ export const postTeacher = (
     {
       email,
       username,
-      password,
       nama_lengkap,
+      password,
       ttl,
       id_kelas,
     }
