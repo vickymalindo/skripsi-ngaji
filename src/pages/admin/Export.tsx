@@ -1,13 +1,11 @@
 import React from 'react';
 import Calendar from 'react-calendar';
-// import 'react-calendar/dist/Calendar.css';
 import { BsCalendar } from 'react-icons/bs';
 import { datasToExport, excelNewRoteSchool } from '../../fetch/api/Admin';
 import { getUser } from '../../fetch/storage/Gets';
 import Loader from '../../views/atoms/Loader';
 import TitlePage from '../../views/atoms/TitlePage';
 import Appbar from '../../views/molecules/Appbar';
-// import './../../index.css';
 
 const Export = () => {
   const [openDate, setOpenDate] = React.useState(false);
@@ -34,9 +32,7 @@ const Export = () => {
     const monthSecond = dateSecond.getMonth();
     const yearSecond = dateSecond.getFullYear();
     const newDateSecond = `${yearSecond}-${monthSecond + 1}-${daySecond}`;
-    console.log(newDate, newDateSecond);
     const res = await datasToExport(newDate, newDateSecond, category, dataType);
-    console.log(res);
     if (res.length === 0) {
       setMessage('Data Kosong, Silahkan Pilih Tanggal Kembali');
       return;
@@ -46,13 +42,15 @@ const Export = () => {
   };
 
   React.useEffect(() => {
-    (async function () {
-      if (data) {
-        const decryptedData = getUser(data);
-        setUserdata(decryptedData);
-        setIsLoading((prev) => (prev = false));
-      }
-    })();
+    setTimeout(() => {
+      (function () {
+        if (data) {
+          const decryptedData = getUser(data);
+          setUserdata(decryptedData);
+          setIsLoading((prev) => (prev = false));
+        }
+      })();
+    }, 80000);
   }, []);
 
   if (isLoading) {
