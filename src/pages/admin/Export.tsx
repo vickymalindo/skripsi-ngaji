@@ -30,11 +30,13 @@ const Export = () => {
     const month = date.getMonth();
     const year = date.getFullYear();
     const newDate = `${year}-${month + 1}-${day}`;
-    const daySecond = date.getDate();
-    const monthSecond = date.getMonth();
-    const yearSecond = date.getFullYear();
+    const daySecond = dateSecond.getDate();
+    const monthSecond = dateSecond.getMonth();
+    const yearSecond = dateSecond.getFullYear();
     const newDateSecond = `${yearSecond}-${monthSecond + 1}-${daySecond}`;
+    console.log(newDate, newDateSecond);
     const res = await datasToExport(newDate, newDateSecond, category, dataType);
+    console.log(res);
     if (res.length === 0) {
       setMessage('Data Kosong, Silahkan Pilih Tanggal Kembali');
       return;
