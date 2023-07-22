@@ -95,12 +95,12 @@ export const Parent = () => {
           <InputFloating
             classname='mb-[39px]'
             label='Nama Lengkap'
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setNama_lengkap(e.target.value)}
           />
           <InputFloating
             classname='mb-[39px]'
             label='Password'
-            onChange={(e) => setNama_lengkap(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <div className={'relative mt-2 mb-[39px]'}>
             <div
