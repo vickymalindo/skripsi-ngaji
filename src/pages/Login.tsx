@@ -9,7 +9,7 @@ import Loader from '../views/atoms/Loader';
 import Logo from './../assets/images/Logo.png';
 
 const Login = () => {
-  const [email, setEmail] = React.useState<string | undefined>('');
+  const [username, setUsername] = React.useState<string | undefined>('');
   const [password, setPassword] = React.useState<string | undefined>('');
   const [isError, setIsError] = React.useState<string | undefined>('');
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -22,7 +22,7 @@ const Login = () => {
         const login = await axios.post(
           import.meta.env.VITE_BASE_URL + 'auth/login',
           {
-            email,
+            username,
             password,
           }
         );
@@ -68,9 +68,9 @@ const Login = () => {
             )}
             <div>
               <InputDefault
-                label='Email'
+                label='Username'
                 classname='mb-[47.05px]'
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <InputDefault
                 label='Password'
