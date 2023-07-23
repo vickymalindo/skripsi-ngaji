@@ -8,7 +8,7 @@ import Loader from '../views/atoms/Loader';
 import Logo from './../assets/images/Logo.png';
 
 const ForgotPassword = () => {
-  const [email, setEmail] = React.useState<string | undefined>('');
+  const [username, setUsername] = React.useState<string | undefined>('');
   const [newPassword, setNewPassword] = React.useState<string | undefined>('');
   const [confirmNewPassword, setConfirmNewPassword] = React.useState<
     string | undefined
@@ -26,9 +26,9 @@ const ForgotPassword = () => {
 
     setIsLoading((prev) => !prev);
     const changePassword = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}auth/forgot/${email}`,
+      `${import.meta.env.VITE_BASE_URL}auth/forgot/${username}`,
       {
-        email,
+        username,
         newPassword,
       }
     );
@@ -38,7 +38,7 @@ const ForgotPassword = () => {
       setIsLoading((prev) => !prev);
     } else {
       setIsError((prev) => (prev === true ? prev : !prev));
-      setMessage('Email tidak ditemukan');
+      setMessage('Username tidak ditemukan');
       setIsLoading((prev) => !prev);
     }
   };
@@ -64,9 +64,9 @@ const ForgotPassword = () => {
             )}
             <div>
               <InputDefault
-                label='Email'
+                label='Username'
                 classname='mb-[47.05px]'
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <InputDefault
                 label='Kata Sandi Baru'

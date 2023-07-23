@@ -47,7 +47,7 @@ const Login = () => {
           navigate('/parent/rote');
         }
       } catch (error) {
-        setIsError('Password / email salah');
+        setIsError('Password / username salah');
         setIsLoading((prev) => !prev);
       }
     }, 80000);
