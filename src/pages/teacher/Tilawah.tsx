@@ -28,7 +28,7 @@ export const Tilawah = () => {
     const res = await deleteTilawah(id);
     const { status } = res;
     if (status === 200) {
-      const responseTilawah = await fetchTilawah();
+      const responseTilawah = await fetchTilawah(userData.id_kelas);
       setTilawah(responseTilawah);
       setOpenModal((prev) => !prev);
       setIsError((prev) => (prev === false ? prev : !prev));
@@ -56,7 +56,9 @@ export const Tilawah = () => {
         const decryptedData = getUser(data);
         const responseKelas = await fetchTeacherKelas(decryptedData.id_kelas);
         try {
-          const responseTilawah = await fetchTilawah();
+          const responseTilawah = await fetchTilawah(
+            '' + decryptedData.id_kelas
+          );
           setTilawah(responseTilawah);
         } catch (error) {
           setTilawah([]);

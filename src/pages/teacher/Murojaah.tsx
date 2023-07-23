@@ -27,7 +27,7 @@ export const Murojaah = () => {
     const res = await deleteMurojaah(id);
     const { status } = res;
     if (status === 200) {
-      const responseMurojaah = await fetchMurojaah();
+      const responseMurojaah = await fetchMurojaah(userData.id_kelas);
       setMurojaah(responseMurojaah);
       setOpenModal((prev) => !prev);
       setIsError((prev) => (prev === false ? prev : !prev));
@@ -55,7 +55,10 @@ export const Murojaah = () => {
         const decryptedData = getUser(data);
         const responseKelas = await fetchTeacherKelas(decryptedData.id_kelas);
         try {
-          const responseMurojaah = await fetchMurojaah();
+          const responseMurojaah = await fetchMurojaah(
+            '' + decryptedData.id_kelas
+          );
+          console.log(responseMurojaah);
           setMurojaah(responseMurojaah);
         } catch (error) {
           setMurojaah([]);

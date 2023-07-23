@@ -19,17 +19,21 @@ export const fetchTeacherKelas = async (id: number) => {
   return data.data.nama_kelas;
 };
 
-export const fetchMurojaah = async (): Promise<MurojaahType[]> => {
+export const fetchMurojaah = async (
+  id_kelas: string
+): Promise<MurojaahType[]> => {
   const response = await axios.get(
-    import.meta.env.VITE_BASE_URL + 'guru/daftarmurojaah'
+    import.meta.env.VITE_BASE_URL + 'guru/daftarmurojaah/' + id_kelas
   );
   const { data } = response;
   return data.data;
 };
 
-export const fetchTilawah = async (): Promise<MurojaahType[]> => {
+export const fetchTilawah = async (
+  id_kelas: string
+): Promise<MurojaahType[]> => {
   const response = await axios.get(
-    import.meta.env.VITE_BASE_URL + 'guru/daftartilawah'
+    import.meta.env.VITE_BASE_URL + 'guru/daftartilawah/' + id_kelas
   );
   const { data } = response;
   return data.data;
