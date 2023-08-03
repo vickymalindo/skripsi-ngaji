@@ -4,6 +4,7 @@ import {
   deleteAllRote,
   fetchAllRote,
   fetchRote,
+  fetchRoteHafalan,
 } from '../../fetch/api/Teacher';
 import { getUser } from '../../fetch/storage/Gets';
 import { Rote } from '../../types/ApiParent';
@@ -12,9 +13,7 @@ import Modal from '../../views/atoms/Modal';
 import Content from '../../views/molecules/Content';
 
 const Quran = () => {
-  // TODO: ini belom di fetch
   const [userData, setUserData] = React.useState<any>({});
-  const [kelas, setKelas] = React.useState<string | undefined>('');
   const [allRote, setAllRote] = React.useState<Rote[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [id, setId] = React.useState('');
@@ -55,7 +54,7 @@ const Quran = () => {
     (async function () {
       if (data) {
         const decryptedData = getUser(data);
-        const resAllRote = await fetchAllRote(decryptedData.id_kelas);
+        const resAllRote = await fetchRoteHafalan(decryptedData.id_kelas);
         setAllRote(resAllRote.data.data);
         setUserData(decryptedData);
         setIsLoading((prev) => (prev === false ? prev : !prev));

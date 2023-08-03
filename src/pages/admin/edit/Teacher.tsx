@@ -15,7 +15,6 @@ import Loader from '../../../views/atoms/Loader';
 import TitlePage from '../../../views/atoms/TitlePage';
 import Appbar from '../../../views/molecules/Appbar';
 
-// TODO: benerin update teacher
 export const Teacher = () => {
   const [userData, setUserData] = React.useState<any>({});
   const [allKelas, setAllKelas] = React.useState<AllKelas[]>([]);

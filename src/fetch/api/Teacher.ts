@@ -225,6 +225,13 @@ export const fetchAllRote = async (id: number) => {
   return res;
 };
 
+export const fetchRoteHafalan = async (id: number) => {
+  const res = axios.get(
+    import.meta.env.VITE_BASE_URL + `guru/daftarhafalankelas/${id}`
+  );
+  return res;
+};
+
 export const deleteAllRote = async (id_input: string) => {
   const res = axios.delete(
     import.meta.env.VITE_BASE_URL + `guru/deleteallhafalan/${id_input}`

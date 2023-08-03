@@ -20,7 +20,6 @@ interface Props<T> {
   isError?: boolean;
 }
 
-// TODO: buat field tanggal
 export const QuranTable = <T extends MurojaahType | Rote>({
   showAction,
   showIconEye,

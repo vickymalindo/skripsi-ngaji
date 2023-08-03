@@ -15,7 +15,6 @@ import Loader from '../../../views/atoms/Loader';
 import TitlePage from '../../../views/atoms/TitlePage';
 import Appbar from '../../../views/molecules/Appbar';
 
-// TODO: betulin updatenya coba restart servernya
 export const Parent = () => {
   const [userData, setUserData] = React.useState<any>({});
   const [students, setStudents] = React.useState<StudentData[]>([]);

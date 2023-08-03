@@ -114,8 +114,6 @@ const AllRoteStudent = () => {
     return <Loader isWhite={true} />;
   }
 
-  // TODO: get data untuk hafalan lama dan tilawah
-
   return (
     <div className='relative left-0 w-full lg:left-[274px] lg:w-[calc(100%-274px)] transition-all duration-300 ease-in-out-out'>
       <Appbar username={userData.username} />

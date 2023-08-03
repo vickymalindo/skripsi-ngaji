@@ -25,7 +25,6 @@ export const Rote = () => {
   const data = localStorage.getItem('data');
   const token = localStorage.getItem('token');
 
-  // TODO:  testing ini
   const handleClick = async () => {
     if (token) {
       const decryptedToken = getToken(token);

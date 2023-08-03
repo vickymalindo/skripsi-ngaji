@@ -21,7 +21,7 @@ import Content from '../../views/molecules/Content';
 export const RoteParent = () => {
   const [userData, setUserData] = React.useState<any>({});
   const [userChildData, setUserChildData] = React.useState<StudentData[]>([]);
-  const [activeButton, setActiveButton] = React.useState<number>(0);
+  const [activeButton, setActiveButton] = React.useState<number>(3);
   const [rote, setRote] = React.useState<Rote[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [id, setId] = React.useState('');

@@ -30,7 +30,6 @@ export const Student = () => {
   const { id } = useParams();
   const data = localStorage.getItem('data');
 
-  // TODO:  betulin update murid
   const handleSubmit = async () => {
     const res = await updateMurid(id, fullName, ttl, jenis_kelamin, idKelas);
     const { status } = res;
