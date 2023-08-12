@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   deleteAllRote,
-  fetchAllRote,
   fetchRote,
   fetchRoteHafalan,
 } from '../../fetch/api/Teacher';
@@ -28,7 +27,7 @@ const Quran = () => {
     const deleteRote = await deleteAllRote(resRote.data.data.id_input);
     const { status } = deleteRote.data;
     if (status === 200) {
-      const resAllRote = await fetchAllRote(userData.id_kelas);
+      const resAllRote = await fetchRoteHafalan(userData.id_kelas);
       setAllRote(resAllRote.data.data);
       setOpenModal((prev) => !prev);
       setIsError((prev) => (prev === false ? prev : !prev));
@@ -86,7 +85,7 @@ const Quran = () => {
       {openModal ? (
         <Modal
           onClose={() => setOpenModal((prev) => !prev)}
-          children='Apakah anda yakin ingin menghapus Murojaah'
+          children='Apakah anda yakin ingin menghapus Hafalan Baru?'
           showInput={false}
           buttonText='Ya'
           onSubmit={handleSubmit}

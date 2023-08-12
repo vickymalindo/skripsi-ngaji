@@ -94,7 +94,7 @@ export const Murojaah = () => {
       {openModal ? (
         <Modal
           onClose={() => setOpenModal((prev) => !prev)}
-          children='Apakah anda yakin ingin menghapus Murojaah'
+          children='Apakah anda yakin ingin menghapus Hafalan Lama?'
           showInput={false}
           buttonText='Ya'
           onSubmit={handleSubmit}
