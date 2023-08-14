@@ -1,21 +1,19 @@
 // import React from 'react'
-import Website from './../../assets/images/website.png';
 import Whatsapp from './../../assets/images/whatsapp.png';
 
-interface Props {
-  height: string;
-}
-
-const Sosmed = ({ height }: Props) => {
+const Sosmed = () => {
   return (
-    <div className={'flex items-end justify-center gap-6 pb-7 ' + height}>
-      <a href='#' className='inline-block'>
-        <img src={Website} alt='Website' />
-      </a>
-      <a href='#' className='inline-block'>
-        <img src={Whatsapp} alt='Whatsapp' />
-      </a>
-    </div>
+    <a
+      href='#'
+      target='_blank'
+      className={
+        'flex items-center justify-center gap-[10px] bg-white p-[5px] w-[220px] rounded-[30px] mt-24 mb-[30px] m-auto shadow-md'
+      }>
+      <span className='inline-block text-dark-green text-base font-bold'>
+        Tanya Admin
+      </span>
+      <img src={Whatsapp} alt='Whatsapp' />
+    </a>
   );
 };
 

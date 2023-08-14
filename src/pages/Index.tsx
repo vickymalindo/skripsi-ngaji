@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import { CardInfo } from '../views/atoms/Cards';
 import Logo from './../assets/images/Logo.png';
 import Using from './../assets/images/digunakan.png';
+import Instagram from './../assets/images/instagram.png';
 import Ngaji from './../assets/images/orang-ngaji.png';
 import Text from './../assets/images/text.png';
-import Browser from './../assets/images/website.png';
 import Whatsapp from './../assets/images/whatsapp.png';
+import Youtube from './../assets/images/youtube.png';
 
 const Index = () => {
   const [openNavbar, setOpenNavbar] = React.useState(false);
@@ -182,7 +183,7 @@ const Index = () => {
               <div className='flex justify-center items-center gap-10 mt-2 sm:mt-6'>
                 <Link to='#'>
                   <img
-                    src={Browser}
+                    src={Youtube}
                     alt='Browser'
                     className='w-8 h-8 sm:w-10 sm:h-10'
                   />
@@ -190,6 +191,13 @@ const Index = () => {
                 <Link to='#'>
                   <img
                     src={Whatsapp}
+                    alt='Whatsapp'
+                    className='w-8 h-8 sm:w-10 sm:h-10'
+                  />
+                </Link>
+                <Link to='#'>
+                  <img
+                    src={Instagram}
                     alt='Whatsapp'
                     className='w-8 h-8 sm:w-10 sm:h-10'
                   />

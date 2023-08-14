@@ -96,6 +96,7 @@ th {
 table {
   border-collapse: collapse;
   width: 920px;
+  border-radius: 10px;
 }
 
 td {

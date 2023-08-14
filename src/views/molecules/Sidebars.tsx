@@ -65,7 +65,7 @@ export const SidebarParent = () => {
             })}
           </ul>
         </div>
-        <Sosmed height='h-[calc(100%-527.79px)]' />
+        <Sosmed />
       </aside>
     </div>
   );
@@ -135,7 +135,7 @@ export const SidebarAdmin = () => {
             })}
           </ul>
         </div>
-        <Sosmed height='h-[calc(100%-558.79px)]' />
+        <Sosmed />
       </aside>
     </div>
   );
@@ -190,7 +190,7 @@ export const SidebarTeacher = () => {
             ))}
           </ul>
         </div>
-        <Sosmed height='h-[calc(100%-538.82px)]' />
+        <Sosmed />
       </aside>
     </div>
   );
