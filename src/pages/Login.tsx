@@ -50,7 +50,7 @@ const Login = () => {
         setIsError('Password / username salah');
         setIsLoading((prev) => !prev);
       }
-    }, 80000);
+    }, 55000);
   };
 
   return (

@@ -50,7 +50,7 @@ const Export = () => {
           setIsLoading((prev) => (prev = false));
         }
       })();
-    }, 80000);
+    }, 55000);
   }, []);
 
   if (isLoading) {
