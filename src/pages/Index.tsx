@@ -218,7 +218,7 @@ const Index = () => {
             </div>
           </div>
           <p className='font-medium text-center text-xs sm:text-base'>
-            © 2023 Semua Hak Dilindungi Undang-Undang, QUR’AN
+            © 2023 Semua Hak Dilindungi Undang-Undang, Marwah Qur’anic School
           </p>
         </div>
       </footer>
