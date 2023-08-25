@@ -17,40 +17,38 @@ const Login = () => {
 
   const handleLogin = async () => {
     setIsLoading((prev) => !prev);
-    setTimeout(async () => {
-      try {
-        const login = await axios.post(
-          import.meta.env.VITE_BASE_URL + 'auth/login',
-          {
-            username,
-            password,
-          }
-        );
-
-        const { access_token } = login.data;
-        localStorage.setItem('token', encrypt(access_token));
-        const user = await axios({
-          method: 'POST',
-          url: import.meta.env.VITE_BASE_URL + 'auth/me',
-          headers: { Authorization: `Bearer${access_token}` },
-        });
-
-        localStorage.setItem('data', encrypt(user.data));
-
-        const { level } = user.data;
-        setIsLoading((prev) => !prev);
-        if (level === 'admin') {
-          navigate('/admin/list/teacher');
-        } else if (level === 'guru') {
-          navigate('/teacher/students');
-        } else {
-          navigate('/parent/rote');
+    try {
+      const login = await axios.post(
+        import.meta.env.VITE_BASE_URL + 'auth/login',
+        {
+          username,
+          password,
         }
-      } catch (error) {
-        setIsError('Password / username salah');
-        setIsLoading((prev) => !prev);
+      );
+
+      const { access_token } = login.data;
+      localStorage.setItem('token', encrypt(access_token));
+      const user = await axios({
+        method: 'POST',
+        url: import.meta.env.VITE_BASE_URL + 'auth/me',
+        headers: { Authorization: `Bearer${access_token}` },
+      });
+
+      localStorage.setItem('data', encrypt(user.data));
+
+      const { level } = user.data;
+      setIsLoading((prev) => !prev);
+      if (level === 'admin') {
+        navigate('/admin/list/teacher');
+      } else if (level === 'guru') {
+        navigate('/teacher/students');
+      } else {
+        navigate('/parent/rote');
       }
-    }, 55000);
+    } catch (error) {
+      setIsError('Password / username salah');
+      setIsLoading((prev) => !prev);
+    }
   };
 
   return (

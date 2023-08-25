@@ -42,15 +42,13 @@ const Export = () => {
   };
 
   React.useEffect(() => {
-    setTimeout(() => {
-      (function () {
-        if (data) {
-          const decryptedData = getUser(data);
-          setUserdata(decryptedData);
-          setIsLoading((prev) => (prev = false));
-        }
-      })();
-    }, 55000);
+    (function () {
+      if (data) {
+        const decryptedData = getUser(data);
+        setUserdata(decryptedData);
+        setIsLoading((prev) => (prev = false));
+      }
+    })();
   }, []);
 
   if (isLoading) {
