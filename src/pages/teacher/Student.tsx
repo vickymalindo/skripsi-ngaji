@@ -46,7 +46,7 @@ export const Student = () => {
       <Appbar username={userData?.username} />
       <div className='w-full box-shadow px-[22px] py-[22px] lg:px-7 lg:py-7 rounded-[57px]'>
         <TitlePage page='Daftar Nama Siswa' />
-        <div className='grid grid-cols-1 min-[560px]:grid-cols-2 min-[886px]:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 place-items-center px-[33.47px] sm:px-[40.47px] lg:px-[60.47px]'>
+        <div className='flex flex-wrap gap-y-3 gap-x-6 justify-center'>
           {students.map((item) => {
             return (
               <CardProfile

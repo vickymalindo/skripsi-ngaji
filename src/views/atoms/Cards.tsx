@@ -51,11 +51,11 @@ export const CardProfile = ({
         <p className='text-base ml-2'>{username}</p>
       ) : (
         <div>
-          <div>
+          <div className='w-[190px] whitespace-nowrap text-ellipsis overflow-hidden'>
             <span className='font-bold ml-2 text-sm sm:text-base'>Nama : </span>
             <span className='text-sm sm:text-base'>{name}</span>
           </div>
-          <div>
+          <div className='w-[190px] whitespace-nowrap text-ellipsis overflow-hidden'>
             <span className='font-bold ml-2 text-sm sm:text-base'>TTL : </span>
             <span className='text-sm sm:text-base'>{birthdate}</span>
           </div>
